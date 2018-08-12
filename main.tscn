@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tileset/tileset_set.tres" type="TileSet" id=1]
-[ext_resource path="res://assets/human_m.png" type="Texture" id=2]
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://assets/human_m.png" type="Texture" id=3]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -31,12 +32,13 @@ __meta__ = {
 
 [node name="Node2D" type="Node2D" parent="." index="1"]
 
-position = Vector2( 0, 64 )
+position = Vector2( 0, 60 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="Node2D" index="0"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="Node2D" index="1"]
 
