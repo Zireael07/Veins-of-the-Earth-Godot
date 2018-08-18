@@ -14,6 +14,10 @@ config/name="Veins of the Earth"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+RPG="*res://RPG.gd"
+
 [input]
 
 move_up=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)

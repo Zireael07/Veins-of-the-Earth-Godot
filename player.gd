@@ -11,6 +11,21 @@ const DIRECTIONS = {
 	"NW":   Vector2(-1,-1),
     }
 
+func set_map_position(pos):
+	var new_grid_pos = pos #grid.map_to_world(pos)
+	var target_pos = grid.map_to_world(pos) + tile_offset
+	
+	# Print statements help to understand what's happening. We're using GDscript's string format operator % to convert
+	# Vector2s to strings and integrate them to a sentence. The syntax is "... %s" % value / "... %s ... %s" % [value_1, value_2]
+	print("Pos %s, dir %s" % [pos, direction])
+	print("Grid pos new: %s" % [new_grid_pos])
+	#print(target_pos)
+	
+	set_position(target_pos+Vector2(0,-8))
+	
+	
+	return [target_pos, new_grid_pos]
+
 func update_position(pos, direction):
 	var grid_pos = grid.world_to_map(pos)
 

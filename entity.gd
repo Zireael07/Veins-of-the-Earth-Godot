@@ -18,7 +18,8 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	
-	grid = get_parent().get_node("TileMap")
+	#grid = get_parent().get_node("TileMap")
+	grid = get_parent()
 	tile_size = grid.get_cell_size()
 	tile_offset = Vector2(0, tile_size.y / 2)
 	
