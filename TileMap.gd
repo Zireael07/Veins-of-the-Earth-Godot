@@ -1,9 +1,23 @@
 extends TileMap
 
+
+# Draw map cells from map 2DArray
+func draw_map( map ):
+	for x in range( map.size() ):
+		for y in range( map[x].size() ):
+			set_cell( x,y, map[x][y] )
+
+
 func _ready():
+	
+	var data = dun_gen.Generate()
+	draw_map( data.map )
+	
+	
 	# Test objects
 	var player = RPG.make_entity( "player/player" )
-	spawn( player, Vector2( 2,2 ) )
+	spawn(player, data.start_pos)
+	#spawn( player, Vector2( 2,2 ) )
 
 # Return TRUE if cell is a floor on the map
 func is_floor( cell ):
