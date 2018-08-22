@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/floor_fog.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D" index="0"]
+
+[node name="fog" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 0, -27 )
+_sections_unfolded = [ "Offset" ]
+
+
