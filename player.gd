@@ -1,5 +1,8 @@
 extends "entity.gd"
 
+signal player_moved(me)
+
+
 const DIRECTIONS = {
 	"N":    Vector2(0,-1),
 	"NE":   Vector2(1,-1),
@@ -10,6 +13,12 @@ const DIRECTIONS = {
 	"W":    Vector2(-1,0),
 	"NW":   Vector2(-1,-1),
     }
+
+func _ready():
+	connect("player_moved", get_parent().get_node('FogMap'), '_on_player_pos_changed')
+	
+	set_z_index(2)
+
 
 func set_map_position(pos):
 	var new_grid_pos = pos #grid.map_to_world(pos)
@@ -22,6 +31,9 @@ func set_map_position(pos):
 	#print(target_pos)
 	
 	set_position(target_pos+Vector2(0,-8))
+	
+	# signal
+	emit_signal("player_moved", self)
 	
 	
 	return [target_pos, new_grid_pos]
@@ -38,6 +50,10 @@ func update_position(pos, direction):
 	print("Pos %s, dir %s" % [pos, direction])
 	print("Grid pos, old: %s, new: %s" % [grid_pos, new_grid_pos])
 	#print(target_pos)
+	
+	# signal
+	emit_signal("player_moved", self)
+	
 	return [target_pos, new_grid_pos]
 
 

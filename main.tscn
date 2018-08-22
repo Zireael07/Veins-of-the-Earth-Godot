@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tileset/tileset_set.tres" type="TileSet" id=1]
 [ext_resource path="res://TileMap.gd" type="Script" id=2]
+[ext_resource path="res://tileset/fog_set.tres" type="TileSet" id=3]
+[ext_resource path="res://fogMap.gd" type="Script" id=4]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -29,5 +31,28 @@ _sections_unfolded = [ "Cell" ]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="FogMap" type="TileMap" parent="TileMap" index="0"]
+
+z_index = 1
+mode = 1
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 54, 28 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Cell", "Visibility", "Z Index" ]
 
 
