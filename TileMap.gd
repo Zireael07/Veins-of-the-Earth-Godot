@@ -10,6 +10,8 @@ func draw_map( map ):
 
 
 func _ready():
+	RPG.map = self
+	
 	
 	data = dun_gen.Generate()
 	draw_map( data.map )
@@ -28,6 +30,7 @@ func is_floor( cell ):
 
 # Spawn what path from Database, set position to where
 func spawn( what, where ):
+	print("Spawning: " + str(what.get_name()) + " @: " + str(where))
 	# Add the entity to the scene and set its pos
 	add_child( what )
 	#what.set_map_pos( where )

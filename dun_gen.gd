@@ -77,6 +77,10 @@ func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,10), w
 				for cell in hline( A.x, B.x, B.y ):
 					map[cell.x][cell.y] = floor_id
 
+			# Spawning
+			place_monsters(room)
+
+
 	# return data
 	return {
 		"map":      map,
@@ -104,3 +108,15 @@ func vline( y1, y2, x ):
 	for y in range( min(y1,y2), max(y1,y2) + 1 ):
 		line.append( Vector2(x,y) )
 	return line
+	
+func place_monsters(room):
+	print("Placing monsters...")
+	var x = RPG.roll(room.position.x+1, room.end.x-2)
+	var y = RPG.roll(room.position.y+1, room.end.y-2)
+	var pos = Vector2(x,y)
+	
+	var mon = RPG.make_entity("kobold/kobold")
+	
+	print("Place monster: " + str(mon) + " @ " + str(pos))
+	
+	RPG.map.spawn(mon, pos)
