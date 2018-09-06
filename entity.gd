@@ -4,6 +4,7 @@ extends Node2D
 var direction = Vector2()
 
 var target_pos = Vector2()
+export var block_move = false
 
 var grid
 # The map_to_world function returns the position of the tile's top left corner in isometric space,
@@ -17,6 +18,8 @@ func cartesian_to_isometric(vector):
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	add_to_group("entity")
+	
 	
 	#grid = get_parent().get_node("TileMap")
 	grid = get_parent()

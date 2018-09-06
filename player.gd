@@ -78,7 +78,9 @@ func _input(event):
 		var res = update_position(get_position(), direction)
 		
 		# Check for valid cell to step to
-		if grid.is_floor(res[1]):
+		#if grid.is_floor(res[1]):
+		# Check if unblocked
+		if not grid.is_cell_blocked(res[1]):
 			set_position(res[0]+Vector2(0,-8))
 		# Announce when we bump something
 		else:

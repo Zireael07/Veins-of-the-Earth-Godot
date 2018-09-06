@@ -28,6 +28,24 @@ func _ready():
 func is_floor( cell ):
 	return get_cellv( cell ) == 0
 
+func get_entities_in_cell(cell):
+	var list = []
+	for obj in get_tree().get_nodes_in_group('entity'):
+		if obj.get_map_position() == cell:
+			list.append(obj)
+	return list
+	
+# Return False if cell is an unblocked floor
+# Return Object if cell has a blocking Object
+func is_cell_blocked(cell):
+	var blocks = not is_floor(cell)
+	var entities = get_entities_in_cell(cell)
+	for e in entities:
+		if e.block_move:
+			blocks = e
+	return blocks
+
+
 # Spawn what path from Database, set position to where
 func spawn( what, where ):
 	print("Spawning: " + str(what.get_name()) + " @: " + str(where))

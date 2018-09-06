@@ -8,6 +8,7 @@
 position = Vector2( 0, 60 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+block_move = true
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
