@@ -1,7 +1,7 @@
 extends "entity.gd"
 
 signal player_moved(me)
-
+signal player_acted
 
 const DIRECTIONS = {
 	"N":    Vector2(0,-1),
@@ -12,10 +12,11 @@ const DIRECTIONS = {
 	"SW":   Vector2(-1,1),
 	"W":    Vector2(-1,0),
 	"NW":   Vector2(-1,-1),
-    }
+	}
 
 func _ready():
 	connect("player_moved", get_parent().get_node('FogMap'), '_on_player_pos_changed')
+	connect("player_acted", get_parent(), '_on_player_acted')
 	
 	set_z_index(2)
 
@@ -44,6 +45,8 @@ func update_position(pos, direction):
 	
 	return [target_pos, new_grid_pos]
 
+func wait():
+	emit_signal("player_acted")
 
 func _input(event):
 	direction = Vector2()
@@ -80,8 +83,15 @@ func _input(event):
 		# Check for valid cell to step to
 		#if grid.is_floor(res[1]):
 		# Check if unblocked
-		if not grid.is_cell_blocked(res[1]):
+		var blocker = grid.is_cell_blocked(res[1])
+		if not blocker:
 			set_position(res[0]+Vector2(0,-8))
+			emit_signal("player_acted")
 		# Announce when we bump something
 		else:
-        	print( "Ow! You hit a wall!" )
+			if typeof(blocker) == TYPE_OBJECT:
+				print("You punch the " + blocker.get_name() + " in the face!")
+				emit_signal("player_acted")
+			else:
+				print( "Ow! You hit a wall!" )
+				emit_signal("player_acted")

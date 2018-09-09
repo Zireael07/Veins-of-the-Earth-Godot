@@ -21,6 +21,7 @@ func _ready():
 	var player = RPG.make_entity( "player/player" )
 	
 	call_deferred("spawn", player, data.start_pos)
+	RPG.player = player
 	#spawn(player, data.start_pos)
 	#spawn( player, Vector2( 2,2 ) )
 
@@ -34,6 +35,12 @@ func get_entities_in_cell(cell):
 		if obj.get_map_position() == cell:
 			list.append(obj)
 	return list
+
+# Turn-based
+func _on_player_acted():
+	for node in get_tree().get_nodes_in_group('entity'):
+		if node != RPG.player:
+			print(node.get_name() + " gives you a dirty look!")
 	
 # Return False if cell is an unblocked floor
 # Return Object if cell has a blocking Object
