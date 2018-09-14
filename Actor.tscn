@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Actor.gd" type="Script" id=1]
+
+[node name="Actor" type="Node" index="0"]
+
+script = ExtResource( 1 )
+power = 1
+defense = 1
+max_hp = 5
+
+

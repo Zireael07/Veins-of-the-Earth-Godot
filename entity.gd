@@ -12,6 +12,10 @@ var grid
 var tile_offset = Vector2(0,0)
 var tile_size = Vector2(0,0)
 
+# components
+var fighter
+
+
 func cartesian_to_isometric(vector):
 	return Vector2(vector.x - vector.y, (vector.x + vector.y) / 2)
 

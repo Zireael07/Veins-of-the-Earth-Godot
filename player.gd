@@ -90,7 +90,11 @@ func _input(event):
 		# Announce when we bump something
 		else:
 			if typeof(blocker) == TYPE_OBJECT:
-				print("You punch the " + blocker.get_name() + " in the face!")
+				if blocker.fighter:
+					fighter.fight(blocker)
+				else:
+					print("You punch the " + blocker.get_name() + " in the face!")
+				
 				emit_signal("player_acted")
 			else:
 				print( "Ow! You hit a wall!" )

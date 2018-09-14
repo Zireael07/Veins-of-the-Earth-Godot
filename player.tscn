@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/human_m.png" type="Texture" id=2]
+[ext_resource path="res://Actor.tscn" type="PackedScene" id=3]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 position = Vector2( 0, 60 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+block_move = false
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -38,5 +40,9 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Actor" parent="." index="2" instance=ExtResource( 3 )]
+
+max_hp = 10
 
 
