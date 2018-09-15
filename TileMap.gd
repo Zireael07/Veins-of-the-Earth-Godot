@@ -16,6 +16,10 @@ func _ready():
 	data = dun_gen.Generate()
 	draw_map( data.map )
 	
+	#RPG.map_size = Vector2(data.map.size(), data.map[0].size())
+	
+	# Astar representation
+	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells()) 
 	
 	# Test objects
 	var player = RPG.make_entity( "player/player" )
@@ -39,8 +43,9 @@ func get_entities_in_cell(cell):
 # Turn-based
 func _on_player_acted():
 	for node in get_tree().get_nodes_in_group('entity'):
-		if node != RPG.player:
-			print(node.get_name() + " gives you a dirty look!")
+		if node != RPG.player and node.ai:
+			#print(node.get_name() + " gives you a dirty look!")
+			node.ai.take_turn()
 	
 # Return False if cell is an unblocked floor
 # Return Object if cell has a blocking Object
@@ -60,3 +65,4 @@ func spawn( what, where ):
 	add_child( what )
 	#what.set_map_pos( where )
 	what.set_map_position(where)
+	#print("Map position set " + str(where))

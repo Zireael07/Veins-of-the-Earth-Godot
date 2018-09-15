@@ -28,22 +28,12 @@ func set_map_position(pos):
 	emit_signal("player_moved", self)
 
 func update_position(pos, direction):
-	var grid_pos = grid.world_to_map(pos)
-
-	var new_grid_pos = grid_pos + direction
-
-	var target_pos = grid.map_to_world(new_grid_pos) + tile_offset
-	
-	# Print statements help to understand what's happening. We're using GDscript's string format operator % to convert
-	# Vector2s to strings and integrate them to a sentence. The syntax is "... %s" % value / "... %s ... %s" % [value_1, value_2]
-	print("Pos %s, dir %s" % [pos, direction])
-	print("Grid pos, old: %s, new: %s" % [grid_pos, new_grid_pos])
-	#print(target_pos)
+	var data = .update_position(pos, direction)
 	
 	# signal
 	emit_signal("player_moved", self)
 	
-	return [target_pos, new_grid_pos]
+	return data
 
 func wait():
 	emit_signal("player_acted")

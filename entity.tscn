@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entity.gd" type="Script" id=1]
 [ext_resource path="res://assets/kobold.png" type="Texture" id=2]
 [ext_resource path="res://Actor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://AI.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -18,5 +19,7 @@ texture = ExtResource( 2 )
 [node name="Actor" parent="." index="1" instance=ExtResource( 3 )]
 
 max_hp = 2
+
+[node name="AI" parent="." index="2" instance=ExtResource( 4 )]
 
 

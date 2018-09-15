@@ -14,6 +14,7 @@ var tile_size = Vector2(0,0)
 
 # components
 var fighter
+var ai
 
 
 func cartesian_to_isometric(vector):
@@ -49,7 +50,51 @@ func set_map_position(pos):
 
 	return [target_pos, new_grid_pos]
 	
+func update_position(pos, direction):
+	var grid_pos = grid.world_to_map(pos)
+
+	var new_grid_pos = grid_pos + direction
+
+	var target_pos = grid.map_to_world(new_grid_pos) + tile_offset
 	
+	# Print statements help to understand what's happening. We're using GDscript's string format operator % to convert
+	# Vector2s to strings and integrate them to a sentence. The syntax is "... %s" % value / "... %s ... %s" % [value_1, value_2]
+	#print("Pos %s, dir %s" % [pos, direction])
+	#print("Grid pos, old: %s, new: %s" % [grid_pos, new_grid_pos])
+	#print(target_pos)
+	
+	return [target_pos, new_grid_pos]
+
+func update_position_map(map_pos, direction):
+	var new_grid_pos = map_pos + direction
+
+	var target_pos = grid.map_to_world(new_grid_pos) + tile_offset
+	
+	# Print statements help to understand what's happening. We're using GDscript's string format operator % to convert
+	# Vector2s to strings and integrate them to a sentence. The syntax is "... %s" % value / "... %s ... %s" % [value_1, value_2]
+	#print("Pos %s, dir %s" % [pos, direction])
+	#print("Grid pos, old: %s, new: %s" % [grid_pos, new_grid_pos])
+	#print(target_pos)
+	
+	return [target_pos, new_grid_pos]
+	
+func step_to(cell):
+	var map_pos = get_map_position()
+	var path = Astar_map.find_path(map_pos, cell)
+	if path.size() > 1:
+		print("Path: " + str(path))
+		var dir = path[1] - map_pos
+		print("Dir: " + str(dir))
+		var res = update_position_map(map_pos, dir)
+		print("AI has moved!!! " + str(res))
+		# since we use Astar, we don't have to check if the cell is blocked or not
+		set_position(res[0]+Vector2(0,-8))
+
+func distance_to(cell):
+	var line = FOV_gen.get_line(get_map_position(), cell)
+	return line.size() - 1
+
+
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.

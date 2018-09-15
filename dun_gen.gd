@@ -1,5 +1,7 @@
 extends Node
 
+var map = []
+
 # Generate the Datamap
 # room_size = minimum and maximum w/h a room should have
 func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,10), wall_id=1, floor_id=0):
@@ -8,7 +10,7 @@ func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,10), w
 	randomize()
 
 	# initialize data
-	var map = []
+	map = []
 	var rooms = []
 	var start_pos = Vector2()
 
@@ -108,6 +110,15 @@ func vline( y1, y2, x ):
 	for y in range( min(y1,y2), max(y1,y2) + 1 ):
 		line.append( Vector2(x,y) )
 	return line
+
+func get_floor_cells():
+	var list = []
+	for x in range( map.size() ):
+		for y in range( map[x].size() ):
+			if map[x][y] == 0:
+				list.append(Vector2(x,y))
+	
+	return list
 	
 func place_monsters(room):
 	print("Placing monsters...")
