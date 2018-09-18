@@ -31,6 +31,10 @@ func _ready():
 	tile_size = grid.get_cell_size()
 	tile_offset = Vector2(0, tile_size.y / 2)
 
+func kill():
+	if RPG.player != self:
+		queue_free()
+
 func get_map_position():
 	var grid_pos = grid.world_to_map(get_position()-Vector2(0,-8))
 	

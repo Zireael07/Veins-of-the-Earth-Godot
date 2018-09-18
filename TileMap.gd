@@ -21,13 +21,19 @@ func _ready():
 	# Astar representation
 	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells()) 
 	
-	# Test objects
+	call_deferred("spawn_player")
+
+func spawn_player():
 	var player = RPG.make_entity( "player/player" )
-	
-	call_deferred("spawn", player, data.start_pos)
+	spawn(player, data.start_pos)
+	#call_deferred("spawn", player, data.start_pos)
 	RPG.player = player
+	var ob = RPG.player
+	ob.fighter.connect("hp_changed", RPG.game.playerinfo, "hp_changed")
+	ob.fighter.emit_signal("hp_changed",ob.fighter.hp, ob.fighter.max_hp)
 	#spawn(player, data.start_pos)
 	#spawn( player, Vector2( 2,2 ) )
+
 
 # Return TRUE if cell is a floor on the map
 func is_floor( cell ):
