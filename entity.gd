@@ -33,7 +33,11 @@ func _ready():
 
 func kill():
 	if RPG.player != self:
+		broadcast_kill()
 		queue_free()
+
+func broadcast_kill():
+	RPG.broadcast(self.name + " is killed!", RPG.COLOR_LIGHT_GREY)
 
 func get_map_position():
 	var grid_pos = grid.world_to_map(get_position()-Vector2(0,-8))

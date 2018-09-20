@@ -31,6 +31,10 @@ func spawn_player():
 	var ob = RPG.player
 	ob.fighter.connect("hp_changed", RPG.game.playerinfo, "hp_changed")
 	ob.fighter.emit_signal("hp_changed",ob.fighter.hp, ob.fighter.max_hp)
+	
+	# welcome message
+	RPG.broadcast("Welcome to Veins of the Earth!", RPG.COLOR_BROWN)
+	
 	#spawn(player, data.start_pos)
 	#spawn( player, Vector2( 2,2 ) )
 

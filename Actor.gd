@@ -1,6 +1,9 @@
 extends Node
 
 # class member variables go here, for example:
+	
+onready var ownr = get_parent()
+
 export(int) var power = 1
 export(int) var defense = 1
 
@@ -15,11 +18,12 @@ func fill_hp():
 
 func fight(who):
 	if who.fighter:
-		who.fighter.take_damage(self.power)
+		who.fighter.take_damage(ownr, self.power)
 
-func take_damage(amount):
+func take_damage(from, amount):
+	#print(get_parent().get_name() + " takes " + str(amount) + " damage!")
+	broadcast_damage_taken(from,amount)
 	self.hp -= amount
-	print(get_parent().get_name() + " takes " + str(amount) + " damage!")
 
 func die():
 	get_parent().kill()
@@ -38,10 +42,18 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	
-	owner.fighter = self
+	ownr.fighter = self
 	fill_hp()
 	
 	#pass
+
+func broadcast_damage_taken(from, amount):
+	var n = from.name
+	var m = str(amount)
+	var color = RPG.COLOR_DARK_GREY
+	if ownr == RPG.player:
+		color = RPG.COLOR_RED
+	RPG.broadcast(n+ " hits " +ownr.name+ " for " +str(amount)+ " HP",color)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

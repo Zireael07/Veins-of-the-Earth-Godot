@@ -1,7 +1,7 @@
 extends Control
 
 # class member variables go here, for example:
-onready var messagebox = get_node('frame/right/MessageBox')
+onready var messagebox = get_node('frame/right/Panel/MessageBox')
 onready var playerinfo = get_node('frame/left/PlayerInfo')
 
 func _ready():

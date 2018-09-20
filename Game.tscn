@@ -1,8 +1,94 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://PlayerInfo.gd" type="Script" id=2]
 [ext_resource path="res://main.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxFlat" id=5]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 1, 0.00390625, 0.00390625, 1 )
+draw_center = true
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = true
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Border", "Border Width" ]
+
+[sub_resource type="StyleBoxFlat" id=6]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.167969, 0.157471, 0.157471, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Shadow" ]
+
+[sub_resource type="StyleBoxFlat" id=4]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.0331373, 0.011098, 0.0277647, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
 
 [node name="Game" type="Control" index="0"]
 
@@ -17,6 +103,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Visibility" ]
 
 [node name="frame" type="HBoxContainer" parent="." index="0"]
 
@@ -66,7 +153,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
 script = ExtResource( 2 )
-_sections_unfolded = [ "Size Flags" ]
+_sections_unfolded = [ "Size Flags", "custom_styles" ]
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="frame/left/PlayerInfo" index="0"]
 
@@ -137,15 +224,16 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 0
+custom_styles/fg = SubResource( 5 )
 min_value = 0.0
 max_value = 100.0
 step = 1.0
 page = 0.0
-value = 0.0
+value = 100.0
 exp_edit = false
 rounded = false
 percent_visible = false
-_sections_unfolded = [ "Percent", "Size Flags" ]
+_sections_unfolded = [ "Percent", "Size Flags", "custom_styles" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="frame/left/PlayerInfo/VBoxContainer2" index="1"]
 
@@ -189,7 +277,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 720.0
-margin_bottom = 496.0
+margin_bottom = 446.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -217,7 +305,7 @@ _sections_unfolded = [ "Rect", "Size Flags" ]
 [node name="Viewport" type="Viewport" parent="frame/right/map/ViewportContainer" index="0"]
 
 arvr = false
-size = Vector2( 700, 400 )
+size = Vector2( 720, 450 )
 own_world = false
 world = null
 transparent_bg = false
@@ -243,23 +331,42 @@ _sections_unfolded = [ "Render Target", "Rendering" ]
 
 [node name="Node2D" parent="frame/right/map/ViewportContainer/Viewport" index="0" instance=ExtResource( 3 )]
 
-[node name="MessageBox" type="RichTextLabel" parent="frame/right" index="1"]
+[node name="Panel" type="Panel" parent="frame/right" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 500.0
+margin_top = 450.0
 margin_right = 720.0
 margin_bottom = 600.0
-rect_min_size = Vector2( 0, 100 )
+rect_min_size = Vector2( 0, 150 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/panelf = SubResource( 6 )
+custom_styles/panel = SubResource( 4 )
+_sections_unfolded = [ "Material", "Rect", "Visibility", "custom_styles" ]
+
+[node name="MessageBox" type="RichTextLabel" parent="frame/right/Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 720.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-bbcode_enabled = false
+bbcode_enabled = true
 bbcode_text = ""
 visible_characters = -1
 percent_visible = 1.0
@@ -270,6 +377,6 @@ scroll_active = true
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
-_sections_unfolded = [ "Rect", "Size Flags" ]
+_sections_unfolded = [ "BBCode", "Rect", "Size Flags", "custom_colors" ]
 
 
