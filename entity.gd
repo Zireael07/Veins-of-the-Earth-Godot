@@ -15,6 +15,7 @@ var tile_size = Vector2(0,0)
 # components
 var fighter
 var ai
+var item
 
 
 func cartesian_to_isometric(vector):

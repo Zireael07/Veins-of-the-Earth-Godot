@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Item.gd" type="Script" id=1]
+
+[node name="Item" type="Node" index="0"]
+
+script = ExtResource( 1 )
+use_function = ""
+indestructible = null
+
+

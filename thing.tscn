@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entity.gd" type="Script" id=1]
+[ext_resource path="res://assets/potion.png" type="Texture" id=2]
+[ext_resource path="res://Item.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Node2D" index="0" groups=[
+"entities",
+]]
+
+script = ExtResource( 1 )
+block_move = false
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="Item" parent="." index="1" instance=ExtResource( 3 )]
+
+

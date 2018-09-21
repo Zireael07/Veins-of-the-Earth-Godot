@@ -81,6 +81,9 @@ func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,10), w
 
 			# Spawning
 			place_monsters(room)
+			
+		# items
+		place_items(room)
 
 
 	# return data
@@ -131,3 +134,15 @@ func place_monsters(room):
 	print("Place monster: " + str(mon) + " @ " + str(pos))
 	
 	RPG.map.spawn(mon, pos)
+	
+func place_items(room):
+	print("Placing items...")
+	var x = RPG.roll(room.position.x+1, room.end.x-2)
+	var y = RPG.roll(room.position.y+1, room.end.y-2)
+	var pos = Vector2(x,y)
+	
+	var it = RPG.make_entity("potion/potion")
+	
+	print("Place item: " + str(it) + " @ " + str(pos))
+	
+	RPG.map.spawn(it, pos)
