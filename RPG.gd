@@ -21,6 +21,7 @@ var player
 var map
 var map_size
 var game
+var inventory
 
 func make_entity( path ):
 	return _db.spawn( path )

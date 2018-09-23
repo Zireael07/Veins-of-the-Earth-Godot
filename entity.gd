@@ -103,6 +103,9 @@ func distance_to(cell):
 	var line = FOV_gen.get_line(get_map_position(), cell)
 	return line.size() - 1
 
+# Get our Icon texture
+func get_icon():
+	return get_node('Sprite').get_texture()
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

@@ -96,3 +96,4 @@ func _input(event):
 		for ob in RPG.map.get_entities_in_cell(get_map_position()):
 			if ob.item:
 				print("Item at our position")
+				ob.item.pickup()

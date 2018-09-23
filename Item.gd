@@ -19,7 +19,9 @@ func use():
 			ownr.kill()
 
 func pickup():
-	pass
+	# TODO: this inventory isn't tied to any particular actor
+	RPG.inventory.add_to_inventory(ownr)
+	#pass
 
 func drop():
 	pass
