@@ -6,6 +6,8 @@ onready var ownr = get_parent()
 export(String) var use_function = ''
 export(bool) var indestructible
 
+var inventory_slot
+
 func use():
 	if use_function.empty():
 		RPG.broadcast("The " +ownr.name+ " cannot be used", RPG.COLOR_DARK_GREY)
@@ -24,7 +26,8 @@ func pickup():
 	#pass
 
 func drop():
-	pass
+	assert inventory_slot != null
+	RPG.inventory.remove_from_inventory(inventory_slot,ownr)
 
 func _ready():
 	# Called when the node is added to the scene for the first time.

@@ -4,6 +4,19 @@ extends GridContainer
 onready var objects = get_node('../InventoryObjects')
 onready var name_label = get_node('../ItemName')
 
+# these work regardless of turns
+func _input(event):
+	if Input.is_action_pressed("inventory"):
+		if not get_parent().get_parent().is_visible():
+			print("Pausing")
+			# prevents accidentally doing other stuff
+			get_tree().set_pause(true)
+			get_parent().get_parent().show()
+		else:
+			print("Unpausing")
+			get_tree().set_pause(false)
+			get_parent().get_parent().hide()
+
 # Get the first free inventoryslot
 func get_free_slot():
 	for node in get_children():
@@ -39,6 +52,16 @@ func add_to_inventory(item):
 	
 	# assign the item to the slot
 	slot.add_contents(item)
+
+func remove_from_inventory(slot, item):
+	slot.remove_contents(item)
+	
+	item.remove_from_group('inventory')
+	item.add_to_group('entities')
+
+	item.get_parent().remove_child(item)
+	RPG.map.add_child(item)
+	item.set_map_position(RPG.player.get_map_position())
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
