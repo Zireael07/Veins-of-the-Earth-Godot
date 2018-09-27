@@ -97,3 +97,14 @@ func _input(event):
 			if ob.item:
 				print("Item at our position")
 				ob.item.pickup()
+				
+	if Input.is_action_just_pressed("act_drop"):
+		RPG.inventory_menu.start(true)
+		var items = yield(RPG.inventory_menu, 'items_selected')
+		if items.empty():
+			RPG.broadcast("action cancelled")
+		else:
+			for obj in items:
+				obj.item.drop()
+		
+		emit_signal('player_acted')

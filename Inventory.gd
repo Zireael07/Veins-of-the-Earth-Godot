@@ -17,6 +17,10 @@ func _input(event):
 			get_tree().set_pause(false)
 			get_parent().get_parent().hide()
 
+# Get an array of all inventory Objects
+func get_objects():
+	return self.objects.get_children()
+
 # Get the first free inventoryslot
 func get_free_slot():
 	for node in get_children():

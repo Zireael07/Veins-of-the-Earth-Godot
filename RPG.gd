@@ -22,6 +22,8 @@ var map
 var map_size
 var game
 var inventory
+# for the drop panel
+var inventory_menu
 
 func make_entity( path ):
 	return _db.spawn( path )
