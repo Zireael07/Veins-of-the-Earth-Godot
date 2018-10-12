@@ -78,9 +78,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 78.0
+margin_top = 66.0
 margin_right = 300.0
-margin_bottom = 98.0
+margin_bottom = 86.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -98,14 +98,13 @@ align = 1
 
 [node name="Load" type="Button" parent="Panel/VBoxContainer" index="1"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 18.0
+margin_top = 90.0
 margin_right = 300.0
-margin_bottom = 32.0
+margin_bottom = 110.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -113,6 +112,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+disabled = true
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -127,9 +127,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 102.0
+margin_top = 114.0
 margin_right = 300.0
-margin_bottom = 122.0
+margin_bottom = 134.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -146,6 +146,8 @@ flat = false
 align = 1
 
 [connection signal="pressed" from="Panel/VBoxContainer/New_game" to="." method="_on_New_game_pressed"]
+
+[connection signal="pressed" from="Panel/VBoxContainer/Load" to="." method="_on_Load_pressed"]
 
 [connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 

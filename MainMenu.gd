@@ -7,7 +7,12 @@ extends Control
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	pass
+	# check for save file
+	var file = File.new()
+	var save_exists = file.file_exists(RPG.SAVEGAME_PATH)
+	var button = get_node('Panel/VBoxContainer/Load')
+	#print("Save exists: " + str(save_exists))
+	button.set_disabled(!save_exists)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -33,4 +38,12 @@ func _on_New_game_pressed():
 
 func _on_Quit_pressed():
 	get_tree().quit()
+	#pass # replace with function body
+
+
+func _on_Load_pressed():
+	RPG.restore_game = true
+	get_tree().change_scene("res://Game.tscn")
+	
+	
 	#pass # replace with function body

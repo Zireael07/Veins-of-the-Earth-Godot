@@ -5,6 +5,8 @@ const GREETING = "Hello RPG!"
 const TORCH_RADIUS = 4
 
 onready var _db = preload("res://Database.tscn").instance()
+const SAVEGAME_PATH = "user://game.sav"
+var restore_game = false
 
 # colors for message panel
 const COLOR_WHITE = '#deeed6'

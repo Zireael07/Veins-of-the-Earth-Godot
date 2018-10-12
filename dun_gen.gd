@@ -2,7 +2,7 @@ extends Node
 
 var map = []
 
-# Generate the Datamap
+# Generate the map
 # room_size = minimum and maximum w/h a room should have
 func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,10), wall_id=1, floor_id=0):
 

@@ -8,11 +8,133 @@ onready var inventory = get_node('frame/right/map/InventoryPanel')
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	# prevent quitting without saving
+	get_tree().set_auto_accept_quit(false)
 	
 	RPG.game = self
 	messagebox.set_scroll_follow(true)
+
+	if RPG.restore_game:
+		restore_game()
+	else:
+		new_game()
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+func new_game():
+	# just call
+	RPG.map.new_game()
+
+# save on quit
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		var saved = save_game()
+		if saved != OK:
+			print('SAVE GAME RETURNED ERROR '+str(saved))
+		get_tree().quit()
+
+# Save Game Mother Function
+func save_game():
+	print("Saving game...")
+	
+	# create a new file object to work with
+	var file = File.new()
+	var opened = file.open(RPG.SAVEGAME_PATH, File.WRITE)
+	
+	# Alert and return error if file can't be opened
+	if not opened == OK:
+		OS.alert("Unable to access file " + RPG.SAVEGAME_PATH)
+		return opened
+
+	# Gather data to save
+	var data = {}
+	
+	# Map data: Datamap and Fogmap
+	data.map = RPG.map.save()
+	
+	# Player object data
+	data.player = RPG.player.save()
+
+	# non-player objects
+	data.objects = []
+	data.inventory = []
+	for node in get_tree().get_nodes_in_group('entity'):
+		# because we saved player data earlier
+		if node != RPG.player:
+			data.objects.append(node.save())
+	
+	for node in get_tree().get_nodes_in_group('inventory'):
+		data.inventory.append(node.save())
+		
+	
+	# Store data and close file
+	file.store_line(to_json(data))
+	file.close()
+	# Return OK if all goes well
+	return opened
+
+# Restore Game Mother Function
+func restore_game():
+	print("Loading game...")
+	
+	# create a new file object to work with
+	var file = File.new()
+	
+	# return error if file not found
+	if not file.file_exists(RPG.SAVEGAME_PATH):
+		OS.alert("No file found at " + RPG.SAVEGAME_PATH)
+		return ERR_FILE_NOT_FOUND
+
+	var opened = file.open(RPG.SAVEGAME_PATH, File.READ)
+	
+	# Alert and return error if file can't be opened
+	if not opened == OK:
+		OS.alert("Unable to access file " + RPG.SAVEGAME_PATH)
+		return opened
+
+	# Dictionary to store file data
+	var data = {}
+	
+	# Parse data from json file
+	data = parse_json(file.get_as_text())
+	
+	################
+	# Restore game from data
+	################
+	
+	# Map Data
+	if 'map' in data:
+		RPG.map.restore(data.map)
+	
+#	# Global Playerdata
+#	if 'player_data' in data:
+#		for key in data.player_data.keys():
+	
+#	# Player data
+	if 'player' in data:
+		var start_pos = Vector2(data.player.x, data.player.y)
+		RPG.map.spawn_player(start_pos)
+		RPG.player.restore(data.player)
+
+	# Object data
+	if 'objects' in data:
+		for entry in data.objects:
+			var ob = RPG.map.restore_object(entry)
+			var pos = Vector2(entry.x,entry.y)
+			RPG.map.spawn(ob,pos)
+
+	# Inventory data
+	if 'inventory' in data:
+		for entry in data.inventory:
+			var ob = RPG.map.restore_object(entry)
+			print(ob.item != null)
+			ob.pickup()
+	
+	
+	# close file and return status
+	file.close()
+	
+	return opened
