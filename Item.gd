@@ -40,3 +40,14 @@ func _ready():
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+func save():
+	var data = {}
+	data.use_function = self.use_function
+	data.indestructible = self.indestructible
+	return data
+
+func restore(data):
+	for key in data:
+		if get(key)!=null:
+			set(key, data[key])

@@ -59,3 +59,16 @@ func broadcast_damage_taken(from, amount):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+func save():
+	var data = {}
+	data.power = self.power
+	data.defense = self.defense
+	data.max_hp = self.max_hp
+	data.hp = self.hp
+	return data
+
+func restore(data):
+	for key in data:
+		if self.get(key)!=null:
+			self.set(key, data[key])

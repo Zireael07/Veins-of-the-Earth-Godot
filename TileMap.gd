@@ -12,7 +12,7 @@ func draw_map( map ):
 func _ready():
 	RPG.map = self
 	
-	
+func new_game():
 	data = dun_gen.Generate()
 	draw_map( data.map )
 	
@@ -21,11 +21,11 @@ func _ready():
 	# Astar representation
 	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells()) 
 	
-	call_deferred("spawn_player")
+	call_deferred("spawn_player", data.start_pos)
 
-func spawn_player():
+func spawn_player(pos):
 	var player = RPG.make_entity( "player/player" )
-	spawn(player, data.start_pos)
+	spawn(player, pos)
 	#call_deferred("spawn", player, data.start_pos)
 	RPG.player = player
 	var ob = RPG.player
@@ -76,3 +76,33 @@ func spawn( what, where ):
 	#what.set_map_pos( where )
 	what.set_map_position(where)
 	#print("Map position set " + str(where))
+	
+func save():
+	print("Saving map data...")
+	var data = {}
+	data.map = dun_gen.map
+	data.fogmap = get_node('FogMap').get_fog_data(data.map.size(), data.map[0].size())
+	return data
+
+func restore(save_data):
+	if 'map' in save_data:
+		dun_gen.map = save_data.map
+		data = {} # dummy
+		data.map = dun_gen.map
+	if 'fogmap' in save_data:
+		# fill it first
+		get_node('FogMap').fill()
+		get_node('FogMap').reveal_from_data(save_data.fogmap)
+		
+	draw_map(data.map)
+	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells())
+	
+func restore_object(data):
+	var ob = load(data.filename)
+	var pos = Vector2(data.x, data.y)
+	if ob:
+		#print(ob)
+		#spawn(ob, pos) 
+		ob = ob.instance().spawn(self,pos)
+		ob.restore(data)
+		return ob

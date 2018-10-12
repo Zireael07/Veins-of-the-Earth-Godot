@@ -19,10 +19,32 @@ func reveal(cells):
 		#set_cell(cell[0], cell[1], -1)
 		#print("Revealed cell " + str(cell))
 
+# for game load
+func reveal_from_data(data):
+	#print("Revealing from data..")
+	var cells = []
+	for x in range(data.size()-1):
+		for y in range(data[x].size()-1):
+			if data[x][y] == -1:
+				cells.append(Vector2(x,y))
+	reveal(cells)
+
+func get_fog_data(size_x, size_y):
+	var data = []
+	#var size = RPG.MAP_SIZE
+	for x in range(size_x):
+		var col = []
+		for y in range(size_y):
+			col.append(get_cell(x,y))
+		data.append(col)
+	return data
+
 
 func _ready():
-	# we have to defer since otherwise we don't have access to map data
-	call_deferred("fill") #fill()
+	# if we're not loading:
+	if not RPG.restore_game:
+		# we have to defer since otherwise we don't have access to map data
+		call_deferred("fill") #fill()
 	
 func _on_player_pos_changed(player):
 	# Torch (sight) radius

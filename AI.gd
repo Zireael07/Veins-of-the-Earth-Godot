@@ -16,3 +16,11 @@ func take_turn():
 		else:
 			print("AI making a move")
 			ownr.step_to(target.get_map_position())
+
+# dummies
+func save():
+	var data = {}
+	return data
+
+func restore(data):
+	pass

@@ -111,3 +111,46 @@ func get_icon():
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+func save():
+	print("Saving... " + str(self.name))
+	var data = {}
+	data.name = self.name
+	# from where we were loaded
+	data.filename = get_filename()
+	var pos = get_map_position()
+	data.x = pos.x
+	data.y = pos.y
+	
+	# save components
+	if item:
+		data.item = item.save()
+	if fighter:
+		data.fighter = fighter.save()
+	if ai:
+		data.ai = ai.save()
+	
+	return data
+	
+func restore(data):
+	if 'name' in data:
+		self.name = data.name
+		
+	# x,y are handled by the map instead
+	
+	if item and 'item' in data:
+		item.restore(data.item)
+	if fighter and 'fighter' in data:
+		fighter.restore(data.fighter)
+	if ai and 'ai' in data:
+		ai.restore(data.ai)
+	
+	return self
+	
+func spawn(map,cell):
+	print("Spawning " + self.get_name() + " at " + str(cell))
+	map.add_child(self)
+	set_map_position(cell)
+	
+	# fpr chaining
+	return self
