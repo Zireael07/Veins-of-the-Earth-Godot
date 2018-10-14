@@ -138,3 +138,20 @@ func restore_game():
 	file.close()
 	
 	return opened
+
+
+func _on_QuitButton_pressed():
+	print("Quit pressed")
+	get_node("frame/right/map/Panel").hide()
+	save_game()
+	get_tree().quit()
+	
+	
+	#pass # replace with function body
+
+func _input(event):
+	if (event is InputEventKey):
+		if event.scancode == KEY_ESCAPE:
+			print("Esc pressed")
+			get_node("frame/right/map/Panel").show()
+		

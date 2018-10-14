@@ -11,7 +11,9 @@ func _ready():
 	var file = File.new()
 	var save_exists = file.file_exists(RPG.SAVEGAME_PATH)
 	var button = get_node('Panel/VBoxContainer/Load')
-	#print("Save exists: " + str(save_exists))
+	print("Persistent: " + str(OS.is_userfs_persistent()))
+	print("User at: " + str(OS.get_user_data_dir()))
+	print("Save exists: " + str(save_exists))
 	button.set_disabled(!save_exists)
 
 #func _process(delta):
