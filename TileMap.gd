@@ -38,10 +38,42 @@ func spawn_player(pos):
 	#spawn(player, data.start_pos)
 	#spawn( player, Vector2( 2,2 ) )
 
+func next_level():
+	print("Changing level...")
+	
+	# nuke all entities that were on previous level
+	clear_entities()
+	
+	data = dun_gen.Generate()
+	draw_map( data.map )
+	
+	# Astar representation
+	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells())
+	
+	# fill it first
+	get_node('FogMap').fill()
+	
+	# place player in safe spot (on floor)
+	var spot_id = randi() % dun_gen.get_floor_cells().size()
+	var safe_spot = dun_gen.get_floor_cells()[spot_id]
+	print("Safe spot: " + str(safe_spot))
+	
+	RPG.player.set_map_position(safe_spot)
+	
+	# calculate FOV anew
+	get_node('FogMap')._on_player_pos_changed(RPG.player)
+	
+	
+func clear_entities():
+	for node in get_tree().get_nodes_in_group('entity'):
+		if node != RPG.player:
+			node.queue_free()
+			
 
 # Return TRUE if cell is a floor on the map
-func is_floor( cell ):
-	return get_cellv( cell ) == 0
+func is_walkable( cell ):
+	var walk = [0,2]
+	return walk.has(get_cellv( cell )) #== 0
 
 func get_entities_in_cell(cell):
 	var list = []
@@ -49,6 +81,9 @@ func get_entities_in_cell(cell):
 		if obj.get_map_position() == cell:
 			list.append(obj)
 	return list
+	
+func is_stairs(cell):
+	return get_cellv(cell) == 2
 
 # Turn-based
 func _on_player_acted():
@@ -60,7 +95,7 @@ func _on_player_acted():
 # Return False if cell is an unblocked floor
 # Return Object if cell has a blocking Object
 func is_cell_blocked(cell):
-	var blocks = not is_floor(cell)
+	var blocks = not is_walkable(cell)
 	var entities = get_entities_in_cell(cell)
 	for e in entities:
 		if e.block_move:

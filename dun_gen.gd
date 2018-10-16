@@ -4,7 +4,7 @@ var map = []
 
 # Generate the map
 # room_size = minimum and maximum w/h a room should have
-func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,10), wall_id=1, floor_id=0):
+func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,8), wall_id=1, floor_id=0):
 
 	# Randomize
 	randomize()
@@ -81,9 +81,16 @@ func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,10), w
 
 			# Spawning
 			place_monsters(room)
+		
+			if i == rooms.size()-1:
+				print("Last room")
+				# place stairs
+				var cent = center(room)
+				map[cent.x][cent.y] = 2 #stairs
 			
 		# items
 		place_items(room)
+
 
 
 	# return data
@@ -118,7 +125,7 @@ func get_floor_cells():
 	var list = []
 	for x in range( map.size() ):
 		for y in range( map[x].size() ):
-			if map[x][y] == 0:
+			if map[x][y] == 0 or map[x][y] == 2: #stairs are walkable too!
 				list.append(Vector2(x,y))
 	
 	return list

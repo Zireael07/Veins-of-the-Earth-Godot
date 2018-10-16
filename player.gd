@@ -90,6 +90,14 @@ func _input(event):
 				print( "Ow! You hit a wall!" )
 				emit_signal("player_acted")
 
+	# change level
+	if Input.is_action_just_pressed("change_level"):
+		if RPG.map.is_stairs(get_map_position()):
+			print("Stairs at our location")
+			RPG.map.next_level()
+			RPG.broadcast("You descend a level")
+		
+
 	# other actions
 	if Input.is_action_just_pressed("act_pickup"):
 		var items = []

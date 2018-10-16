@@ -90,7 +90,7 @@ func update_position_map(map_pos, direction):
 func step_to(cell):
 	var map_pos = get_map_position()
 	var path = Astar_map.find_path(map_pos, cell)
-	if path.size() > 1:
+	if path != null and path.size() > 1:
 		print("Path: " + str(path))
 		var dir = path[1] - map_pos
 		print("Dir: " + str(dir))
