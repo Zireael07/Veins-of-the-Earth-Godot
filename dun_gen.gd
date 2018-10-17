@@ -130,13 +130,56 @@ func get_floor_cells():
 	
 	return list
 	
+var monster_table = [ ["kobold", 80], ["drow", 20] ]
+func get_chance_roll_table(chances, pad=false):
+	var num = 0
+	var chance_roll = []
+	for chance in chances:
+		#print(chance)
+		var old_num = num + 1
+		num += 1 + chance[1]
+		# clip top number to 100
+		if num > 100:
+			num = 100
+		chance_roll.append([chance[0], old_num, num])
+
+	if pad:
+		# pad out to 100
+		print("Last number is " + str(num))
+		# print "Last number is " + str(num)
+		chance_roll.append(["None", num, 100])
+
+	return chance_roll
+
+# wants a table of chances [[name, low, upper]]
+func random_choice_table(table):
+	var roll = randi() % 101 # between 0 and 100
+	print("Roll: " + str(roll))
+	
+	for row in table:
+		if roll >= row[1] and roll <= row[2]:
+			print("Random roll picked: " + str(row[0]))
+			return row[0]
+	
+
 func place_monsters(room):
 	print("Placing monsters...")
 	var x = RPG.roll(room.position.x+1, room.end.x-2)
 	var y = RPG.roll(room.position.y+1, room.end.y-2)
 	var pos = Vector2(x,y)
 	
-	var mon = RPG.make_entity("kobold/kobold")
+	# random select from a table
+	var chance_roll_table = get_chance_roll_table(monster_table)
+	print(chance_roll_table)
+	
+	var res = random_choice_table(chance_roll_table)
+	print("Res: " + str(res))
+	
+	var mon
+	if res == "kobold":
+		mon = RPG.make_entity("kobold/kobold")
+	elif res == "drow":
+		mon = RPG.make_entity("drow/drow")
 	
 	print("Place monster: " + str(mon) + " @ " + str(pos))
 	

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Database.gd" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entity.tscn" type="PackedScene" id=3]
-[ext_resource path="res://thing.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/drow_fighter.png" type="Texture" id=4]
+[ext_resource path="res://thing.tscn" type="PackedScene" id=5]
 
 [node name="Database" type="Node" index="0"]
 
@@ -19,11 +20,22 @@ position = Vector2( 0, 0 )
 
 [node name="kobold" parent="kobold" index="0" instance=ExtResource( 3 )]
 
-[node name="potion" type="Node" parent="." index="2"]
+[node name="drow" type="Node" parent="." index="2"]
 
-[node name="potion" parent="potion" index="0" instance=ExtResource( 4 )]
+[node name="drow" parent="drow" index="0" instance=ExtResource( 3 )]
+
+position = Vector2( 38, 60 )
+
+[node name="Sprite" parent="drow/drow" index="0"]
+
+texture = ExtResource( 4 )
+
+[node name="potion" type="Node" parent="." index="3"]
+
+[node name="potion" parent="potion" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 0, 120 )
 _sections_unfolded = [ "Transform" ]
 
 
+[editable path="drow/drow"]
