@@ -7,7 +7,8 @@ func fill():
 	for x in range(map.data.map.size()):
 		for y in range(map.data.map[x].size()):
 			#print("Filling fog for cell: " + str(x) + " " + str(y))
-			set_cell(x,y,0)
+			set_cell(x,y, map.data.map[x][y])
+			#set_cell(x,y,0)
 
 func reveal(cells):
 	for cell in cells:
@@ -56,3 +57,9 @@ func _on_player_pos_changed(player):
 	#print("Cells to reveal: " + str(cells))
 	# Reveal cells
 	reveal(cells)
+	
+	for cell in cells:
+		for obj in get_tree().get_nodes_in_group('entity'):
+			if obj.get_map_position() == cell and not obj.is_visible():
+				obj.set_visible(true)
+	

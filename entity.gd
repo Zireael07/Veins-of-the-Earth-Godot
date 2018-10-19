@@ -26,6 +26,8 @@ func _ready():
 	# Initialization here
 	add_to_group("entity")
 	
+	# set ourselves to invisible
+	set_visible(false)
 	
 	#grid = get_parent().get_node("TileMap")
 	grid = get_parent()
