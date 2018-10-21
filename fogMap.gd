@@ -10,6 +10,19 @@ func fill():
 			set_cell(x,y, map.data.map[x][y])
 			#set_cell(x,y,0)
 
+#-------------------
+# lightmap
+func fill_cells(cells):
+	for cell in cells:
+		set_cell(cell[0],cell[1], map.data.map[cell[0]][cell[1]])
+
+func reveal_all():
+	for x in range(map.data.map.size()):
+		for y in range(map.data.map[x].size()):
+			#print("Filling fog for cell: " + str(x) + " " + str(y))
+			set_cell(x,y, -1)
+
+
 func reveal(cells):
 	for cell in cells:
 		#print("Revealing cell " + str(cell))
@@ -46,20 +59,4 @@ func _ready():
 	if not RPG.restore_game:
 		# we have to defer since otherwise we don't have access to map data
 		call_deferred("fill") #fill()
-	
-func _on_player_pos_changed(player):
-	# Torch (sight) radius
-	var r = RPG.TORCH_RADIUS
-	
-	# Get FOV cells
-	var cells = FOV_gen.calculate_fov(map.data.map, 1, player.get_map_position(), r)
-	
-	#print("Cells to reveal: " + str(cells))
-	# Reveal cells
-	reveal(cells)
-	
-	for cell in cells:
-		for obj in get_tree().get_nodes_in_group('entity'):
-			if obj.get_map_position() == cell and not obj.is_visible():
-				obj.set_visible(true)
 	

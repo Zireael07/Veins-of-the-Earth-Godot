@@ -15,7 +15,7 @@ const DIRECTIONS = {
 	}
 
 func _ready():
-	connect("player_moved", get_parent().get_node('FogMap'), '_on_player_pos_changed')
+	connect("player_moved", get_parent(), '_on_player_pos_changed')
 	connect("player_acted", get_parent(), '_on_player_acted')
 	
 	set_z_index(2)

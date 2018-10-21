@@ -61,7 +61,7 @@ func next_level():
 	RPG.player.set_map_position(safe_spot)
 	
 	# calculate FOV anew
-	get_node('FogMap')._on_player_pos_changed(RPG.player)
+	_on_player_pos_changed(RPG.player)
 	
 	
 func clear_entities():
@@ -101,6 +101,25 @@ func is_cell_blocked(cell):
 		if e.block_move:
 			blocks = e
 	return blocks
+
+func _on_player_pos_changed(player):
+	# Torch (sight) radius
+	var r = RPG.TORCH_RADIUS
+	
+	# Get FOV cells
+	var cells = FOV_gen.calculate_fov(data.map, 1, player.get_map_position(), r)
+	
+	#print("Cells to reveal: " + str(cells))
+	# Reveal cells
+	$"FogMap".reveal(cells)
+	# Light
+	$"LightMap".reveal_all()
+	$"LightMap".fill_cells(cells)
+	
+	for cell in cells:
+		for obj in get_tree().get_nodes_in_group('entity'):
+			if obj.get_map_position() == cell and not obj.is_visible():
+				obj.set_visible(true)
 
 
 # Spawn what path from Database, set position to where
