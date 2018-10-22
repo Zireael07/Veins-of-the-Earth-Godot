@@ -13,7 +13,8 @@ func _ready():
 	RPG.map = self
 	
 func new_game():
-	data = dun_gen.Generate()
+	#data = dun_gen.Generate_random()
+	data = dun_gen.Generate_BSP()
 	draw_map( data.map )
 	
 	#RPG.map_size = Vector2(data.map.size(), data.map[0].size())
@@ -44,7 +45,7 @@ func next_level():
 	# nuke all entities that were on previous level
 	clear_entities()
 	
-	data = dun_gen.Generate()
+	data = dun_gen.Generate_BSP()
 	draw_map( data.map )
 	
 	# Astar representation

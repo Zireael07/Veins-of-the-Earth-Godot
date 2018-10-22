@@ -2,9 +2,125 @@ extends Node
 
 var map = []
 
+# BSP
+var rect1
+var rect2
+var contain
+var bak = []
+var start_rect
+
+
+func Generate_BSP(map_size=Vector2(20,20), wall_id=1, floor_id=0):
+	# Randomize
+	randomize()
+	
+	# initialize data
+	map = []
+	var rooms = []
+	var start_pos = Vector2()
+	
+	# x,y,w,h
+	start_rect = [0,0,map_size.x, map_size.y]
+	contain = [start_rect]
+	
+	# Populate map array
+	for x in range( map_size.x ):
+		var column = []
+		for y in range( map_size.y ):
+			column.append( wall_id )
+		map.append( column )
+	
+	rect(contain)
+	rect(contain)
+	
+	print(contain)
+	
+	for r in contain:
+		# Construct Rect2
+		var new_room = Rect2( r[0], r[1], r[2], r[3] )
+		
+		rooms.append(new_room)
+		
+	# Process generated rooms
+	for i in range( rooms.size() ):
+		var room = rooms[i]
+		# Carve room
+		for x in range( room.size.x - 2 ):
+			for y in range( room.size.y - 2 ):
+				map[ room.position.x + x + 1 ][ room.position.y + y + 1] = floor_id
+		
+					
+		# Tunnels
+		if i == 0:
+			# First room
+			# Define the start_pos in the first room
+			start_pos = center( room )
+		else:
+			# Carve a hall between this room and the last room
+			var prev_room = rooms[i-1]
+			var A = center( room )
+			var B = center( prev_room )
+
+			# Flip a coin..
+			if randi() % 2 == 0:
+				# carve vertical -> horizontal hall
+				for cell in hline( A.x, B.x, A.y ):
+					map[cell.x][cell.y] = floor_id
+				for cell in vline( A.y, B.y, B.x ):
+					map[cell.x][cell.y] = floor_id
+			else:
+				# carve horizontal -> vertical hall
+				for cell in vline( A.y, B.y, A.x ):
+					map[cell.x][cell.y] = floor_id
+				for cell in hline( A.x, B.x, B.y ):
+					map[cell.x][cell.y] = floor_id
+
+			# Spawning
+			place_monsters(room)
+		
+			if i == rooms.size()-1:
+				print("Last room")
+				# place stairs
+				var cent = center(room)
+				map[cent.x][cent.y] = 2 #stairs
+			
+		# items
+		place_items(room)
+	
+	
+	# return data
+	return {
+		"map":      map,
+		"rooms":    rooms,
+		"start_pos":    start_pos,
+		}
+	
+	
+func rect(contain):
+	bak.clear()
+	for rect in contain:
+		randomize()
+		if rect[2] > rect[3]:
+			# 30-70% of width
+			var w = round(rand_range(.3, .7)*rect[2])
+			rect1 = [rect[0], rect[1], w, rect[3]]
+			rect2 = [rect[0]+w, rect[1], rect[2]-w, rect[3]]
+		else:
+			var h = round(rand_range(.3, .7)*rect[3])
+			rect1 = [rect[0], rect[1], rect[2], h]
+			rect2 = [rect[0], rect[1]+h, rect[2], rect[3]-h]
+			
+		bak.append(rect1)
+		bak.append(rect2)
+		
+	contain.clear()
+	for r in bak:
+		contain.append(r)	
+
+
 # Generate the map
 # room_size = minimum and maximum w/h a room should have
-func Generate(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,8), wall_id=1, floor_id=0):
+func Generate_random(map_size=Vector2(20,20), room_count=35, room_size=Vector2(5,8), wall_id=1, floor_id=0):
 
 	# Randomize
 	randomize()
