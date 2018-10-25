@@ -10,6 +10,102 @@ var bak = []
 var start_rect
 
 
+func Generate_Town_BSP(map_size=Vector2(20,20), wall_id=1, floor_id=0):
+	# Randomize
+	randomize()
+	
+	# initialize data
+	map = []
+	var rooms = []
+	var start_pos = Vector2()
+	
+	# x,y,w,h
+	start_rect = [0,0,map_size.x, map_size.y]
+	contain = [start_rect]
+	
+	# Populate map array
+	for x in range( map_size.x ):
+		var column = []
+		for y in range( map_size.y ):
+			column.append( floor_id )
+		map.append( column )
+	
+	rect(contain)
+	rect(contain)
+	
+	print(contain)
+	
+	for r in contain:
+		# Construct Rect2
+		var new_room = Rect2( r[0], r[1], r[2], r[3] )
+		
+		rooms.append(new_room)
+	
+		
+	# Process generated rooms
+	for i in range( rooms.size() ):
+		var room = rooms[i]
+		#print("Room: " + str(room))
+		
+		# Build walls
+		for x in range(room.position.x, room.position.x + room.size.x - 1 ):
+			for y in range(room.position.y, room.position.y + room.size.y - 1 ):
+				map[ x + 1 ][ y + 1] = wall_id
+		
+		
+		# Carve room
+		for x in range(room.position.x+1, room.position.x + room.size.x - 2 ):
+			for y in range(room.position.y+1, room.position.y + room.size.y - 2):
+				map[ x + 1 ][ y + 1] = floor_id
+	
+		if i == 0:
+			# First room
+			# Define the start_pos in the first room
+			start_pos = center( room )
+		
+
+			
+		# items
+		place_items(room)
+	
+	create_doors(rooms)
+	
+	# return data
+	return {
+		"map":      map,
+		"rooms":    rooms,
+		"start_pos":    start_pos,
+		}
+		
+func create_doors(rooms):
+	for room in rooms:
+		var cent = center(room)
+		
+		var choices = ["north", "south", "east", "west"]
+		
+		var wall = choices[randi() % choices.size()]
+		var wallX
+		var wallY
+		
+		if wall == "north":
+			wallX = cent.x
+			wallY = room.position.y + 1
+			print("N: " + str(wallX) + " " + str(wallY))
+		elif wall == "south":
+			wallX = cent.x
+			wallY = room.end.y - 1
+			print("S: " + str(wallX) + " " + str(wallY))
+		elif wall == "east":
+			wallX = room.end.x - 1
+			wallY = cent.y
+			print("E: " + str(wallX) + " " + str(wallY))
+		elif wall == "west":
+			wallX = room.position.x + 1
+			wallY = cent.y
+			print("W: " + str(wallX) + " " + str(wallY))
+			
+		map[wallX][wallY] = 0 # floor
+
 func Generate_BSP(map_size=Vector2(20,20), wall_id=1, floor_id=0):
 	# Randomize
 	randomize()
