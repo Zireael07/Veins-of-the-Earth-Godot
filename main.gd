@@ -26,7 +26,7 @@ func _on_Viewport_gui_input(ev):
 			$"TileMap/Cursor".visible = true
 		var map_cell = map.world_to_map( get_global_mouse_position() )
 		if map_cell != self.cell_hovered:
-			self.cell_hovered = mcell
+			self.cell_hovered = map_cell
 	
 
 

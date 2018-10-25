@@ -52,13 +52,13 @@ func calculate_fov(data, wall_index, origin, radius):
 	
 	
 	for cell in cells:
-
 		if not is_wall(data, wall_index, cell):
 			for x in range(-1,2):
 				for y in range(-1,2):
 					var ncell = cell+Vector2(x,y)
-					if is_wall(data, wall_index, ncell) and int(ncell.distance_to(origin)) <= radius:
-						cells.append(ncell)
+					if ncell.x <= data.size()-1 and ncell.y <= data[0].size()-1:
+						if is_wall(data, wall_index, ncell) and int(ncell.distance_to(origin)) <= radius:
+							cells.append(ncell)
 
 	return cells
 
@@ -81,13 +81,14 @@ func cast_fov_ray(data,wall_index,from,to):
 	var cells = []
 	var line = get_line(from,to)
 	for cell in line:
-		# Check for blocking cell
-		if not is_wall(data, wall_index, cell):
-			cells.append(cell)
-		else:
-			# include the blocking cell in the list
-			cells.append(cell)
-			return cells
+		if cell.x <= data.size()-1 and cell.y <= data[0].size()-1:
+			# Check for blocking cell
+			if not is_wall(data, wall_index, cell):
+				cells.append(cell)
+			else:
+				# include the blocking cell in the list
+				cells.append(cell)
+				return cells
 	return cells
 
 # Returns an array of datamap cells that lie
