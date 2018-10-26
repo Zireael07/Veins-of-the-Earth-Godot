@@ -4,6 +4,8 @@ extends Node2D
 var map_hovered = false
 var cell_hovered = null setget _set_cell_hovered
 
+signal cell_hover
+
 var map
 
 func _ready():
@@ -27,6 +29,8 @@ func _on_Viewport_gui_input(ev):
 		var map_cell = map.world_to_map( get_global_mouse_position() )
 		if map_cell != self.cell_hovered:
 			self.cell_hovered = map_cell
+			
+		emit_signal("cell_hover", map_cell)
 	
 
 

@@ -83,6 +83,14 @@ func get_entities_in_cell(cell):
 			list.append(obj)
 	return list
 	
+func get_entities_in_cell_readable(cell):
+	var ret = []
+	var list = get_entities_in_cell(cell)
+	for obj in list:
+		ret.append(obj.get_name())
+	
+	return ret
+	
 func is_stairs(cell):
 	return get_cellv(cell) == 2
 
