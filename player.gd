@@ -35,6 +35,13 @@ func update_position(pos, direction):
 	
 	return data
 
+func kill():
+	print("Player is killed!")
+	# prevents accidentally doing other stuff
+	get_tree().set_pause(true)
+	
+	RPG.game.death_panel.show()
+
 func wait():
 	emit_signal("player_acted")
 

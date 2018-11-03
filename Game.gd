@@ -4,6 +4,7 @@ extends Control
 onready var messagebox = get_node('frame/right/Panel/MessageBox')
 onready var playerinfo = get_node('frame/left/PlayerInfo')
 onready var inventory = get_node('frame/right/map/InventoryPanel')
+onready var death_panel = get_node('DeathPopup')
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
