@@ -56,7 +56,7 @@ func calculate_fov(data, wall_index, origin, radius):
 			for x in range(-1,2):
 				for y in range(-1,2):
 					var ncell = cell+Vector2(x,y)
-					if ncell.x <= data.size()-1 and ncell.y <= data[0].size()-1:
+					if -1 < ncell.x and ncell.x <= data.size()-1 and -1 < ncell.y and ncell.y <= data[0].size()-1:
 						if is_wall(data, wall_index, ncell) and int(ncell.distance_to(origin)) <= radius:
 							cells.append(ncell)
 
@@ -81,7 +81,7 @@ func cast_fov_ray(data,wall_index,from,to):
 	var cells = []
 	var line = get_line(from,to)
 	for cell in line:
-		if cell.x <= data.size()-1 and cell.y <= data[0].size()-1:
+		if -1 < cell.x and cell.x <= data.size()-1 and -1 < cell.y and cell.y <= data[0].size()-1:
 			# Check for blocking cell
 			if not is_wall(data, wall_index, cell):
 				cells.append(cell)
