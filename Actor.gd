@@ -9,8 +9,8 @@ export(int) var defense = 1
 
 signal hp_changed(current,full)
 
-export(int) var max_hp = 5 setget _set_max_hp
-var hp = 5 setget _set_hp
+export(int) var max_hp = 10 setget _set_max_hp
+var hp = 10 setget _set_hp
 
 
 func fill_hp():
@@ -18,7 +18,7 @@ func fill_hp():
 
 func fight(who):
 	if who.fighter:
-		who.fighter.take_damage(ownr, self.power)
+		who.fighter.take_damage(ownr, RPG.roll(1,6)) #self.power)
 
 func take_damage(from, amount):
 	#print(get_parent().get_name() + " takes " + str(amount) + " damage!")
