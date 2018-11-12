@@ -9,14 +9,16 @@ const SAVEGAME_PATH = "user://game.sav"
 var restore_game = false
 
 # colors for message panel
-const COLOR_WHITE = '#deeed6'
-const COLOR_LIGHT_GREY = '#8595a1'
-const COLOR_DARK_GREY = '#4e4a4e'
+const COLOR_WHITE = '#ffffff' #deeed6'
 const COLOR_RED = '#d04648'
 const COLOR_BROWN = '#854c30'
 const COLOR_DARK_GREEN = '#346524'
 const COLOR_GREEN = '#6daa2c'
 const COLOR_YELLOW = '#dad45e'
+# from libtcod
+const COLOR_LIGHT_BLUE = "#73b9ff" #7373ff"
+const COLOR_DARK_GREY = "5f5f5f"   #'#4e4a4e' #muddy gray
+const COLOR_LIGHT_GREY = "9f9f9f" #'#8595a1'
 
 
 var player

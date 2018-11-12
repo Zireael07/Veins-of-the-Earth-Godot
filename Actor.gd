@@ -18,7 +18,13 @@ func fill_hp():
 
 func fight(who):
 	if who.fighter:
-		who.fighter.take_damage(ownr, RPG.roll(1,6)) #self.power)
+		# attack
+		var melee = RPG.roll(1,100)
+		if melee < 55:
+			RPG.broadcast(ownr.name + " hits " + who.name + "!", RPG.COLOR_LIGHT_BLUE)
+			who.fighter.take_damage(ownr, RPG.roll(1,6)) #self.power)
+		else:
+			RPG.broadcast(ownr.name + " misses " + who.name + "!")
 
 func take_damage(from, amount):
 	#print(get_parent().get_name() + " takes " + str(amount) + " damage!")
