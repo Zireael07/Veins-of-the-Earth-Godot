@@ -151,7 +151,7 @@ func restore(data):
 	
 func spawn(map,cell):
 	print("Spawning " + self.get_name() + " at " + str(cell))
-	map.add_child(self)
+	map.add_child(self, true) # legible names
 	set_map_position(cell)
 	
 	# fpr chaining

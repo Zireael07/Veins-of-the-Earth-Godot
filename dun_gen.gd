@@ -344,7 +344,7 @@ func get_floor_cells():
 	
 var monster_table = [ ["kobold", 80], ["drow", 20] ]
 func get_chance_roll_table(chances, pad=false):
-	var num = 0
+	var num = -1
 	var chance_roll = []
 	for chance in chances:
 		#print(chance)

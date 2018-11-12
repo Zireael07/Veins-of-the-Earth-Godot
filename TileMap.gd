@@ -135,7 +135,7 @@ func _on_player_pos_changed(player):
 func spawn( what, where ):
 	print("Spawning: " + str(what.get_name()) + " @: " + str(where))
 	# Add the entity to the scene and set its pos
-	add_child( what )
+	add_child( what, true)
 	#what.set_map_pos( where )
 	what.set_map_position(where)
 	#print("Map position set " + str(where))
