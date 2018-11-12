@@ -32,9 +32,10 @@ func new_game():
 # save on quit
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		var saved = save_game()
-		if saved != OK:
-			print('SAVE GAME RETURNED ERROR '+str(saved))
+		if not RPG.player.dead:
+			var saved = save_game()
+			if saved != OK:
+				print('SAVE GAME RETURNED ERROR '+str(saved))
 		get_tree().quit()
 
 # Save Game Mother Function
@@ -144,7 +145,8 @@ func restore_game():
 func _on_QuitButton_pressed():
 	print("Quit pressed")
 	get_node("frame/right/map/Panel").hide()
-	save_game()
+	if not RPG.player.dead:
+		save_game()
 	get_tree().quit()
 	
 	

@@ -17,6 +17,7 @@ var fighter
 var ai
 var item
 
+var dead = false
 
 func cartesian_to_isometric(vector):
 	return Vector2(vector.x - vector.y, (vector.x + vector.y) / 2)
@@ -36,6 +37,7 @@ func _ready():
 
 func kill():
 	if RPG.player != self:
+		dead = true
 		broadcast_kill()
 		queue_free()
 
