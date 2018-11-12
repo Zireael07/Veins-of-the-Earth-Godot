@@ -154,7 +154,11 @@ func _on_QuitButton_pressed():
 
 func _input(event):
 	if (event is InputEventKey):
-		if event.scancode == KEY_ESCAPE:
+		if event.scancode == KEY_ESCAPE and event.pressed:
 			print("Esc pressed")
-			get_node("frame/right/map/Panel").show()
+			if get_node("frame/right/map/Panel").is_visible():
+				get_node("frame/right/map/Panel").hide()
+			else:
+				get_node("frame/right/map/Panel").show()
+		
 		
