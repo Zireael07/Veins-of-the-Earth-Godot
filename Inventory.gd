@@ -44,8 +44,8 @@ func add_to_inventory(item):
 	if !slot: return
 	
 	# remove from world objects group
-	if item.is_in_group('entities'):
-		item.remove_from_group('entities')
+	if item.is_in_group('entity'):
+		item.remove_from_group('entity')
 	# add to inventory group
 	if not item.is_in_group('inventory'):
 		item.add_to_group('inventory')
@@ -61,7 +61,7 @@ func remove_from_inventory(slot, item):
 	slot.remove_contents(item)
 	
 	item.remove_from_group('inventory')
-	item.add_to_group('entities')
+	item.add_to_group('entity')
 
 	item.get_parent().remove_child(item)
 	RPG.map.add_child(item)
