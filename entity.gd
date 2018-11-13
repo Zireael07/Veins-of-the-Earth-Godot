@@ -27,6 +27,8 @@ func _ready():
 	# Initialization here
 	add_to_group("entity")
 	
+	set_z_index(1)
+	
 	# set ourselves to invisible
 	set_visible(false)
 	
