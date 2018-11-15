@@ -21,9 +21,12 @@ func fight(who):
 		# attack
 		var melee = RPG.roll(1,100)
 		if melee < 55:
+			var dmg = RPG.roll(1,6)
 			RPG.broadcast(ownr.name + " hits " + who.name + "!", RPG.COLOR_LIGHT_BLUE)
-			who.fighter.take_damage(ownr, RPG.roll(1,6)) #self.power)
+			who.fighter.take_damage(ownr, dmg) #self.power)
+			who.add_splash(0, dmg)
 		else:
+			who.add_splash(1)
 			RPG.broadcast(ownr.name + " misses " + who.name + "!")
 
 func take_damage(from, amount):

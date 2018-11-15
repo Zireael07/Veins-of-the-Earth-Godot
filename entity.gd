@@ -19,6 +19,9 @@ var item
 
 var dead = false
 
+var splash_base = preload("res://splash.tscn")
+
+
 func cartesian_to_isometric(vector):
 	return Vector2(vector.x - vector.y, (vector.x + vector.y) / 2)
 
@@ -112,6 +115,16 @@ func distance_to(cell):
 # Get our Icon texture
 func get_icon():
 	return get_node('Sprite').get_texture()
+
+func add_splash(type=0,dmg=null):
+	var splash = splash_base.instance()
+	
+	# set values
+	splash.type = type
+	if dmg:
+		splash.dmg = dmg
+	add_child(splash)
+
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
