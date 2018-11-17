@@ -110,8 +110,8 @@ func _input(event):
 		var items = []
 		for ob in RPG.map.get_entities_in_cell(get_map_position()):
 			if ob.item:
-				print("Item at our position")
-				ob.item.pickup()
+				#print("Item at our position")
+				ob.item.pickup(self)
 				
 	if Input.is_action_just_pressed("act_drop"):
 		RPG.inventory_menu.start(true)
@@ -120,6 +120,6 @@ func _input(event):
 			RPG.broadcast("action cancelled")
 		else:
 			for obj in items:
-				obj.item.drop()
+				obj.item.drop(self)
 		
 		emit_signal('player_acted')

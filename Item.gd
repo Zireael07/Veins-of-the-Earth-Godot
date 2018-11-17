@@ -20,12 +20,15 @@ func use():
 		if not indestructible:
 			ownr.kill()
 
-func pickup():
+func pickup(entity):
+	RPG.broadcast(entity.get_name() + " picks up " + ownr.get_name())
 	# TODO: this inventory isn't tied to any particular actor
 	RPG.inventory.add_to_inventory(ownr)
 	#pass
 
-func drop():
+func drop(entity):
+	RPG.broadcast(entity.get_name() + " drops " + ownr.get_name())
+	# TODO: this inventory isn't tied to any particular actor
 	assert inventory_slot != null
 	RPG.inventory.remove_from_inventory(inventory_slot,ownr)
 

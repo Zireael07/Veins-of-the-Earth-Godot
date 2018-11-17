@@ -46,7 +46,7 @@ func _on_InventorySlot_pressed():
 
 func _on_DropButton_pressed():
 	var obj = contents[0]
-	obj.item.drop()
+	obj.item.drop(RPG.player)
 	update_slot()
 	
 	get_node("MenuContainer").hide()
