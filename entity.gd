@@ -46,6 +46,10 @@ func kill():
 		broadcast_kill()
 		queue_free()
 
+func remove():
+	queue_free()
+
+
 func broadcast_kill():
 	RPG.broadcast(self.name + " is killed!", RPG.COLOR_LIGHT_GREY)
 

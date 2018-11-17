@@ -40,8 +40,10 @@ func _ready():
 
 
 func _on_InventorySlot_pressed():
-	# show the menu
-	get_node("MenuContainer").show()
+	# don't show if nothing in slot
+	if contents.size() > 0:
+		# show the menu
+		get_node("MenuContainer").show()
 
 
 func _on_DropButton_pressed():
@@ -55,5 +57,19 @@ func _on_DropButton_pressed():
 	get_parent().get_parent().get_parent().hide()
 	# unpause
 	get_tree().set_pause(false)
+
+
+func _on_UseButton_pressed():
+	var obj = contents[0]
+	obj.item.use(RPG.player)
+	update_slot()
+	
+	get_node("MenuContainer").hide()
+	
+	# close the whole inventory
+	get_parent().get_parent().get_parent().hide()
+	# unpause
+	get_tree().set_pause(false)
+	
 	
 	#pass # replace with function body

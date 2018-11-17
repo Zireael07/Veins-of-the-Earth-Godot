@@ -8,17 +8,21 @@ export(bool) var indestructible
 
 var inventory_slot
 
-func use():
+func use(entity):
+	print("Using an item")
 	if use_function.empty():
 		RPG.broadcast("The " +ownr.name+ " cannot be used", RPG.COLOR_DARK_GREY)
 		return
 	if has_method(use_function):
-		var result = call(use_function)
+		print("We have the function: " + str(use_function))
+		var result = call(use_function, entity)
 		if result != "OK":
 			RPG.broadcast(result,RPG.COLOR_DARK_GREY)
 			return
 		if not indestructible:
-			ownr.kill()
+			# fix
+			RPG.inventory.remove_from_inventory(inventory_slot, ownr)
+			ownr.remove()
 
 func pickup(entity):
 	RPG.broadcast(entity.get_name() + " picks up " + ownr.get_name())
@@ -39,10 +43,21 @@ func _ready():
 	
 	#pass
 
+#-------------------------
+# item use functions
+func heal(entity):
+	RPG.broadcast(entity.get_name() + " is healed!")
+	var heal = RPG.roll(1,6)
+	entity.fighter.hp += heal
+	return "OK"
+
+
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+
+
 
 func save():
 	var data = {}

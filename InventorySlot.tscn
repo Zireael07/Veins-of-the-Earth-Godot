@@ -34,7 +34,6 @@ _sections_unfolded = [ "Offset" ]
 
 [node name="MenuContainer" type="VBoxContainer" parent="." index="1"]
 
-editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -101,6 +100,8 @@ flat = false
 align = 1
 
 [connection signal="pressed" from="." to="." method="_on_InventorySlot_pressed"]
+
+[connection signal="pressed" from="MenuContainer/UseButton" to="." method="_on_UseButton_pressed"]
 
 [connection signal="pressed" from="MenuContainer/DropButton" to="." method="_on_DropButton_pressed"]
 

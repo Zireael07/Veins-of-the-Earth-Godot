@@ -17,4 +17,6 @@ texture = ExtResource( 2 )
 
 [node name="Item" parent="." index="1" instance=ExtResource( 3 )]
 
+use_function = "heal"
+
 
