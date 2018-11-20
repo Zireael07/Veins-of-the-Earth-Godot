@@ -14,7 +14,8 @@ func _ready():
 	
 func new_game():
 	#data = dun_gen.Generate_random()
-	data = dun_gen.Generate_Town_BSP()
+	data = dun_gen.Generate_BSP()
+	#data = dun_gen.Generate_Town_BSP()
 	draw_map( data.map )
 	
 	#RPG.map_size = Vector2(data.map.size(), data.map[0].size())
