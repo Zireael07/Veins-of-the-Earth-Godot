@@ -4,7 +4,8 @@ extends Node
 	
 onready var ownr = get_parent()
 
-export(int) var power = 1
+#export(int) var power = 1
+var damage = [1,6]
 export(int) var defense = 1
 
 signal hp_changed(current,full)
@@ -21,7 +22,7 @@ func fight(who):
 		# attack
 		var melee = RPG.roll(1,100)
 		if melee < 55:
-			var dmg = RPG.roll(1,6)
+			var dmg = RPG.roll(damage[0], damage[1])
 			RPG.broadcast(ownr.name + " hits " + who.name + "!", RPG.COLOR_LIGHT_BLUE)
 			who.fighter.take_damage(ownr, dmg) #self.power)
 			who.add_splash(0, dmg)
@@ -71,7 +72,7 @@ func broadcast_damage_taken(from, amount):
 
 func save():
 	var data = {}
-	data.power = self.power
+	data.damage = self.damage
 	data.defense = self.defense
 	data.max_hp = self.max_hp
 	data.hp = self.hp

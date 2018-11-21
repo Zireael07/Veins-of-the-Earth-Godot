@@ -53,6 +53,10 @@ _sections_unfolded = [ "Transform" ]
 
 texture = ExtResource( 6 )
 
+[node name="Item" parent="longsword/longsword" index="1"]
+
+damage = PoolIntArray( 1, 8 )
+
 
 [editable path="drow/drow"]
 [editable path="longsword/longsword"]
