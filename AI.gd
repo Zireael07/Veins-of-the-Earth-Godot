@@ -6,6 +6,11 @@ func _ready():
 	ownr.ai = self
 	
 func take_turn():
+	if ownr.dead:
+		print("Dead, do nothing")
+		return
+	
+	
 	var target = RPG.player
 	var distance = ownr.distance_to(target.get_map_position())
 	print("AI taking turn")
