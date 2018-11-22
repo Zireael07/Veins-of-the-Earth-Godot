@@ -39,6 +39,9 @@ func _ready():
 	grid = get_parent()
 	tile_size = grid.get_cell_size()
 	tile_offset = Vector2(0, tile_size.y / 2)
+	
+	$"Label".set_text(get_name())
+	$"Label".hide()
 
 func kill():
 	if RPG.player != self:
