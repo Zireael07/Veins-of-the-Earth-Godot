@@ -5,6 +5,11 @@ onready var ownr = get_parent()
 
 export(String) var use_function = ''
 export(bool) var indestructible
+# equipment
+export(bool) var equippable
+var equipped = false
+export(String) var equip_slot = ''
+
 
 export(PoolIntArray) var damage = []
 
@@ -13,11 +18,14 @@ var inventory_slot
 func use(entity):
 	print("Using an item")
 	
-	if damage.size() > 0:
-		print("wielding")
-		# use the weapon's damage in place of the player's
-		entity.fighter.damage = damage
-		return
+	if equippable:
+		if not equipped:
+			RPG.broadcast(entity.get_name() + " equipped " + ownr.name, RPG.COLOR_WHITE)
+			if equip_slot == "MAIN_HAND" and damage.size() > 0:
+				#print("Using the sword's damage")
+				# use the weapon's damage in place of the player's
+				entity.fighter.damage = damage
+				return
 	
 	if use_function.empty():
 		RPG.broadcast("The " +ownr.name+ " cannot be used", RPG.COLOR_DARK_GREY)

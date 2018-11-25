@@ -55,6 +55,8 @@ texture = ExtResource( 6 )
 
 [node name="Item" parent="longsword/longsword" index="1"]
 
+equippable = true
+equip_slot = "MAIN_HAND"
 damage = PoolIntArray( 1, 8 )
 
 

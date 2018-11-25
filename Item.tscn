@@ -7,5 +7,8 @@
 script = ExtResource( 1 )
 use_function = ""
 indestructible = null
+equippable = null
+equip_slot = ""
+damage = null
 
 
