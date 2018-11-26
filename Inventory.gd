@@ -2,6 +2,7 @@ extends GridContainer
 
 # class member variables go here, for example:
 onready var objects = get_node('../InventoryObjects')
+onready var eq = get_node("../EquipmentContainer")
 onready var name_label = get_node('../ItemName')
 
 # these work regardless of turns
@@ -66,6 +67,11 @@ func remove_from_inventory(slot, item):
 	item.get_parent().remove_child(item)
 	RPG.map.add_child(item)
 	item.set_map_position(RPG.player.get_map_position())
+	
+func move_to_equipped(slot, item):
+	slot.remove_contents(item)
+	
+	eq.get_child(0).add_contents(item)
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
