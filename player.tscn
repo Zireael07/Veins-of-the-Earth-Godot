@@ -15,8 +15,9 @@ block_move = false
 [node name="marker" type="Sprite" parent="." index="0"]
 
 modulate = Color( 0, 1, 1, 1 )
+position = Vector2( 0, -2 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Material", "Visibility" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 

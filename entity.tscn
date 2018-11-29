@@ -16,12 +16,14 @@ block_move = true
 [node name="marker" type="Sprite" parent="." index="0"]
 
 modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, -4 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Material", "Visibility" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Actor" parent="." index="2" instance=ExtResource( 4 )]
 
