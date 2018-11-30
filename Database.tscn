@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Database.gd" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entity.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/drow_fighter.png" type="Texture" id=4]
 [ext_resource path="res://thing.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/longsword.png" type="Texture" id=6]
+[ext_resource path="res://assets/flask.png" type="Texture" id=6]
+[ext_resource path="res://assets/food.png" type="Texture" id=7]
+[ext_resource path="res://assets/longsword.png" type="Texture" id=8]
 
 [node name="Database" type="Node" index="0"]
 
@@ -42,7 +44,37 @@ max_hp = 10
 position = Vector2( 0, 120 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="longsword" type="Node" parent="." index="4"]
+[node name="flask" type="Node" parent="." index="4"]
+
+[node name="flask" parent="flask" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 80, 120 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" parent="flask/flask" index="0"]
+
+texture = ExtResource( 6 )
+
+[node name="Item" parent="flask/flask" index="1"]
+
+use_function = ""
+
+[node name="rations" type="Node" parent="." index="5"]
+
+[node name="rations" parent="rations" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 80, 120 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" parent="rations/rations" index="0"]
+
+texture = ExtResource( 7 )
+
+[node name="Item" parent="rations/rations" index="1"]
+
+use_function = ""
+
+[node name="longsword" type="Node" parent="." index="6"]
 
 [node name="longsword" parent="longsword" index="0" instance=ExtResource( 5 )]
 
@@ -51,7 +83,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="longsword/longsword" index="0"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 
 [node name="Item" parent="longsword/longsword" index="1"]
 
@@ -61,4 +93,6 @@ damage = PoolIntArray( 1, 8 )
 
 
 [editable path="drow/drow"]
+[editable path="flask/flask"]
+[editable path="rations/rations"]
 [editable path="longsword/longsword"]
