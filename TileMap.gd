@@ -34,11 +34,20 @@ func spawn_player(pos):
 	ob.fighter.connect("hp_changed", RPG.game.playerinfo, "hp_changed")
 	ob.fighter.emit_signal("hp_changed",ob.fighter.hp, ob.fighter.max_hp)
 	
+	# starting inventory
+	var pot = RPG.make_entity("potion/potion")
+	spawn(pot, pos)
+	pot.item.pickup(player)
+	var flask = RPG.make_entity("flask/flask")
+	spawn(flask, pos)
+	flask.item.pickup(player)
+	var ration = RPG.make_entity("rations/rations")
+	spawn(ration, pos)
+	ration.item.pickup(player)
+		
 	# welcome message
 	RPG.broadcast("Welcome to Veins of the Earth!", RPG.COLOR_BROWN)
-	
-	#spawn(player, data.start_pos)
-	#spawn( player, Vector2( 2,2 ) )
+
 
 func next_level():
 	print("Changing level...")
