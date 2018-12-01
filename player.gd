@@ -1,5 +1,9 @@
 extends "entity.gd"
 
+var nutrition = 500
+var thirst = 300
+
+
 signal player_moved(me)
 signal player_acted
 
@@ -44,6 +48,19 @@ func kill():
 
 func wait():
 	emit_signal("player_acted")
+	
+func act():
+	print("Player act")
+	nutrition -= 1
+	thirst -= 1
+
+	# starve/thirst
+	if nutrition <= 0 or thirst <= 0:
+	   fighter.take_damage(self, 1)
+	
+	# update HUD
+	RPG.game.playerinfo.get_node("VBoxContainer2/NutritionBar").set_value(nutrition)
+	RPG.game.playerinfo.get_node("VBoxContainer2/ThirstBar").set_value(thirst)
 
 func _input(event):
 	direction = Vector2()

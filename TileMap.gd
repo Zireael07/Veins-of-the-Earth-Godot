@@ -104,12 +104,15 @@ func get_entities_in_cell_readable(cell):
 func is_stairs(cell):
 	return get_cellv(cell) == 2
 
+# MAIN LOOP!!!
 # Turn-based
 func _on_player_acted():
 	for node in get_tree().get_nodes_in_group('entity'):
 		if node != RPG.player and node.ai:
 			#print(node.get_name() + " gives you a dirty look!")
 			node.ai.take_turn()
+		elif node == RPG.player:
+			node.act()
 	
 # Return False if cell is an unblocked floor
 # Return Object if cell has a blocking Object

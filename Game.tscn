@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://PlayerInfo.gd" type="Script" id=2]
@@ -42,6 +42,62 @@ content_margin_left = -1.0
 content_margin_right = -1.0
 content_margin_top = -1.0
 content_margin_bottom = -1.0
+bg_color = Color( 0.429688, 1, 0, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+
+[sub_resource type="StyleBoxFlat" id=3]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0, 0.0390625, 1, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+
+[sub_resource type="StyleBoxFlat" id=4]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
 bg_color = Color( 0.167969, 0.157471, 0.157471, 1 )
 draw_center = true
 border_width_left = 0
@@ -65,7 +121,7 @@ anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Shadow" ]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=5]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -110,7 +166,6 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="frame" type="HBoxContainer" parent="." index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -240,7 +295,7 @@ rounded = false
 percent_visible = false
 _sections_unfolded = [ "Percent", "Size Flags", "custom_styles" ]
 
-[node name="HSeparator" type="HSeparator" parent="frame/left/PlayerInfo/VBoxContainer2" index="1"]
+[node name="NutritionBar" type="ProgressBar" parent="frame/left/PlayerInfo/VBoxContainer2" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -248,7 +303,59 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 20.0
 margin_right = 286.0
-margin_bottom = 24.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+custom_styles/fg = SubResource( 2 )
+min_value = 0.0
+max_value = 500.0
+step = 1.0
+page = 0.0
+value = 500.0
+exp_edit = false
+rounded = false
+percent_visible = false
+_sections_unfolded = [ "Percent", "custom_styles" ]
+
+[node name="ThirstBar" type="ProgressBar" parent="frame/left/PlayerInfo/VBoxContainer2" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 40.0
+margin_right = 286.0
+margin_bottom = 56.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+custom_styles/fg = SubResource( 3 )
+min_value = 0.0
+max_value = 300.0
+step = 1.0
+page = 0.0
+value = 300.0
+exp_edit = false
+rounded = false
+percent_visible = false
+_sections_unfolded = [ "Percent", "custom_styles" ]
+
+[node name="HSeparator" type="HSeparator" parent="frame/left/PlayerInfo/VBoxContainer2" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 60.0
+margin_right = 286.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -256,15 +363,15 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="frame/left/PlayerInfo/VBoxContainer2" index="2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="frame/left/PlayerInfo/VBoxContainer2" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 28.0
+margin_top = 68.0
 margin_right = 286.0
-margin_bottom = 80.0
+margin_bottom = 120.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -515,8 +622,8 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_styles/panelf = SubResource( 2 )
-custom_styles/panel = SubResource( 3 )
+custom_styles/panelf = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
 _sections_unfolded = [ "Material", "Rect", "Visibility", "custom_styles" ]
 
 [node name="MessageBox" type="RichTextLabel" parent="frame/right/Panel" index="0"]
