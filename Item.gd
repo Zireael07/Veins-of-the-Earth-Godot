@@ -70,6 +70,30 @@ func heal(entity):
 	entity.fighter.hp += heal
 	return "OK"
 
+func eat(entity):
+	if 'nutrition' in entity and entity.nutrition < 500:
+		RPG.broadcast("You ate your food", RPG.COLOR_GREEN)
+		entity.nutrition = entity.nutrition + 150
+		# update HUD
+		RPG.game.playerinfo.get_node("VBoxContainer2/NutritionBar").set_value(entity.nutrition)
+		return "OK"
+	else:
+		return "You're full, you can't eat any more"
+		#RPG.broadcast("You're full, you can't eat any more", RPG.COLOR_YELLOW)
+		#return "OK"
+
+func drink(entity):
+	if 'thirst' in entity and entity.thirst < 300:
+		RPG.broadcast("You drank from the flask", RPG.COLOR_LIGHT_BLUE)
+		entity.thirst = entity.thirst + 150
+		# update HUD
+		RPG.game.playerinfo.get_node("VBoxContainer2/ThirstBar").set_value(entity.thirst)
+		return "OK"
+	else:
+		return "You're full, you can't drink any more"
+		#RPG.broadcast("You're full, you can't drink any more", RPG.COLOR_YELLOW)
+		#return "OK"
+
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

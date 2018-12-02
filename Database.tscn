@@ -57,7 +57,7 @@ texture = ExtResource( 6 )
 
 [node name="Item" parent="flask/flask" index="1"]
 
-use_function = ""
+use_function = "drink"
 
 [node name="rations" type="Node" parent="." index="5"]
 
@@ -72,7 +72,7 @@ texture = ExtResource( 7 )
 
 [node name="Item" parent="rations/rations" index="1"]
 
-use_function = ""
+use_function = "eat"
 
 [node name="longsword" type="Node" parent="." index="6"]
 
