@@ -1,22 +1,10 @@
-extends GridContainer
+extends HBoxContainer
 
 # class member variables go here, for example:
 onready var objects = get_node('../InventoryObjects')
-onready var eq = get_node("../EquipmentContainer")
-onready var name_label = get_node('../ItemName')
+onready var eq = get_node("../VBoxContainer/EquipmentContainer")
+onready var name_label = get_node('../VBoxContainer/ItemName')
 
-# these work regardless of turns
-func _input(event):
-	if Input.is_action_pressed("inventory"):
-		if not get_parent().get_parent().is_visible():
-			print("Pausing")
-			# prevents accidentally doing other stuff
-			get_tree().set_pause(true)
-			get_parent().get_parent().show()
-		else:
-			print("Unpausing")
-			get_tree().set_pause(false)
-			get_parent().get_parent().hide()
 
 # Get an array of all inventory Objects
 func get_objects():

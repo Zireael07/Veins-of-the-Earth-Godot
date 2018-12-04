@@ -42,8 +42,12 @@ func _ready():
 func _on_InventorySlot_pressed():
 	# don't show if nothing in slot
 	if contents.size() > 0:
-		# show the menu
-		get_node("MenuContainer").show()
+		if get_node("MenuContainer").is_visible():
+			get_node("MenuContainer").hide()
+		else:
+			# show the menu
+			get_node("MenuContainer").show()
+			
 
 
 func _on_DropButton_pressed():
@@ -54,7 +58,7 @@ func _on_DropButton_pressed():
 	get_node("MenuContainer").hide()
 	
 	# close the whole inventory
-	get_parent().get_parent().get_parent().hide()
+	get_parent().get_parent().hide()
 	# unpause
 	get_tree().set_pause(false)
 
@@ -67,7 +71,7 @@ func _on_UseButton_pressed():
 	get_node("MenuContainer").hide()
 	
 	# close the whole inventory
-	get_parent().get_parent().get_parent().hide()
+	get_parent().get_parent().hide()
 	# unpause
 	get_tree().set_pause(false)
 	
