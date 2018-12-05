@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://PlayerInfo.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://InventoryPanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://PopupPanel.gd" type="Script" id=5]
 [ext_resource path="res://DeathPopup.gd" type="Script" id=6]
+[ext_resource path="res://WelcomePopup.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -96,6 +97,7 @@ _sections_unfolded = [ "Rect", "Size Flags" ]
 
 [node name="left" type="VBoxContainer" parent="frame" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -116,6 +118,7 @@ _sections_unfolded = [ "Rect", "Size Flags" ]
 
 [node name="right" type="VBoxContainer" parent="frame" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -469,8 +472,6 @@ max_lines_visible = -1
 [node name="DeathPopup" type="Popup" parent="." index="2"]
 
 pause_mode = 2
-editor/display_folded = true
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -564,6 +565,68 @@ group = null
 text = "Back to main menu"
 flat = false
 align = 1
+
+[node name="WelcomePopup" type="Popup" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = true
+script = ExtResource( 7 )
+_sections_unfolded = [ "Popup" ]
+
+[node name="Panel" type="Panel" parent="WelcomePopup" index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -300.0
+margin_right = 300.0
+margin_bottom = 300.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WelcomePopup/Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Brave adventurer, you are now lost in the underground corridors
+of the Veins of the Earth.
+There is no way to return to your homeland.
+How long can you survive...?
+Press ESC or click to close."
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
 
 [connection signal="gui_input" from="frame/right/map/ViewportContainer" to="frame/right/map/ViewportContainer/Viewport/Node2D" method="_on_Viewport_gui_input"]
 

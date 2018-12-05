@@ -30,6 +30,9 @@ func _ready():
 func new_game():
 	# just call
 	RPG.map.new_game()
+	
+	# show welcome
+	get_node("WelcomePopup").popup()
 
 # save on quit
 func _notification(what):
@@ -158,6 +161,11 @@ func _input(event):
 	if (event is InputEventKey):
 		if event.scancode == KEY_ESCAPE and event.pressed:
 			print("Esc pressed")
+			if get_node("WelcomePopup").is_visible():
+				get_node("WelcomePopup").hide()
+				return
+			
+			
 			if get_node("frame/right/map/Panel").is_visible():
 				get_node("frame/right/map/Panel").hide()
 			else:
