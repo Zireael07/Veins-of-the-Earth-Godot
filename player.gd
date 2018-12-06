@@ -140,3 +140,6 @@ func _input(event):
 				obj.item.drop(self)
 		
 		emit_signal('player_acted')
+		
+	if Input.is_action_just_pressed("help"):
+		RPG.game.get_node("HelpPopup").popup()

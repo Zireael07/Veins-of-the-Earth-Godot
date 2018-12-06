@@ -82,6 +82,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="frame" type="HBoxContainer" parent="." index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -118,7 +119,6 @@ _sections_unfolded = [ "Rect", "Size Flags" ]
 
 [node name="right" type="VBoxContainer" parent="frame" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -201,6 +201,7 @@ _sections_unfolded = [ "Render Target", "Rendering" ]
 
 [node name="Panel" type="Panel" parent="frame/right/map" index="2"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -246,6 +247,7 @@ _sections_unfolded = [ "Rect" ]
 
 [node name="Panel" type="Panel" parent="frame/right" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -472,6 +474,8 @@ max_lines_visible = -1
 [node name="DeathPopup" type="Popup" parent="." index="2"]
 
 pause_mode = 2
+editor/display_folded = true
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -568,6 +572,8 @@ align = 1
 
 [node name="WelcomePopup" type="Popup" parent="." index="3"]
 
+editor/display_folded = true
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -623,6 +629,69 @@ of the Veins of the Earth.
 There is no way to return to your homeland.
 How long can you survive...?
 Press ESC or click to close."
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+
+[node name="HelpPopup" type="Popup" parent="." index="4"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = false
+script = ExtResource( 7 )
+
+[node name="Panel" type="Panel" parent="HelpPopup" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 212.0
+margin_right = -212.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HelpPopup/Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "Default keys:
+Arrows to move
+Home to move up-left, PageUp to move up-right
+PageDown to move left-down, End to move right-down
+
+> to ascend/descend stairs
+G to pick up items, D to drop items, I to open inventory
+? to bring up this menu again"
 scroll_active = true
 scroll_following = false
 selection_enabled = false
