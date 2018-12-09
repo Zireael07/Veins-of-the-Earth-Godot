@@ -13,6 +13,14 @@ signal hp_changed(current,full)
 export(int) var max_hp = 10 setget _set_max_hp
 var hp = 10 setget _set_hp
 
+# stats
+var strength = 8
+var dexterity = 8
+var constitution = 8
+var intelligence = 8
+var wisdom = 8
+var charisma = 8
+
 
 func fill_hp():
 	self.hp = self.max_hp
@@ -51,6 +59,11 @@ func _set_max_hp(what):
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	
+	# roll dice for stats
+	for s in ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]:
+		self[s] = RPG.roll_dice(3,6)
+	
 	
 	ownr.fighter = self
 	fill_hp()

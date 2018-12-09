@@ -35,6 +35,14 @@ func make_entity( path ):
 func roll(l,h):
 	return int(round(rand_range(l,h)))
 
+func roll_dice(n, d):
+	var res = 0
+	for i in range(n):
+		res += int(round(rand_range(1,d)))
+		
+	return res
+
+
 func broadcast(message, color=COLOR_WHITE):
 	if game:
 		if game.messagebox:
