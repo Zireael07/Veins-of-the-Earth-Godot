@@ -31,8 +31,9 @@ func fight(who):
 		var melee = RPG.roll(1,100)
 		if melee < 55:
 			var dmg = RPG.roll(damage[0], damage[1])
+			var mod = int(floor((strength - 10)/2))
 			RPG.broadcast(ownr.name + " hits " + who.name + "!", RPG.COLOR_LIGHT_BLUE)
-			who.fighter.take_damage(ownr, dmg) #self.power)
+			who.fighter.take_damage(ownr, dmg + mod) #self.power)
 			who.add_splash(0, dmg)
 		else:
 			who.add_splash(1)
@@ -53,7 +54,7 @@ func _set_hp(value):
 		die()
 
 func _set_max_hp(what):
-	max_hp = what
+	max_hp = what + int(floor(constitution - 10)/2)
 	emit_signal('hp_changed', self.hp, self.max_hp)
 
 func _ready():
