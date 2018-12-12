@@ -106,7 +106,7 @@ func create_doors(rooms):
 			
 		map[wallX][wallY] = 0 # floor
 
-func Generate_BSP(map_size=Vector2(20,20), wall_id=1, floor_id=0):
+func Generate_BSP(map_size=Vector2(20,20), wall_id=1, floor_id=3):
 	# Randomize
 	randomize()
 	
@@ -337,7 +337,7 @@ func get_floor_cells():
 	var list = []
 	for x in range( map.size() ):
 		for y in range( map[x].size() ):
-			if map[x][y] == 0 or map[x][y] == 2: #stairs are walkable too!
+			if map[x][y] in [0, 2, 3]: # 2 = stairs are walkable too!
 				list.append(Vector2(x,y))
 	
 	return list

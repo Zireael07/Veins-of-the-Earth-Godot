@@ -83,7 +83,7 @@ func clear_entities():
 
 # Return TRUE if cell is a floor on the map
 func is_walkable( cell ):
-	var walk = [0,2]
+	var walk = [0,2,3]
 	return walk.has(get_cellv( cell )) #== 0
 
 func get_entities_in_cell(cell):
