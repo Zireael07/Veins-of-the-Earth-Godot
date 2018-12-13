@@ -794,7 +794,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 98.0
+margin_right = 40.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -815,7 +815,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
-margin_right = 98.0
+margin_right = 40.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -836,7 +836,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 36.0
-margin_right = 98.0
+margin_right = 40.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -856,7 +856,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 54.0
-margin_right = 98.0
+margin_right = 40.0
 margin_bottom = 68.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -876,7 +876,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 72.0
-margin_right = 98.0
+margin_right = 40.0
 margin_bottom = 86.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -897,7 +897,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 90.0
-margin_right = 98.0
+margin_right = 40.0
 margin_bottom = 104.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -1092,6 +1092,8 @@ override_selected_font_color = false
 [connection signal="gui_input" from="frame/right/map/ViewportContainer" to="frame/right/map/ViewportContainer/Viewport/Node2D" method="_on_Viewport_gui_input"]
 
 [connection signal="mouse_exited" from="frame/right/map/ViewportContainer" to="frame/right/map/ViewportContainer/Viewport/Node2D" method="_on_Viewport_mouse_exited"]
+
+[connection signal="cell_hover" from="frame/right/map/ViewportContainer/Viewport/Node2D" to="frame/left/PlayerInfo" method="_on_Node2D_cell_hover"]
 
 [connection signal="pressed" from="frame/right/map/Panel/QuitButton" to="." method="_on_QuitButton_pressed"]
 
