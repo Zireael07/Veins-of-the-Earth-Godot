@@ -163,6 +163,8 @@ func _input(event):
 			print("Esc pressed")
 			if get_node("WelcomePopup").is_visible():
 				get_node("WelcomePopup").hide()
+				get_node("CharacterCreation").roll()
+				get_node("CharacterCreation").show()
 				return
 			
 			

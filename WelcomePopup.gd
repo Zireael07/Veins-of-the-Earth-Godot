@@ -15,6 +15,9 @@ func _input(event):
 			print("Clicked")
 			
 			hide()
+			
+			get_parent().get_node("CharacterCreation").roll()
+			get_parent().get_node("CharacterCreation").show()
 
 
 #func _process(delta):
