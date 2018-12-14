@@ -29,3 +29,7 @@ func _on_RerollButton_pressed():
 func _on_OKButton_pressed():
 	hide()
 
+
+func _on_TextEdit_text_entered(new_text):
+#	print(new_text)
+	RPG.player.set_name(new_text)

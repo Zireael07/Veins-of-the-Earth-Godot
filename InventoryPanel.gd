@@ -17,6 +17,10 @@ func _ready():
 # these work regardless of turns
 func _input(event):
 	if Input.is_action_pressed("inventory"):
+		# don't steal input from character creation
+		if get_parent().get_parent().get_parent().get_parent().get_node("CharacterCreation").is_visible():
+			return
+		
 		if not is_visible():
 			print("Pausing")
 			# prevents accidentally doing other stuff
