@@ -19,6 +19,10 @@ script = ExtResource( 1 )
 
 position = Vector2( 0, 0 )
 
+[node name="Actor" parent="player/player" index="3"]
+
+faction_id = 0
+
 [node name="kobold" type="Node" parent="." index="1"]
 
 [node name="kobold" parent="kobold" index="0" instance=ExtResource( 3 )]
@@ -92,6 +96,7 @@ equip_slot = "MAIN_HAND"
 damage = PoolIntArray( 1, 8 )
 
 
+[editable path="player/player"]
 [editable path="drow/drow"]
 [editable path="flask/flask"]
 [editable path="rations/rations"]

@@ -21,6 +21,8 @@ var intelligence = 8
 var wisdom = 8
 var charisma = 8
 
+export(int) var faction_id = 1
+enum faction { PLAYER = 0, ENEMY = 1}
 
 func fill_hp():
 	self.hp = self.max_hp
@@ -69,6 +71,9 @@ func _ready():
 	ownr.fighter = self
 	fill_hp()
 	
+	# set applicable marker color
+	ownr.get_node("marker").set_modulate(get_marker_color())
+	
 	#pass
 
 func broadcast_damage_taken(from, amount):
@@ -78,6 +83,22 @@ func broadcast_damage_taken(from, amount):
 	if ownr == RPG.player:
 		color = RPG.COLOR_RED
 	RPG.broadcast(n+ " hits " +ownr.name+ " for " +str(amount)+ " HP",color)
+
+var faction_reaction = { faction.PLAYER: 100, faction.ENEMY: -100 }
+func get_marker_color():
+	var react = faction_reaction[faction_id]
+	print(str(react))
+	
+	if react < -50:
+		return Color(1.0, 0, 0) #"red"
+	elif react < 0:
+		return "orange"
+	elif react == 0:
+		return "yellow"
+	elif react > 50:
+		return Color(0, 1.0, 1.0)  #"cyan"
+	elif react > 0:
+		return "blue"
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

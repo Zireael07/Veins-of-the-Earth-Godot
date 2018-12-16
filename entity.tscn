@@ -27,6 +27,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Actor" parent="." index="2" instance=ExtResource( 4 )]
 
+faction_id = 1
+
 [node name="AI" parent="." index="3" instance=ExtResource( 5 )]
 
 [node name="Label" type="Label" parent="." index="4"]
