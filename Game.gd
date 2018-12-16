@@ -138,7 +138,7 @@ func restore_game():
 		for entry in data.inventory:
 			var ob = RPG.map.restore_object(entry)
 			print(ob.item != null)
-			ob.pickup()
+			ob.item.pickup(RPG.player)
 	
 	
 	# close file and return status

@@ -148,6 +148,8 @@ func save():
 	data.x = pos.x
 	data.y = pos.y
 	
+	data.visible = self.is_visible()
+	
 	# save components
 	if item:
 		data.item = item.save()
@@ -170,6 +172,9 @@ func restore(data):
 		fighter.restore(data.fighter)
 	if ai and 'ai' in data:
 		ai.restore(data.ai)
+	
+	self.set_visible(data.visible)
+	
 	
 	return self
 	

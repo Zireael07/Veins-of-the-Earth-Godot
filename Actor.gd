@@ -111,6 +111,13 @@ func save():
 	data.defense = self.defense
 	data.max_hp = self.max_hp
 	data.hp = self.hp
+	data.strength = self.strength
+	data.dexterity = self.dexterity
+	data.constitution = self.constitution
+	data.intelligence = self.intelligence
+	data.wisdom = self.wisdom
+	data.charisma = self.charisma
+	data.faction_id = self.faction_id
 	return data
 
 func restore(data):
