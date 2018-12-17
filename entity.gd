@@ -48,9 +48,10 @@ func _ready():
 
 func kill():
 	if RPG.player != self:
-		dead = true
 		broadcast_kill()
 		queue_free()
+	
+	dead = true
 
 func remove():
 	queue_free()

@@ -21,10 +21,15 @@ func _on_Button_pressed():
 	# save?
 	var file = File.new()
 	var save_exists = file.file_exists(RPG.SAVEGAME_PATH)
-	var button = get_node('Panel/VBoxContainer/Load')
-	print("Persistent: " + str(OS.is_userfs_persistent()))
-	print("User at: " + str(OS.get_user_data_dir()))
+#	var button = get_node('Panel/VBoxContainer/Load')
+#	print("Persistent: " + str(OS.is_userfs_persistent()))
+#	print("User at: " + str(OS.get_user_data_dir()))
 	print("Save exists: " + str(save_exists))
-	
+	var dir = Directory.new()
+	var deletd = dir.remove(RPG.SAVEGAME_PATH)
+	if deletd:
+		print("Remove save")
+	else:
+		print("Error while deleting")
 	
 	get_tree().set_pause(false)

@@ -41,6 +41,9 @@ func _notification(what):
 			var saved = save_game()
 			if saved != OK:
 				print('SAVE GAME RETURNED ERROR '+str(saved))
+		else:
+			print("Skipping save, player dead")
+			
 		get_tree().quit()
 
 # Save Game Mother Function
@@ -131,7 +134,7 @@ func restore_game():
 		for entry in data.objects:
 			var ob = RPG.map.restore_object(entry)
 			var pos = Vector2(entry.x,entry.y)
-			RPG.map.spawn(ob,pos)
+#			RPG.map.spawn(ob,pos)
 
 	# Inventory data
 	if 'inventory' in data:
@@ -152,6 +155,8 @@ func _on_QuitButton_pressed():
 	get_node("frame/right/map/Panel").hide()
 	if not RPG.player.dead:
 		save_game()
+	else:
+		print("Skipping save, player dead")
 	get_tree().quit()
 	
 	
