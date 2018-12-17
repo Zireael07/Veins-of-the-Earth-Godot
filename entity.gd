@@ -1,6 +1,9 @@
 extends Node2D
 
 # class member variables go here, for example:
+# for spawning
+var original	
+	
 var direction = Vector2()
 
 var target_pos = Vector2()
@@ -142,8 +145,12 @@ func save():
 	print("Saving... " + str(self.name))
 	var data = {}
 	data.name = self.name
+	# this didn't work properly, lost editable info
 	# from where we were loaded
-	data.filename = get_filename()
+	#data.filename = get_filename()
+	# original path in Database
+	data.original = self.original
+
 	var pos = get_map_position()
 	data.x = pos.x
 	data.y = pos.y
@@ -174,7 +181,6 @@ func restore(data):
 		ai.restore(data.ai)
 	
 	self.set_visible(data.visible)
-	
 	
 	return self
 	

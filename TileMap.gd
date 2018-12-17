@@ -175,11 +175,13 @@ func restore(save_data):
 	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells())
 	
 func restore_object(data):
-	var ob = load(data.filename)
+	var ob = RPG.make_entity(data.original)
+	#var ob = load(data.filename)
+	#print(data.filename)
 	var pos = Vector2(data.x, data.y)
 	if ob:
-		#print(ob)
-		#spawn(ob, pos) 
-		ob = ob.instance().spawn(self,pos)
+#		print(ob)
+		spawn(ob, pos) 
+		#ob = ob.instance().spawn(self,pos)
 		ob.restore(data)
 		return ob
