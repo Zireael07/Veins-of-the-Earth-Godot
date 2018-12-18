@@ -29,7 +29,13 @@ func _on_RerollButton_pressed():
 func _on_OKButton_pressed():
 	hide()
 
+	# recalc hp
+	RPG.player.get_node("Actor")._set_max_hp(10)
+	RPG.player.get_node("Actor").fill_hp()
 
 func _on_TextEdit_text_entered(new_text):
 #	print(new_text)
 	RPG.player.set_name(new_text)
+	
+	# enable the OK button
+	get_node("Panel/OKButton").set_disabled(false)
