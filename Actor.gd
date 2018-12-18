@@ -28,7 +28,11 @@ func fill_hp():
 	self.hp = self.max_hp
 
 func fight(who):
-	if who.fighter:
+	# paranoia
+	if not who.fighter:
+		return
+	var react = faction_reaction[faction_id]
+	if react < -50:
 		# attack
 		var melee = RPG.roll(1,100)
 		if melee < 55:
@@ -40,7 +44,9 @@ func fight(who):
 		else:
 			who.add_splash(1)
 			RPG.broadcast(ownr.name + " misses " + who.name + "!")
-
+	else:
+		print("Not a hostile")
+		
 func take_damage(from, amount):
 	#print(get_parent().get_name() + " takes " + str(amount) + " damage!")
 	broadcast_damage_taken(from,amount)
