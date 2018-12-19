@@ -111,13 +111,24 @@ func step_to(cell):
 	var map_pos = get_map_position()
 	var path = Astar_map.find_path(map_pos, cell)
 	if path != null and path.size() > 1:
-		print("Path: " + str(path))
+		#print("Path: " + str(path))
 		var dir = path[1] - map_pos
-		print("Dir: " + str(dir))
+		#print("Dir: " + str(dir))
 		var res = update_position_map(map_pos, dir)
 		print("AI has moved!!! " + str(res))
+		
+		# Check if unblocked
+		var blocker = grid.is_cell_blocked(res[1])
+		if not blocker:
+			set_position(res[0]+Vector2(0,-8))
+		# detect when we bump something
+		else:
+			if typeof(blocker) == TYPE_OBJECT:
+				if blocker.fighter:
+					fighter.fight(blocker)
+		
 		# since we use Astar, we don't have to check if the cell is blocked or not
-		set_position(res[0]+Vector2(0,-8))
+		#set_position(res[0]+Vector2(0,-8))
 
 func distance_to(cell):
 	var line = FOV_gen.get_line(get_map_position(), cell)

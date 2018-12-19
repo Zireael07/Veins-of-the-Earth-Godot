@@ -48,6 +48,11 @@ func kill():
 
 func wait():
 	emit_signal("player_acted")
+
+func step_to(cell):
+	.step_to(cell)
+	emit_signal("player_moved", self)
+
 	
 func act():
 	print("Player act")

@@ -32,6 +32,15 @@ func _on_Viewport_gui_input(ev):
 			
 		emit_signal("cell_hover", map_cell)
 	
+	# test
+	if ev is InputEventMouseButton:
+		if ev.button_index == BUTTON_LEFT and ev.pressed:
+			print("Pressed left button")
+			if cell_hovered:
+				print("Moving to " + str(cell_hovered))
+				RPG.player.step_to(cell_hovered)
+		elif ev.button_index == BUTTON_RIGHT and ev.pressed:
+			print("Pressed right button")
 
 
 func _on_Viewport_mouse_exited():
