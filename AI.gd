@@ -17,6 +17,7 @@ func take_turn():
 	if distance <= RPG.TORCH_RADIUS:
 		print("Player in torch radius")
 		if distance <= 1:
+			print("AI attacking")
 			ownr.fighter.fight(target)
 		else:
 			print("AI making a move")

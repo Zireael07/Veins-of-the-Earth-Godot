@@ -31,8 +31,9 @@ func fight(who):
 	# paranoia
 	if not who.fighter:
 		return
-	var react = faction_reaction[faction_id]
-	if react < -50:
+	var react = faction_reaction[who.fighter.faction_id]
+#	print(who.get_name() + " reaction: " + str(react))
+	if (RPG.player == self.ownr and react < -50) or react > 80: # hack for now
 		# attack
 		var melee = RPG.roll(1,100)
 		if melee < 55:
