@@ -22,7 +22,7 @@ var wisdom = 8
 var charisma = 8
 
 export(int) var faction_id = 1
-enum faction { PLAYER = 0, ENEMY = 1}
+enum faction { PLAYER = 0, ENEMY = 1, NEUTRAL = 2}
 
 func fill_hp():
 	self.hp = self.max_hp
@@ -32,8 +32,9 @@ func fight(who):
 	if not who.fighter:
 		return
 	var react = faction_reaction[who.fighter.faction_id]
+	var self_react = faction_reaction[faction_id]
 #	print(who.get_name() + " reaction: " + str(react))
-	if (RPG.player == self.ownr and react < -50) or react > 80: # hack for now
+	if (RPG.player == self.ownr and react < -50) or self_react < -50: # hack for now
 		# attack
 		var melee = RPG.roll(1,100)
 		if melee < 55:
@@ -91,7 +92,7 @@ func broadcast_damage_taken(from, amount):
 		color = RPG.COLOR_RED
 	RPG.broadcast(n+ " hits " +ownr.name+ " for " +str(amount)+ " HP",color)
 
-var faction_reaction = { faction.PLAYER: 100, faction.ENEMY: -100 }
+var faction_reaction = { faction.PLAYER: 100, faction.ENEMY: -100, faction.NEUTRAL: 0 }
 func get_marker_color():
 	var react = faction_reaction[faction_id]
 	print(str(react))
@@ -101,7 +102,7 @@ func get_marker_color():
 	elif react < 0:
 		return "orange"
 	elif react == 0:
-		return "yellow"
+		return Color(1.0, 1.0, 0.0) #"yellow"
 	elif react > 50:
 		return Color(0, 1.0, 1.0)  #"cyan"
 	elif react > 0:

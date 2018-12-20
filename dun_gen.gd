@@ -342,7 +342,7 @@ func get_floor_cells():
 	
 	return list
 	
-var monster_table = [ ["kobold", 80], ["drow", 20] ]
+var monster_table = [ ["kobold", 70], ["drow", 20], ["human", 10] ]
 func get_chance_roll_table(chances, pad=false):
 	var num = -1
 	var chance_roll = []
@@ -392,6 +392,8 @@ func place_monsters(room):
 		mon = RPG.make_entity("kobold/kobold")
 	elif res == "drow":
 		mon = RPG.make_entity("drow/drow")
+	elif res == "human":
+		mon = RPG.make_entity("human/human")
 	
 	print("Place monster: " + str(mon) + " @ " + str(pos))
 	
