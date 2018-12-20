@@ -31,8 +31,9 @@ func fight(who):
 	# paranoia
 	if not who.fighter:
 		return
-	var react = faction_reaction[who.fighter.faction_id]
-	var self_react = faction_reaction[faction_id]
+		
+	var react = faction_reaction[int(who.fighter.faction_id)]
+	var self_react = faction_reaction[int(faction_id)]
 #	print(who.get_name() + " reaction: " + str(react))
 	if (RPG.player == self.ownr and react < -50) or self_react < -50: # hack for now
 		# attack
@@ -48,6 +49,11 @@ func fight(who):
 			RPG.broadcast(ownr.name + " misses " + who.name + "!")
 	else:
 		print("Not a hostile")
+		if RPG.player == self.ownr and react == 0:
+			# dialogue
+			RPG.game.dialogue_panel.show()
+			# prevents accidentally doing other stuff
+			get_tree().set_pause(true)
 		
 func take_damage(from, amount):
 	#print(get_parent().get_name() + " takes " + str(amount) + " damage!")

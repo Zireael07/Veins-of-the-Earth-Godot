@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://PlayerInfo.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main.tscn" type="PackedScene" id=3]
 [ext_resource path="res://InventoryPanel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://CharacterCreation.gd" type="Script" id=5]
-[ext_resource path="res://PopupPanel.gd" type="Script" id=6]
-[ext_resource path="res://DeathPopup.gd" type="Script" id=7]
-[ext_resource path="res://WelcomePopup.gd" type="Script" id=8]
+[ext_resource path="res://DialoguePanel.gd" type="Script" id=5]
+[ext_resource path="res://CharacterCreation.gd" type="Script" id=6]
+[ext_resource path="res://PopupPanel.gd" type="Script" id=7]
+[ext_resource path="res://DeathPopup.gd" type="Script" id=8]
+[ext_resource path="res://WelcomePopup.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -169,6 +170,7 @@ _sections_unfolded = [ "Rect", "Size Flags" ]
 
 [node name="Viewport" type="Viewport" parent="frame/right/map/ViewportContainer" index="0"]
 
+editor/display_folded = true
 arvr = false
 size = Vector2( 720, 450 )
 own_world = false
@@ -198,7 +200,180 @@ _sections_unfolded = [ "Render Target", "Rendering" ]
 
 [node name="InventoryPanel" parent="frame/right/map" index="1" instance=ExtResource( 4 )]
 
-[node name="Panel" type="Panel" parent="frame/right/map" index="2"]
+[node name="DialoguePanel" type="Control" parent="frame/right/map" index="2"]
+
+pause_mode = 2
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 160.0
+margin_right = 560.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 400, 400 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 5 )
+_sections_unfolded = [ "Pause", "Rect" ]
+
+[node name="Panel" type="Panel" parent="frame/right/map/DialoguePanel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 400.0
+margin_bottom = 400.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="frame/right/map/DialoguePanel" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="NameHeader" type="Label" parent="frame/right/map/DialoguePanel/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 400.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Human"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor" ]
+
+[node name="HSeparator" type="HSeparator" parent="frame/right/map/DialoguePanel/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 400.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Text" type="Label" parent="frame/right/map/DialoguePanel/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 26.0
+margin_right = 400.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Welcome adventurer! Do you want my help?"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HSeparator2" type="HSeparator" parent="frame/right/map/DialoguePanel/VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 44.0
+margin_right = 400.0
+margin_bottom = 48.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Button1" type="Button" parent="frame/right/map/DialoguePanel/VBoxContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 52.0
+margin_right = 400.0
+margin_bottom = 72.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Yes please"
+flat = false
+align = 1
+
+[node name="Button2" type="Button" parent="frame/right/map/DialoguePanel/VBoxContainer" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 76.0
+margin_right = 400.0
+margin_bottom = 96.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "No thanks, just passing by"
+flat = false
+align = 1
+
+[node name="Panel" type="Panel" parent="frame/right/map" index="3"]
 
 editor/display_folded = true
 visible = false
@@ -308,7 +483,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Pause", "Popup", "Rect" ]
 
 [node name="Panel" type="Panel" parent="CharacterCreation" index="0"]
@@ -750,7 +925,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="Panel" type="Panel" parent="DropPopup" index="0"]
@@ -927,7 +1102,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 popup_exclusive = true
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Pause", "Popup" ]
 
 [node name="Panel" type="Panel" parent="DeathPopup" index="0"]
@@ -1025,7 +1200,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = true
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Pause", "Popup" ]
 
 [node name="Panel" type="Panel" parent="WelcomePopup" index="0"]
@@ -1089,7 +1264,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="Panel" type="Panel" parent="HelpPopup" index="0"]
 
@@ -1143,6 +1318,10 @@ override_selected_font_color = false
 [connection signal="mouse_exited" from="frame/right/map/ViewportContainer" to="frame/right/map/ViewportContainer/Viewport/Node2D" method="_on_Viewport_mouse_exited"]
 
 [connection signal="cell_hover" from="frame/right/map/ViewportContainer/Viewport/Node2D" to="frame/left/PlayerInfo" method="_on_Node2D_cell_hover"]
+
+[connection signal="pressed" from="frame/right/map/DialoguePanel/VBoxContainer/Button1" to="frame/right/map/DialoguePanel" method="_on_Button1_pressed"]
+
+[connection signal="pressed" from="frame/right/map/DialoguePanel/VBoxContainer/Button2" to="frame/right/map/DialoguePanel" method="_on_Button2_pressed"]
 
 [connection signal="pressed" from="frame/right/map/Panel/QuitButton" to="." method="_on_QuitButton_pressed"]
 

@@ -5,6 +5,7 @@ onready var messagebox = get_node('frame/right/Panel/MessageBox')
 onready var playerinfo = get_node('frame/left/PlayerInfo')
 onready var inventory = get_node('frame/right/map/InventoryPanel')
 onready var death_panel = get_node('DeathPopup')
+onready var dialogue_panel = get_node('frame/right/map/DialoguePanel')
 
 var labels = false
 
