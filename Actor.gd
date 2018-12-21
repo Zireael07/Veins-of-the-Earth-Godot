@@ -51,6 +51,7 @@ func fight(who):
 		print("Not a hostile")
 		if RPG.player == self.ownr and react == 0:
 			# dialogue
+			RPG.game.dialogue_panel.initial_dialogue()
 			RPG.game.dialogue_panel.show()
 			# prevents accidentally doing other stuff
 			get_tree().set_pause(true)
