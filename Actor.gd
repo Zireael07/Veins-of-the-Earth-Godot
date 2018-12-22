@@ -71,7 +71,14 @@ func _set_hp(value):
 		die()
 
 func _set_max_hp(what):
+	max_hp = what
+	emit_signal('hp_changed', self.hp, self.max_hp)
+
+# this is where we apply stat bonus (after we have it)
+func set_real_max_hp(what):
+#	print(get_parent().get_name() + " bonus hp: " + str(int(floor(constitution - 10)/2)))
 	max_hp = what + int(floor(constitution - 10)/2)
+	print(get_parent().get_name() + " " + str(max_hp))
 	emit_signal('hp_changed', self.hp, self.max_hp)
 
 func _ready():
@@ -84,6 +91,7 @@ func _ready():
 	
 	
 	ownr.fighter = self
+	set_real_max_hp(self.max_hp)
 	fill_hp()
 	
 	# set applicable marker color

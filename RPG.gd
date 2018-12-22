@@ -30,6 +30,7 @@ var inventory
 var inventory_menu
 
 func make_entity( path ):
+#	print("Making entity... " + str(path))
 	return _db.spawn( path )
 	
 func roll(l,h):
