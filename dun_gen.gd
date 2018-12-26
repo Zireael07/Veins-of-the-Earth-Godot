@@ -406,7 +406,7 @@ func place_items(room):
 	var pos = Vector2(x,y)
 	
 	#var it = RPG.make_entity("potion/potion")
-	var it = RPG.make_entity("longsword/longsword")
+	var it = RPG.make_entity("chain armor/chain armor")
 	
 	print("Place item: " + str(it) + " @ " + str(pos))
 	

@@ -21,8 +21,26 @@ var intelligence = 8
 var wisdom = 8
 var charisma = 8
 
+var base_armor = 0 #setget _get_armor # damage reduction
+
 export(int) var faction_id = 1
 enum faction { PLAYER = 0, ENEMY = 1, NEUTRAL = 2}
+
+func get_armor():
+	var armor = base_armor
+	var object_bonuses = []
+	# only the player has inventory for now
+	if RPG.player == self.ownr:
+		for o in RPG.inventory.get_equipped_objects():
+			if o.item.armor > 0:
+				object_bonuses.append(o.item.armor)
+			
+		for v in object_bonuses:
+			armor += v
+		
+	#print("Armor: " + str(armor))
+	return armor
+
 
 func fill_hp():
 	self.hp = self.max_hp
@@ -42,8 +60,8 @@ func fight(who):
 			var dmg = RPG.roll(damage[0], damage[1])
 			var mod = int(floor((strength - 10)/2))
 			RPG.broadcast(ownr.name + " hits " + who.name + "!", RPG.COLOR_LIGHT_BLUE)
-			who.fighter.take_damage(ownr, dmg + mod) #self.power)
-			who.add_splash(0, dmg)
+			who.fighter.take_damage(ownr, max(0,dmg + mod - who.fighter.get_armor())) #self.power)
+			who.add_splash(0, max(0,dmg + mod - who.fighter.get_armor()))
 		else:
 			who.add_splash(1)
 			RPG.broadcast(ownr.name + " misses " + who.name + "!")
