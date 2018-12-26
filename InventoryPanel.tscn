@@ -43,7 +43,6 @@ _sections_unfolded = [ "Rect" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -81,7 +80,6 @@ max_lines_visible = -1
 
 [node name="EquipmentContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -102,6 +100,12 @@ _sections_unfolded = [ "Rect" ]
 [node name="InventorySlot" parent="VBoxContainer/EquipmentContainer" index="0" instance=ExtResource( 2 )]
 
 margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="InventorySlot2" parent="VBoxContainer/EquipmentContainer" index="1" instance=ExtResource( 2 )]
+
+margin_left = 36.0
+margin_right = 68.0
 margin_bottom = 32.0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer" index="2"]

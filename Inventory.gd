@@ -10,6 +10,18 @@ onready var name_label = get_node('../VBoxContainer/ItemName')
 func get_objects():
 	return self.objects.get_children()
 
+func get_equipped_objects():
+	var eq = []
+	var ob = get_objects()
+	for o in ob:
+		if o.item.equipped:
+			eq.append(o)
+	
+	for o in eq:
+		print(o.get_name())
+	return eq
+
+
 # Get the first free inventoryslot
 func get_free_slot():
 	for node in get_children():

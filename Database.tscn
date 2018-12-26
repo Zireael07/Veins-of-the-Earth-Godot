@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Database.gd" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/flask.png" type="Texture" id=7]
 [ext_resource path="res://assets/food.png" type="Texture" id=8]
 [ext_resource path="res://assets/longsword.png" type="Texture" id=9]
+[ext_resource path="res://assets/chain_armor.png" type="Texture" id=10]
 
 [node name="Database" type="Node" index="0"]
 
@@ -78,6 +79,7 @@ texture = ExtResource( 7 )
 [node name="Item" parent="flask/flask" index="1"]
 
 use_function = "drink"
+armor = 0
 
 [node name="rations" type="Node" parent="." index="6"]
 
@@ -93,6 +95,7 @@ texture = ExtResource( 8 )
 [node name="Item" parent="rations/rations" index="1"]
 
 use_function = "eat"
+armor = 0
 
 [node name="longsword" type="Node" parent="." index="7"]
 
@@ -107,9 +110,30 @@ texture = ExtResource( 9 )
 
 [node name="Item" parent="longsword/longsword" index="1"]
 
+use_function = ""
 equippable = true
 equip_slot = "MAIN_HAND"
 damage = PoolIntArray( 1, 8 )
+armor = 0
+
+[node name="chain armor" type="Node" parent="." index="8"]
+
+[node name="chain armor" parent="chain armor" index="0" instance=ExtResource( 6 )]
+
+position = Vector2( 110, 120 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" parent="chain armor/chain armor" index="0"]
+
+texture = ExtResource( 10 )
+
+[node name="Item" parent="chain armor/chain armor" index="1"]
+
+use_function = ""
+equippable = true
+equip_slot = "BODY"
+damage = PoolIntArray( 1, 8 )
+armor = 5
 
 
 [editable path="player/player"]
@@ -118,3 +142,4 @@ damage = PoolIntArray( 1, 8 )
 [editable path="flask/flask"]
 [editable path="rations/rations"]
 [editable path="longsword/longsword"]
+[editable path="chain armor/chain armor"]

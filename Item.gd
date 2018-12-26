@@ -12,6 +12,7 @@ export(String) var equip_slot = ''
 
 
 export(PoolIntArray) var damage = []
+export(int) var armor = 0
 
 var inventory_slot
 
@@ -19,16 +20,22 @@ func use(entity):
 	print("Using an item")
 	
 	if equippable:
+#		print("Equippable")
 		if not equipped:
 			RPG.broadcast(entity.get_name() + " equipped " + ownr.name, RPG.COLOR_WHITE)
+			equipped = true
+			
 			# GUI fix
 			RPG.inventory.move_to_equipped(inventory_slot, ownr)
+			
 			if equip_slot == "MAIN_HAND" and damage.size() > 0:
 				#print("Using the sword's damage")
 				# use the weapon's damage in place of the player's
 				entity.fighter.damage = damage
 				return
-	
+			else:
+				# prevent falling through
+				return
 	if use_function.empty():
 		RPG.broadcast("The " +ownr.name+ " cannot be used", RPG.COLOR_DARK_GREY)
 		return
