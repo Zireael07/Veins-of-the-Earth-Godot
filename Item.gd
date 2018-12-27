@@ -47,20 +47,37 @@ func use(entity):
 			return
 		if not indestructible:
 			# fix
-			RPG.inventory.remove_from_inventory(inventory_slot, ownr)
+			entity.container.remove_from_inventory(ownr)
+			if entity == RPG.player:
+				RPG.inventory.remove_from_inventory(inventory_slot, ownr)
 			ownr.remove()
 
 func pickup(entity):
+	# fix
+	ownr.set_visible(false)
+	ownr.set_map_position(entity.get_map_position())
+	
+	
 	RPG.broadcast(entity.get_name() + " picks up " + ownr.get_name())
-	# TODO: this inventory isn't tied to any particular actor
-	RPG.inventory.add_to_inventory(ownr)
+	entity.container.add_to_inventory(ownr)
+
+	if entity == RPG.player:
+		RPG.inventory.add_to_inventory(ownr)
 	#pass
 
 func drop(entity):
 	RPG.broadcast(entity.get_name() + " drops " + ownr.get_name())
-	# TODO: this inventory isn't tied to any particular actor
-	assert inventory_slot != null
-	RPG.inventory.remove_from_inventory(inventory_slot,ownr)
+	
+	# fix
+	ownr.set_visible(true)
+	ownr.set_map_position(entity.get_map_position())
+	
+	if entity == RPG.player:
+		assert inventory_slot != null
+		RPG.inventory.remove_from_inventory(inventory_slot,ownr)
+		
+	entity.container.remove_from_inventory(ownr)
+
 
 func _ready():
 	# Called when the node is added to the scene for the first time.

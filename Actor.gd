@@ -26,19 +26,19 @@ var base_armor = 0 #setget _get_armor # damage reduction
 export(int) var faction_id = 1
 enum faction { PLAYER = 0, ENEMY = 1, NEUTRAL = 2}
 
+
 func get_armor():
 	var armor = base_armor
 	var object_bonuses = []
-	# only the player has inventory for now
-	if RPG.player == self.ownr:
-		for o in RPG.inventory.get_equipped_objects():
-			if o.item.armor > 0:
-				object_bonuses.append(o.item.armor)
+
+	for o in ownr.container.get_equipped_objects():
+		if o.item.armor > 0:
+			object_bonuses.append(o.item.armor)
 			
-		for v in object_bonuses:
-			armor += v
+	for v in object_bonuses:
+		armor += v
 		
-	#print("Armor: " + str(armor))
+#	print("Armor: " + str(armor))
 	return armor
 
 
@@ -102,6 +102,7 @@ func set_real_max_hp(what):
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	
 	
 	# roll dice for stats
 	for s in ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]:

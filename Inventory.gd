@@ -44,28 +44,30 @@ func add_to_inventory(item):
 	# break if no slots free
 	if !slot: return
 	
+	# handled by container script
 	# remove from world objects group
-	if item.is_in_group('entity'):
-		item.remove_from_group('entity')
-	# add to inventory group
-	if not item.is_in_group('inventory'):
-		item.add_to_group('inventory')
+#	if item.is_in_group('entity'):
+#		item.remove_from_group('entity')
+#	# add to inventory group
+#	if not item.is_in_group('inventory'):
+#		item.add_to_group('inventory')
 
 	# shift item parent from Map to InventoryObjects
-	item.get_parent().remove_child(item)
-	objects.add_child(item)
+	#item.get_parent().remove_child(item)
+	#objects.add_child(item)
 	
 	# assign the item to the slot
 	slot.add_contents(item)
 
 func remove_from_inventory(slot, item):
 	slot.remove_contents(item)
-	
-	item.remove_from_group('inventory')
-	item.add_to_group('entity')
 
-	item.get_parent().remove_child(item)
-	RPG.map.add_child(item)
+	# handled by the container script	
+#	item.remove_from_group('inventory')
+#	item.add_to_group('entity')
+#
+#	item.get_parent().remove_child(item)
+#	RPG.map.add_child(item)
 	item.set_map_position(RPG.player.get_map_position())
 	
 func move_to_equipped(slot, item):
