@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entity.gd" type="Script" id=1]
 [ext_resource path="res://assets/unit_marker.png" type="Texture" id=2]
 [ext_resource path="res://assets/kobold.png" type="Texture" id=3]
 [ext_resource path="res://Actor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://AI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://container.gd" type="Script" id=6]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -27,8 +28,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Actor" parent="." index="2" instance=ExtResource( 4 )]
 
-faction_id = 1
-
 [node name="AI" parent="." index="3" instance=ExtResource( 5 )]
 
 [node name="Label" type="Label" parent="." index="4"]
@@ -50,5 +49,9 @@ size_flags_vertical = 4
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="container" type="Node" parent="." index="5"]
+
+script = ExtResource( 6 )
 
 

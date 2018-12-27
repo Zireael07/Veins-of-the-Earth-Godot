@@ -19,6 +19,7 @@ var tile_size = Vector2(0,0)
 var fighter
 var ai
 var item
+var container
 
 var dead = false
 

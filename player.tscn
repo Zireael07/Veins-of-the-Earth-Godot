@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://assets/unit_marker.png" type="Texture" id=2]
 [ext_resource path="res://assets/human_m.png" type="Texture" id=3]
 [ext_resource path="res://Actor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://container.gd" type="Script" id=5]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -72,5 +73,9 @@ size_flags_vertical = 4
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="container" type="Node" parent="." index="5"]
+
+script = ExtResource( 5 )
 
 
