@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://InventoryPanel.gd" type="Script" id=1]
-[ext_resource path="res://InventorySlot.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Inventory.gd" type="Script" id=3]
+[ext_resource path="res://equipment_gui.gd" type="Script" id=2]
+[ext_resource path="res://InventorySlot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Inventory.gd" type="Script" id=4]
 
-[node name="InventoryPanel" type="Control" index="0"]
+[node name="InventoryPanel" type="Control" index="0" groups=[
+"inventory",
+]]
 
 pause_mode = 2
-visible = false
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
@@ -95,14 +97,15 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
+script = ExtResource( 2 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="InventorySlot" parent="VBoxContainer/EquipmentContainer" index="0" instance=ExtResource( 2 )]
+[node name="InventorySlot" parent="VBoxContainer/EquipmentContainer" index="0" instance=ExtResource( 3 )]
 
 margin_right = 32.0
 margin_bottom = 32.0
 
-[node name="InventorySlot2" parent="VBoxContainer/EquipmentContainer" index="1" instance=ExtResource( 2 )]
+[node name="InventorySlot2" parent="VBoxContainer/EquipmentContainer" index="1" instance=ExtResource( 3 )]
 
 margin_left = 36.0
 margin_right = 68.0
@@ -181,51 +184,51 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="InventorySlot" parent="Inventory" index="0" instance=ExtResource( 2 )]
+[node name="InventorySlot" parent="Inventory" index="0" instance=ExtResource( 3 )]
 
 margin_right = 32.0
 margin_bottom = 40.0
 
-[node name="InventorySlot2" parent="Inventory" index="1" instance=ExtResource( 2 )]
+[node name="InventorySlot2" parent="Inventory" index="1" instance=ExtResource( 3 )]
 
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 40.0
 
-[node name="InventorySlot3" parent="Inventory" index="2" instance=ExtResource( 2 )]
+[node name="InventorySlot3" parent="Inventory" index="2" instance=ExtResource( 3 )]
 
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 40.0
 
-[node name="InventorySlot4" parent="Inventory" index="3" instance=ExtResource( 2 )]
+[node name="InventorySlot4" parent="Inventory" index="3" instance=ExtResource( 3 )]
 
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 40.0
 
-[node name="InventorySlot5" parent="Inventory" index="4" instance=ExtResource( 2 )]
+[node name="InventorySlot5" parent="Inventory" index="4" instance=ExtResource( 3 )]
 
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 40.0
 
-[node name="InventorySlot6" parent="Inventory" index="5" instance=ExtResource( 2 )]
+[node name="InventorySlot6" parent="Inventory" index="5" instance=ExtResource( 3 )]
 
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 40.0
 
-[node name="InventorySlot7" parent="Inventory" index="6" instance=ExtResource( 2 )]
+[node name="InventorySlot7" parent="Inventory" index="6" instance=ExtResource( 3 )]
 
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 40.0
 
-[node name="InventorySlot8" parent="Inventory" index="7" instance=ExtResource( 2 )]
+[node name="InventorySlot8" parent="Inventory" index="7" instance=ExtResource( 3 )]
 
 margin_left = 252.0
 margin_right = 284.0
@@ -249,51 +252,51 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="InventorySlot9" parent="Inventory2" index="0" instance=ExtResource( 2 )]
+[node name="InventorySlot9" parent="Inventory2" index="0" instance=ExtResource( 3 )]
 
 margin_right = 32.0
 margin_bottom = 40.0
 
-[node name="InventorySlot10" parent="Inventory2" index="1" instance=ExtResource( 2 )]
+[node name="InventorySlot10" parent="Inventory2" index="1" instance=ExtResource( 3 )]
 
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 40.0
 
-[node name="InventorySlot11" parent="Inventory2" index="2" instance=ExtResource( 2 )]
+[node name="InventorySlot11" parent="Inventory2" index="2" instance=ExtResource( 3 )]
 
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 40.0
 
-[node name="InventorySlot12" parent="Inventory2" index="3" instance=ExtResource( 2 )]
+[node name="InventorySlot12" parent="Inventory2" index="3" instance=ExtResource( 3 )]
 
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 40.0
 
-[node name="InventorySlot13" parent="Inventory2" index="4" instance=ExtResource( 2 )]
+[node name="InventorySlot13" parent="Inventory2" index="4" instance=ExtResource( 3 )]
 
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 40.0
 
-[node name="InventorySlot14" parent="Inventory2" index="5" instance=ExtResource( 2 )]
+[node name="InventorySlot14" parent="Inventory2" index="5" instance=ExtResource( 3 )]
 
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 40.0
 
-[node name="InventorySlot15" parent="Inventory2" index="6" instance=ExtResource( 2 )]
+[node name="InventorySlot15" parent="Inventory2" index="6" instance=ExtResource( 3 )]
 
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 40.0
 
-[node name="InventorySlot16" parent="Inventory2" index="7" instance=ExtResource( 2 )]
+[node name="InventorySlot16" parent="Inventory2" index="7" instance=ExtResource( 3 )]
 
 margin_left = 252.0
 margin_right = 284.0

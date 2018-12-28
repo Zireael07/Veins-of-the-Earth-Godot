@@ -1,6 +1,8 @@
 extends Button
 
 # class member variables go here, for example:
+var inven_root = null	
+	
 var contents = []
 
 func add_contents(what):
@@ -27,6 +29,8 @@ func update_slot():
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	
+	inven_root = get_tree().get_nodes_in_group("inventory")[0]
 	
 	connect("mouse_entered", get_parent(), "_on_slot_mouse_enter", [self])
 	connect("mouse_exited", get_parent(), "_on_slot_mouse_exit")
@@ -58,7 +62,7 @@ func _on_DropButton_pressed():
 	get_node("MenuContainer").hide()
 	
 	# close the whole inventory
-	get_parent().get_parent().hide()
+	inven_root.hide()
 	# unpause
 	get_tree().set_pause(false)
 
@@ -71,7 +75,7 @@ func _on_UseButton_pressed():
 	get_node("MenuContainer").hide()
 	
 	# close the whole inventory
-	get_parent().get_parent().hide()
+	inven_root.hide()
 	# unpause
 	get_tree().set_pause(false)
 	
