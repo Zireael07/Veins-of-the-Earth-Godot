@@ -30,7 +30,7 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	
-	inven_root = get_tree().get_nodes_in_group("inventory")[0]
+	inven_root = get_tree().get_nodes_in_group("inventory_gui")[0]
 	
 	connect("mouse_entered", get_parent(), "_on_slot_mouse_enter", [self])
 	connect("mouse_exited", get_parent(), "_on_slot_mouse_exit")

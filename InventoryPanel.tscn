@@ -6,10 +6,11 @@
 [ext_resource path="res://Inventory.gd" type="Script" id=4]
 
 [node name="InventoryPanel" type="Control" index="0" groups=[
-"inventory",
+"inventory_gui",
 ]]
 
 pause_mode = 2
+visible = false
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
