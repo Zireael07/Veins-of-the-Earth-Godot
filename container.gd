@@ -45,6 +45,10 @@ func remove_from_inventory(item):
 	item.remove_from_group('inventory')
 	item.add_to_group('entity')
 
+	# fix dropping from worn inventory
+	if item.item.equipped:
+		item.item.equipped = false
+
 	item.get_parent().remove_child(item)
 	RPG.map.add_child(item)
 	item.set_map_position(ownr.get_map_position())

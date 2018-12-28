@@ -34,8 +34,7 @@ func _ready():
 	
 	connect("mouse_entered", get_parent(), "_on_slot_mouse_enter", [self])
 	connect("mouse_exited", get_parent(), "_on_slot_mouse_exit")
-	
-	#pass
+
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -49,6 +48,9 @@ func _on_InventorySlot_pressed():
 		if get_node("MenuContainer").is_visible():
 			get_node("MenuContainer").hide()
 		else:
+			# hide use button if wielded
+			if contents.size() > 0 and contents[0].item.equipped:
+				get_node("MenuContainer/UseButton").hide()
 			# show the menu
 			get_node("MenuContainer").show()
 			
