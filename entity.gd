@@ -49,6 +49,11 @@ func _ready():
 
 func kill():
 	if RPG.player != self:
+		# drop all inventory
+		for o in container.get_objects():
+			o.item.drop(self)
+		
+		
 		broadcast_kill()
 		queue_free()
 	

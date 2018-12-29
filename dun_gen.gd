@@ -397,7 +397,8 @@ func place_monsters(room):
 	
 	print("Place monster: " + str(mon) + " @ " + str(pos))
 	
-	RPG.map.spawn(mon, pos)
+	RPG.map.spawn(mon, pos, true)
+	
 	
 func place_items(room):
 	print("Placing items...")

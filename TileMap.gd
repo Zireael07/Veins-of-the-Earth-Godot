@@ -146,13 +146,19 @@ func _on_player_pos_changed(player):
 
 
 # Spawn what path from Database, set position to where
-func spawn( what, where ):
+func spawn( what, where, start_game=false ):
 	print("Spawning: " + str(what.get_name()) + " @: " + str(where))
 	# Add the entity to the scene and set its pos
 	add_child( what, true)
 	#what.set_map_pos( where )
 	what.set_map_position(where)
 	#print("Map position set " + str(where))
+	
+	if start_game:
+		# starting inventory
+		var sw = RPG.make_entity("longsword/longsword")
+		spawn(sw, where)
+		sw.item.pickup(what)	
 	
 func save():
 	print("Saving map data...")
