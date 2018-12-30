@@ -40,7 +40,8 @@ func _ready():
 	set_visible(false)
 	
 	#grid = get_parent().get_node("TileMap")
-	grid = get_parent()
+	#grid = get_parent()
+	grid = get_tree().get_nodes_in_group("map")[0]
 	tile_size = grid.get_cell_size()
 	tile_offset = Vector2(0, tile_size.y / 2)
 	
