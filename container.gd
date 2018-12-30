@@ -7,6 +7,12 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	ownr.container = self
+	
+	# NPCs equip starting inventory
+	if ownr != RPG.player:
+		for o in ownr.container.get_objects():
+			if o.item.equippable:
+				o.item.use(self)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

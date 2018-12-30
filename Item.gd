@@ -25,8 +25,9 @@ func use(entity):
 			RPG.broadcast(entity.get_name() + " equipped " + ownr.name, RPG.COLOR_WHITE)
 			equipped = true
 			
-			# GUI fix
-			RPG.inventory.move_to_equipped(inventory_slot, ownr)
+			if entity == RPG.player:
+				# GUI fix
+				RPG.inventory.move_to_equipped(inventory_slot, ownr)
 			
 			if equip_slot == "MAIN_HAND" and damage.size() > 0:
 				#print("Using the sword's damage")
@@ -75,7 +76,7 @@ func drop(entity):
 	if entity == RPG.player:
 		assert inventory_slot != null
 		RPG.inventory.remove_from_inventory(inventory_slot,ownr)
-		
+
 	entity.container.remove_from_inventory(ownr)
 
 
