@@ -4,12 +4,12 @@
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entity.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/drow_fighter.png" type="Texture" id=4]
-[ext_resource path="res://assets/human.png" type="Texture" id=5]
-[ext_resource path="res://thing.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/flask.png" type="Texture" id=7]
-[ext_resource path="res://assets/food.png" type="Texture" id=8]
-[ext_resource path="res://assets/longsword.png" type="Texture" id=9]
-[ext_resource path="res://assets/chain_armor.png" type="Texture" id=10]
+[ext_resource path="res://thing.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/chain_armor.png" type="Texture" id=6]
+[ext_resource path="res://assets/human.png" type="Texture" id=7]
+[ext_resource path="res://assets/flask.png" type="Texture" id=8]
+[ext_resource path="res://assets/food.png" type="Texture" id=9]
+[ext_resource path="res://assets/longsword.png" type="Texture" id=10]
 
 [node name="Database" type="Node" index="0"]
 
@@ -42,6 +42,24 @@ texture = ExtResource( 4 )
 [node name="Actor" parent="drow/drow" index="2"]
 
 max_hp = 10
+faction_id = 1
+
+[node name="chain armor" parent="drow/drow/container" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 110, 120 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" parent="drow/drow/container/chain armor" index="0"]
+
+texture = ExtResource( 6 )
+
+[node name="Item" parent="drow/drow/container/chain armor" index="1"]
+
+use_function = ""
+equippable = true
+equip_slot = "BODY"
+damage = PoolIntArray( 1, 8 )
+armor = 5
 
 [node name="human" type="Node" parent="." index="3"]
 
@@ -51,7 +69,7 @@ position = Vector2( 74, 60 )
 
 [node name="Sprite" parent="human/human" index="1"]
 
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Actor" parent="human/human" index="2"]
 
@@ -60,21 +78,21 @@ faction_id = 2
 
 [node name="potion" type="Node" parent="." index="4"]
 
-[node name="potion" parent="potion" index="0" instance=ExtResource( 6 )]
+[node name="potion" parent="potion" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 0, 120 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="flask" type="Node" parent="." index="5"]
 
-[node name="flask" parent="flask" index="0" instance=ExtResource( 6 )]
+[node name="flask" parent="flask" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 80, 120 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="flask/flask" index="0"]
 
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Item" parent="flask/flask" index="1"]
 
@@ -83,14 +101,14 @@ armor = 0
 
 [node name="rations" type="Node" parent="." index="6"]
 
-[node name="rations" parent="rations" index="0" instance=ExtResource( 6 )]
+[node name="rations" parent="rations" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 80, 120 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="rations/rations" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Item" parent="rations/rations" index="1"]
 
@@ -99,14 +117,14 @@ armor = 0
 
 [node name="longsword" type="Node" parent="." index="7"]
 
-[node name="longsword" parent="longsword" index="0" instance=ExtResource( 6 )]
+[node name="longsword" parent="longsword" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 40, 120 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="longsword/longsword" index="0"]
 
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="Item" parent="longsword/longsword" index="1"]
 
@@ -118,14 +136,14 @@ armor = 0
 
 [node name="chain armor" type="Node" parent="." index="8"]
 
-[node name="chain armor" parent="chain armor" index="0" instance=ExtResource( 6 )]
+[node name="chain armor" parent="chain armor" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 110, 120 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="chain armor/chain armor" index="0"]
 
-texture = ExtResource( 10 )
+texture = ExtResource( 6 )
 
 [node name="Item" parent="chain armor/chain armor" index="1"]
 
@@ -138,6 +156,7 @@ armor = 5
 
 [editable path="player/player"]
 [editable path="drow/drow"]
+[editable path="drow/drow/container/chain armor"]
 [editable path="human/human"]
 [editable path="flask/flask"]
 [editable path="rations/rations"]
