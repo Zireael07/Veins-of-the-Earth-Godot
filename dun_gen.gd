@@ -343,6 +343,9 @@ func get_floor_cells():
 	return list
 	
 var monster_table = [ ["kobold", 70], ["drow", 20], ["human", 10] ]
+var item_table = [ ["longsword", 50], ["potion", 20], ["chainmail", 30] ]
+
+
 func get_chance_roll_table(chances, pad=false):
 	var num = -1
 	var chance_roll = []
@@ -406,8 +409,20 @@ func place_items(room):
 	var y = RPG.roll(room.position.y+1, room.end.y-2)
 	var pos = Vector2(x,y)
 	
-	#var it = RPG.make_entity("potion/potion")
-	var it = RPG.make_entity("chain armor/chain armor")
+	# random select
+	var chance_roll_table = get_chance_roll_table(item_table)
+	print(chance_roll_table)
+	
+	var res = random_choice_table(chance_roll_table)
+	print("Rs: " + str(res))
+	
+	var it
+	if res == "potion":
+		it = RPG.make_entity("potion/potion")
+	elif res == "chainmail":
+		it = RPG.make_entity("chain armor/chain armor")
+	elif res == "longsword":
+		it = RPG.make_entity("longsword/longsword")
 	
 	print("Place item: " + str(it) + " @ " + str(pos))
 	
