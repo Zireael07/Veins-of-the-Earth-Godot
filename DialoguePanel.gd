@@ -8,14 +8,18 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	
-	initial_dialogue()
-	
-	
-	#pass
+	#initial_dialogue()
+	pass
 
-func initial_dialogue():
+func initial_dialogue(entity):
+	print(entity.get_parent().get_name())
+	print(str(entity.conversations))
+	if entity.conversations.size() < 1:
+		print("Nothing to talk about")
+		return
+	
 	# initial text
-	$"VBoxContainer/Text".set_text("Welcome adventurer! Do you want my help?")
+	$"VBoxContainer/Text".set_text(entity.conversations[0])
 	
 	# show both buttons
 	$"VBoxContainer/Button1".show()

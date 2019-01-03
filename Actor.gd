@@ -26,6 +26,8 @@ var base_armor = 0 #setget _get_armor # damage reduction
 export(int) var faction_id = 1
 enum faction { PLAYER = 0, ENEMY = 1, NEUTRAL = 2}
 
+export(Array, String) var conversations
+
 
 func get_armor():
 	var armor = base_armor
@@ -69,7 +71,7 @@ func fight(who):
 		print("Not a hostile")
 		if RPG.player == self.ownr and react == 0:
 			# dialogue
-			RPG.game.dialogue_panel.initial_dialogue()
+			RPG.game.dialogue_panel.initial_dialogue(who.fighter)
 			RPG.game.dialogue_panel.show()
 			# prevents accidentally doing other stuff
 			get_tree().set_pause(true)
