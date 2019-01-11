@@ -12,7 +12,7 @@ func _ready():
 	if ownr != RPG.player:
 		for o in ownr.container.get_objects():
 			if o.item.equippable:
-				o.item.use(self)
+				o.item.use(ownr)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -41,6 +41,10 @@ func add_to_inventory(item):
 	# add to inventory group
 	if not item.is_in_group('inventory'):
 		item.add_to_group('inventory')
+	
+	# clear equipped flags if any
+	if item.item.equipped:
+		item.item.equipped = false
 		
 	item.get_parent().remove_child(item)
 	self.add_child(item)
