@@ -27,7 +27,7 @@ func use(entity):
 			
 			if entity == RPG.player:
 				# GUI fix
-				RPG.inventory.move_to_equipped(inventory_slot, ownr)
+				RPG.inventory.move_to_equipped(inventory_slot, equip_slot, ownr)
 			
 			if equip_slot == "MAIN_HAND" and damage.size() > 0:
 				#print("Using the sword's damage")
@@ -73,11 +73,11 @@ func drop(entity):
 	ownr.set_visible(true)
 	ownr.set_map_position(entity.get_map_position())
 	
+	entity.container.remove_from_inventory(ownr)
+	
 	if entity == RPG.player:
 		assert inventory_slot != null
 		RPG.inventory.remove_from_inventory(inventory_slot,ownr)
-
-	entity.container.remove_from_inventory(ownr)
 
 
 func _ready():

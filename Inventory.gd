@@ -70,10 +70,13 @@ func remove_from_inventory(slot, item):
 #	RPG.map.add_child(item)
 	item.set_map_position(RPG.player.get_map_position())
 	
-func move_to_equipped(slot, item):
+func move_to_equipped(slot, equip_slot, item):
 	slot.remove_contents(item)
-	
-	eq.get_child(0).add_contents(item)
+	print("Slot: " + str(slot) + " " + str(equip_slot))
+	if equip_slot == "BODY":
+		eq.get_child(0).add_contents(item)
+	elif equip_slot == "MAIN_HAND":
+		eq.get_child(1).add_contents(item)
 
 func _ready():
 	# Called when the node is added to the scene for the first time.

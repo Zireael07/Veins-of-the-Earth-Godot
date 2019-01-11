@@ -50,6 +50,7 @@ func _on_InventorySlot_pressed():
 		else:
 			# hide use button if wielded
 			if contents.size() > 0 and contents[0].item.equipped:
+				print("Hiding use button because equipped: " + str(contents[0].item.get_parent().get_name()))
 				get_node("MenuContainer/UseButton").hide()
 			# show the menu
 			get_node("MenuContainer").show()
