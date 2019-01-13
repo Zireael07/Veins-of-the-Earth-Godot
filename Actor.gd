@@ -23,6 +23,10 @@ var charisma = 8
 
 var base_armor = 0 #setget _get_armor # damage reduction
 
+# skills
+var melee = 55
+
+
 export(int) var faction_id = 1
 enum faction { PLAYER = 0, ENEMY = 1, NEUTRAL = 2}
 
@@ -47,6 +51,47 @@ func get_armor():
 func fill_hp():
 	self.hp = self.max_hp
 
+# d100 roll under
+func skill_test(skill):
+	if ownr.is_visible():
+		RPG.broadcast("Making a test for " + skill + " target " + str(self[skill]), RPG.COLOR_GREEN)
+		
+	var result = RPG.roll(1,100)
+	
+	if result < self[skill]:
+		#print("Skill test succeeded")
+		
+		if ownr == RPG.player:
+			# check how much we gain in current skill
+			var tick = RPG.roll(1,100)
+			# roll OVER the current skill
+			if tick > self[skill]:
+				# +1d4 if we succeeded
+				var gain = RPG.roll(1,4)
+				self[skill] = self[skill] + gain
+				RPG.broadcast("You gain " + str(gain) + " skill points!", RPG.COLOR_GREEN)
+			else:
+				# +1 if we didn't
+				self[skill] = self[skill] + 1
+				RPG.broadcast("You gain 1 skill point", RPG.COLOR_GREEN)
+		
+		
+		return true
+	else:
+		if ownr == RPG.player:
+			# if we failed, the check for gain is different
+			var tick = RPG.roll(1,100)
+			# roll OVER the current skill
+			if tick > self[skill]:
+				# +1 if we succeeded, else nothing
+				self[skill] = self[skill] + 1
+				RPG.broadcast("You learn from your failure and gain 1 skill point", RPG.COLOR_GREEN)
+		
+		
+		#print("Skill test failed")
+		return false
+
+
 func fight(who):
 	# paranoia
 	if not who.fighter:
@@ -57,8 +102,9 @@ func fight(who):
 #	print(who.get_name() + " reaction: " + str(react))
 	if (RPG.player == self.ownr and react < -50) or self_react < -50: # hack for now
 		# attack
-		var melee = RPG.roll(1,100)
-		if melee < 55:
+		if skill_test("melee"):
+		#var melee = RPG.roll(1,100)
+		#if melee < 55:
 			var dmg = RPG.roll(damage[0], damage[1])
 			var mod = int(floor((strength - 10)/2))
 			RPG.broadcast(ownr.name + " hits " + who.name + "!", RPG.COLOR_LIGHT_BLUE)
