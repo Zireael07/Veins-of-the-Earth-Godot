@@ -148,3 +148,10 @@ func _input(event):
 		
 	if Input.is_action_just_pressed("help"):
 		RPG.game.get_node("HelpPopup").popup()
+		
+	if Input.is_action_just_pressed("character_sheet"):
+		if RPG.game.character_sheet.is_visible():
+			RPG.game.character_sheet.hide()
+		else:
+			RPG.game.character_sheet.update_data()
+			RPG.game.character_sheet.show()
