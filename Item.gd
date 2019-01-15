@@ -16,25 +16,32 @@ export(int) var armor = 0
 
 var inventory_slot
 
+
 func use(entity):
 	print("Using an item")
 	
 	if equippable:
 #		print("Equippable")
 		if not equipped:
-			RPG.broadcast(entity.get_name() + " equipped " + ownr.name, RPG.COLOR_WHITE)
-			equipped = true
+			# check for equipped
+			if entity.container.get_equipped_in_slot(equip_slot) == null:
+				RPG.broadcast(entity.get_name() + " equipped " + ownr.name, RPG.COLOR_WHITE)
+				equipped = true
 			
-			if entity == RPG.player:
-				# GUI fix
-				RPG.inventory.move_to_equipped(inventory_slot, equip_slot, ownr)
-			
-			if equip_slot == "MAIN_HAND" and damage.size() > 0:
-				#print("Using the sword's damage")
-				# use the weapon's damage in place of the player's
-				entity.fighter.damage = damage
-				return
+				if entity == RPG.player:
+					# GUI fix
+					RPG.inventory.move_to_equipped(inventory_slot, equip_slot, ownr)
+				
+				if equip_slot == "MAIN_HAND" and damage.size() > 0:
+					#print("Using the sword's damage")
+					# use the weapon's damage in place of the player's
+					entity.fighter.damage = damage
+					return
+				else:
+					# prevent falling through
+					return
 			else:
+				print("Already wearing item in slot " + str(equip_slot) + "!")
 				# prevent falling through
 				return
 	if use_function.empty():

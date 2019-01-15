@@ -34,6 +34,14 @@ func get_equipped_objects():
 		print(o.get_name())
 	return eq
 	
+func get_equipped_in_slot(slot):
+	var eq = get_equipped_objects()
+	for o in eq:
+		if o.item.equip_slot == slot:
+			print(o.get_name())
+			return o
+	return null	
+	
 func add_to_inventory(item):
 	# remove from world objects group
 	if item.is_in_group('entity'):
