@@ -31,11 +31,13 @@ func start(multi=false): #,header='', footer=''):
 
 func clear_items():
 	for i in range(item_box.get_child_count()):
-		item_box.get_child(0).queue_free()
+		item_box.get_child(i).queue_free()
+		print("Clear item" + str(i))
 
 func fill_from_inventory():
 	# Get inventory objects
-	var items = RPG.inventory.get_objects()
+	#var items = RPG.inventory.get_objects()
+	var items = RPG.player.container.get_objects()
 	
 	for obj in items:
 		# instanciate & add
