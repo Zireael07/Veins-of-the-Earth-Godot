@@ -54,25 +54,25 @@ func fill_hp():
 # d100 roll under
 func skill_test(skill):
 	if ownr.is_visible():
-		RPG.broadcast("Making a test for " + skill + " target " + str(self[skill]), RPG.COLOR_GREEN)
+		RPG.broadcast("Making a test for " + skill + " target " + str(get(skill)), RPG.COLOR_GREEN)
 		
 	var result = RPG.roll(1,100)
 	
-	if result < self[skill]:
+	if result < get(skill):
 		#print("Skill test succeeded")
 		
 		if ownr == RPG.player:
 			# check how much we gain in current skill
 			var tick = RPG.roll(1,100)
 			# roll OVER the current skill
-			if tick > self[skill]:
+			if tick > get(skill):
 				# +1d4 if we succeeded
 				var gain = RPG.roll(1,4)
-				self[skill] = self[skill] + gain
+				set(skill, get(skill) + gain)
 				RPG.broadcast("You gain " + str(gain) + " skill points!", RPG.COLOR_GREEN)
 			else:
 				# +1 if we didn't
-				self[skill] = self[skill] + 1
+				set(skill, get(skill) + 1)
 				RPG.broadcast("You gain 1 skill point", RPG.COLOR_GREEN)
 		
 		
@@ -82,9 +82,9 @@ func skill_test(skill):
 			# if we failed, the check for gain is different
 			var tick = RPG.roll(1,100)
 			# roll OVER the current skill
-			if tick > self[skill]:
+			if tick > get(skill):
 				# +1 if we succeeded, else nothing
-				self[skill] = self[skill] + 1
+				set(skill, get(skill) + 1)
 				RPG.broadcast("You learn from your failure and gain 1 skill point", RPG.COLOR_GREEN)
 		
 		
@@ -154,7 +154,8 @@ func _ready():
 	
 	# roll dice for stats
 	for s in ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]:
-		self[s] = RPG.roll_dice(3,6)
+		#self[s] = RPG.roll_dice(3,6)
+		set(s, RPG.roll_dice(3,6))
 	
 	
 	ownr.fighter = self
