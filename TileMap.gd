@@ -8,6 +8,17 @@ func draw_map( map ):
 		for y in range( map[x].size() ):
 			set_cell( x,y, map[x][y] )
 
+# inverse of what the old FogMap node did
+func fill():
+	print("Clearing the whole map")
+	for x in range(data.map.size()):
+		for y in range(data.map[x].size()):
+			set_cell(x, y, -1) # clear
+			
+func reveal(cells):
+	for cell in cells:
+		if get_cellv(cell) == -1:
+			set_cell(cell[0],cell[1], data.map[cell[0]][cell[1]])
 
 func _ready():
 	RPG.map = self
@@ -18,6 +29,7 @@ func new_game():
 	#data = dun_gen.Generate_Town_BSP()
 	draw_map( data.map )
 	
+	fill()
 	#RPG.map_size = Vector2(data.map.size(), data.map[0].size())
 	
 	# Astar representation
@@ -57,13 +69,14 @@ func next_level():
 	clear_entities()
 	
 	data = dun_gen.Generate_BSP()
-	draw_map( data.map )
+	#draw_map( data.map )
 	
 	# Astar representation
 	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells())
 	
 	# fill it first
-	get_node('FogMap').fill()
+	fill()
+	#get_node('FogMap').fill()
 	
 	# place player in safe spot (on floor)
 	var spot_id = randi() % dun_gen.get_floor_cells().size()
@@ -134,7 +147,9 @@ func _on_player_pos_changed(player):
 	
 	#print("Cells to reveal: " + str(cells))
 	# Reveal cells
-	$"FogMap".reveal(cells)
+	reveal(cells)
+	
+	#$"FogMap".reveal(cells)
 	# Light
 	$"LightMap".reveal_all()
 	$"LightMap".fill_cells(cells)

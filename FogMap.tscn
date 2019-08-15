@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tileset/tileset_set.tres" type="TileSet" id=1]
+[ext_resource path="res://fogMap.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 cover = texture(TEXTURE, UV);
+	
+	COLOR = vec4(0.301, 0.301, 0.301, cover.a);
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="FogMap" type="TileMap"]
+visible = false
+material = SubResource( 2 )
+z_index = 1
+mode = 1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 54, 28 )
+format = 1
+script = ExtResource( 2 )
