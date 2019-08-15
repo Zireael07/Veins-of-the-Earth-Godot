@@ -8,23 +8,16 @@
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
-uniform vec4 color : hint_color;
 
-
-void fragment()
-{	
-	//COLOR = texture(TEXTURE, UV) - vec4(1,1,1,0);
+void fragment() {
+	vec4 cover = texture(TEXTURE, UV);
 	
-	//COLOR.rgb = texture(TEXTURE, UV).rgb;
+	COLOR = vec4(0.301, 0.301, 0.301, cover.a);
 	
-	//COLOR.rgb = vec3(UV.x, UV.y, 0);
-	
-	COLOR = color;
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/color = Color( 0.298039, 0.298039, 0.298039, 1 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -67,4 +60,3 @@ script = ExtResource( 4 )
 [node name="Cursor" type="Sprite" parent="TileMap"]
 modulate = Color( 1, 0.867188, 0, 1 )
 texture = ExtResource( 5 )
-
