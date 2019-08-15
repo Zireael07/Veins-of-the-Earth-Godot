@@ -121,6 +121,7 @@ func _input(event):
 
 	# change level
 	if Input.is_action_just_pressed("change_level"):
+		print("Should change level")
 		if RPG.map.is_stairs(get_map_position()):
 			print("Stairs at our location")
 			RPG.map.next_level()
