@@ -11,157 +11,135 @@
 [ext_resource path="res://assets/food.png" type="Texture" id=9]
 [ext_resource path="res://assets/longsword.png" type="Texture" id=10]
 
-[node name="Database" type="Node" index="0"]
-
+[node name="Database" type="Node"]
 script = ExtResource( 1 )
 
-[node name="player" type="Node" parent="." index="0"]
+[node name="player" type="Node" parent="."]
 
-[node name="player" parent="player" index="0" instance=ExtResource( 2 )]
-
+[node name="player" parent="player" instance=ExtResource( 2 )]
 position = Vector2( 0, 0 )
 
 [node name="Actor" parent="player/player" index="3"]
-
 faction_id = 0
-conversations = null
 
-[node name="kobold" type="Node" parent="." index="1"]
+[node name="kobold" type="Node" parent="."]
 
-[node name="kobold" parent="kobold" index="0" instance=ExtResource( 3 )]
+[node name="kobold" parent="kobold" instance=ExtResource( 3 )]
 
-[node name="drow" type="Node" parent="." index="2"]
+[node name="drow" type="Node" parent="."]
 
-[node name="drow" parent="drow" index="0" instance=ExtResource( 3 )]
-
+[node name="drow" parent="drow" instance=ExtResource( 3 )]
 position = Vector2( 38, 60 )
 
 [node name="Sprite" parent="drow/drow" index="1"]
-
 texture = ExtResource( 4 )
 
 [node name="Actor" parent="drow/drow" index="2"]
-
 max_hp = 10
-faction_id = 1
-conversations = null
 
 [node name="chain armor" parent="drow/drow/container" index="0" instance=ExtResource( 5 )]
-
 position = Vector2( 110, 120 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="drow/drow/container/chain armor" index="0"]
-
 texture = ExtResource( 6 )
 
 [node name="Item" parent="drow/drow/container/chain armor" index="1"]
-
 use_function = ""
+indestructible = false
 equippable = true
 equip_slot = "BODY"
 damage = PoolIntArray( 1, 8 )
 armor = 5
 
-[node name="human" type="Node" parent="." index="3"]
+[node name="human" type="Node" parent="."]
 
-[node name="human" parent="human" index="0" instance=ExtResource( 3 )]
-
+[node name="human" parent="human" instance=ExtResource( 3 )]
 position = Vector2( 74, 60 )
 
 [node name="Sprite" parent="human/human" index="1"]
-
 texture = ExtResource( 7 )
 
 [node name="Actor" parent="human/human" index="2"]
-
 max_hp = 10
 faction_id = 2
 conversations = [ "Welcome adventurer! Do you want my help?", "That's great!", "If that's what you want..." ]
 
-[node name="potion" type="Node" parent="." index="4"]
+[node name="potion" type="Node" parent="."]
 
-[node name="potion" parent="potion" index="0" instance=ExtResource( 5 )]
-
+[node name="potion" parent="potion" instance=ExtResource( 5 )]
 position = Vector2( 0, 120 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="flask" type="Node" parent="." index="5"]
+[node name="flask" type="Node" parent="."]
 
-[node name="flask" parent="flask" index="0" instance=ExtResource( 5 )]
-
+[node name="flask" parent="flask" instance=ExtResource( 5 )]
 position = Vector2( 80, 120 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="flask/flask" index="0"]
-
 texture = ExtResource( 8 )
 
 [node name="Item" parent="flask/flask" index="1"]
-
 use_function = "drink"
-armor = 0
+indestructible = false
+equippable = false
+damage = PoolIntArray(  )
 
-[node name="rations" type="Node" parent="." index="6"]
+[node name="rations" type="Node" parent="."]
 
-[node name="rations" parent="rations" index="0" instance=ExtResource( 5 )]
-
+[node name="rations" parent="rations" instance=ExtResource( 5 )]
 position = Vector2( 80, 120 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="rations/rations" index="0"]
-
 texture = ExtResource( 9 )
 
 [node name="Item" parent="rations/rations" index="1"]
-
 use_function = "eat"
-armor = 0
+indestructible = false
+equippable = false
+damage = PoolIntArray(  )
 
-[node name="longsword" type="Node" parent="." index="7"]
+[node name="longsword" type="Node" parent="."]
 
-[node name="longsword" parent="longsword" index="0" instance=ExtResource( 5 )]
-
+[node name="longsword" parent="longsword" instance=ExtResource( 5 )]
 position = Vector2( 40, 120 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="longsword/longsword" index="0"]
-
 texture = ExtResource( 10 )
 
 [node name="Item" parent="longsword/longsword" index="1"]
-
 use_function = ""
+indestructible = false
 equippable = true
 equip_slot = "MAIN_HAND"
 damage = PoolIntArray( 1, 8 )
-armor = 0
 
-[node name="chain armor" type="Node" parent="." index="8"]
+[node name="chain armor" type="Node" parent="."]
 
-[node name="chain armor" parent="chain armor" index="0" instance=ExtResource( 5 )]
-
+[node name="chain armor" parent="chain armor" instance=ExtResource( 5 )]
 position = Vector2( 110, 120 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" parent="chain armor/chain armor" index="0"]
-
 texture = ExtResource( 6 )
 
 [node name="Item" parent="chain armor/chain armor" index="1"]
-
 use_function = ""
+indestructible = false
 equippable = true
 equip_slot = "BODY"
 damage = PoolIntArray( 1, 8 )
 armor = 5
 
-
 [editable path="player/player"]
+
 [editable path="drow/drow"]
+
 [editable path="drow/drow/container/chain armor"]
+
 [editable path="human/human"]
+
 [editable path="flask/flask"]
+
 [editable path="rations/rations"]
+
 [editable path="longsword/longsword"]
+
 [editable path="chain armor/chain armor"]

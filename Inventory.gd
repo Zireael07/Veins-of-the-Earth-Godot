@@ -95,7 +95,7 @@ func _ready():
 
 # moue support
 func _on_slot_mouse_enter(slot):
-	var name = '' if slot.contents.empty() else slot.contents[0].name
+	var name = '' if slot.contents.empty() else slot.contents[0].read_name
 	var count = slot.contents.size()
 	var nt = '' if count < 2 else str(count)+'x '
 	name_label.set_text(nt + name)

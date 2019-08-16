@@ -15,6 +15,8 @@ var grid
 var tile_offset = Vector2(0,0)
 var tile_size = Vector2(0,0)
 
+var read_name = "" # for readability
+
 # components
 var fighter
 var ai
@@ -45,7 +47,8 @@ func _ready():
 	tile_size = grid.get_cell_size()
 	tile_offset = Vector2(0, tile_size.y / 2)
 	
-	$"Label".set_text(get_name())
+	print("Ready: " + str(read_name))
+	$"Label".set_text(read_name)
 	$"Label".hide()
 
 func kill():
@@ -65,7 +68,7 @@ func remove():
 
 
 func broadcast_kill():
-	RPG.broadcast(self.name + " is killed!", RPG.COLOR_LIGHT_GREY)
+	RPG.broadcast(self.read_name + " is killed!", RPG.COLOR_LIGHT_GREY)
 
 func get_map_position():
 	var grid_pos = grid.world_to_map(get_position()-Vector2(0,-8))
@@ -164,6 +167,7 @@ func save():
 	print("Saving... " + str(self.name))
 	var data = {}
 	data.name = self.name
+	data.read_name = self.read_name
 	# this didn't work properly, lost editable info
 	# from where we were loaded
 	#data.filename = get_filename()
@@ -189,6 +193,8 @@ func save():
 func restore(data):
 	if 'name' in data:
 		self.name = data.name
+	if 'read_name' in data:
+		self.read_name = data.read_name
 		
 	# x,y are handled by the map instead
 	

@@ -4,6 +4,7 @@ extends Node
 func spawn( path ):
 	# Find our entity before we try returning anything
 	var entity = get_node( path )
+
 	if entity:
 		var nw_ent = entity.duplicate()
 		# we need to store the path to properly restore when loading game

@@ -25,7 +25,7 @@ func use(entity):
 		if not equipped:
 			# check for equipped
 			if entity.container.get_equipped_in_slot(equip_slot) == null:
-				RPG.broadcast(entity.get_name() + " equipped " + ownr.name, RPG.COLOR_WHITE)
+				RPG.broadcast(entity.read_name + " equipped " + ownr.read_name, RPG.COLOR_WHITE)
 				equipped = true
 			
 				if entity == RPG.player:
@@ -45,7 +45,7 @@ func use(entity):
 				# prevent falling through
 				return
 	if use_function.empty():
-		RPG.broadcast("The " +ownr.name+ " cannot be used", RPG.COLOR_DARK_GREY)
+		RPG.broadcast("The " +ownr.read_name+ " cannot be used", RPG.COLOR_DARK_GREY)
 		return
 	if has_method(use_function):
 		print("We have the function: " + str(use_function))
@@ -66,7 +66,7 @@ func pickup(entity):
 	ownr.set_map_position(entity.get_map_position())
 	
 	
-	RPG.broadcast(entity.get_name() + " picks up " + ownr.get_name())
+	RPG.broadcast(entity.read_name + " picks up " + ownr.read_name)
 	entity.container.add_to_inventory(ownr)
 
 	if entity == RPG.player:
@@ -74,7 +74,7 @@ func pickup(entity):
 	#pass
 
 func drop(entity):
-	RPG.broadcast(entity.get_name() + " drops " + ownr.get_name())
+	RPG.broadcast(entity.read_name + " drops " + ownr.read_name)
 	
 	# fix
 	ownr.set_visible(true)
@@ -97,7 +97,7 @@ func _ready():
 #-------------------------
 # item use functions
 func heal(entity):
-	RPG.broadcast(entity.get_name() + " is healed!")
+	RPG.broadcast(entity.read_name + " is healed!")
 	var heal = RPG.roll(1,6)
 	entity.fighter.hp += heal
 	return "OK"

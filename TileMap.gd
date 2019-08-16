@@ -163,6 +163,9 @@ func _on_player_pos_changed(player):
 # Spawn what path from Database, set position to where
 func spawn( what, where, start_game=false ):
 	print("Spawning: " + str(what.get_name()) + " @: " + str(where))
+	# this is the name in the database, which is readable
+	what.read_name = what.get_name()
+	print("Readable name: " + str(what.read_name))
 	# Add the entity to the scene and set its pos
 	add_child( what, true)
 	#what.set_map_pos( where )

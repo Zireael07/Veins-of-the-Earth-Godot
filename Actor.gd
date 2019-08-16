@@ -107,12 +107,12 @@ func fight(who):
 		#if melee < 55:
 			var dmg = RPG.roll(damage[0], damage[1])
 			var mod = int(floor((strength - 10)/2))
-			RPG.broadcast(ownr.name + " hits " + who.name + "!", RPG.COLOR_LIGHT_BLUE)
+			RPG.broadcast(ownr.read_name + " hits " + who.read_name + "!", RPG.COLOR_LIGHT_BLUE)
 			who.fighter.take_damage(ownr, max(0,dmg + mod - who.fighter.get_armor())) #self.power)
 			who.add_splash(0, max(0,dmg + mod - who.fighter.get_armor()))
 		else:
 			who.add_splash(1)
-			RPG.broadcast(ownr.name + " misses " + who.name + "!")
+			RPG.broadcast(ownr.read_name + " misses " + who.read_name + "!")
 	else:
 		print("Not a hostile")
 		if RPG.player == self.ownr and react == 0:
@@ -144,7 +144,7 @@ func _set_max_hp(what):
 func set_real_max_hp(what):
 #	print(get_parent().get_name() + " bonus hp: " + str(int(floor(constitution - 10)/2)))
 	max_hp = what + int(floor(constitution - 10)/2)
-	print(get_parent().get_name() + " " + str(max_hp))
+	#print(get_parent().get_name() + " " + str(max_hp))
 	emit_signal('hp_changed', self.hp, self.max_hp)
 
 func _ready():
@@ -173,7 +173,7 @@ func broadcast_damage_taken(from, amount):
 	var color = RPG.COLOR_DARK_GREY
 	if ownr == RPG.player:
 		color = RPG.COLOR_RED
-	RPG.broadcast(n+ " hits " +ownr.name+ " for " +str(amount)+ " HP",color)
+	RPG.broadcast(n+ " hits " +ownr.read_name+ " for " +str(amount)+ " HP",color)
 
 var faction_reaction = { faction.PLAYER: 100, faction.ENEMY: -100, faction.NEUTRAL: 0 }
 func get_marker_color():
