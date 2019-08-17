@@ -47,7 +47,7 @@ func _ready():
 	tile_size = grid.get_cell_size()
 	tile_offset = Vector2(0, tile_size.y / 2)
 	
-	print("Ready: " + str(read_name))
+	#print("Ready: " + str(read_name))
 	$"Label".set_text(read_name)
 	$"Label".hide()
 
@@ -56,7 +56,9 @@ func kill():
 		# drop all inventory
 		for o in container.get_objects():
 			o.item.drop(self)
-		
+		# drop equipped, too
+		for o in container.get_equipped_objects():
+			o.item.drop(self)
 		
 		broadcast_kill()
 		queue_free()
