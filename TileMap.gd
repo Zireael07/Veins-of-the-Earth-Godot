@@ -111,7 +111,7 @@ func get_entities_in_cell_readable(cell):
 	var ret = []
 	var list = get_entities_in_cell(cell)
 	for obj in list:
-		ret.append(obj.get_name())
+		ret.append(obj.read_name)
 	
 	return ret
 	

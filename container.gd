@@ -11,6 +11,9 @@ func _ready():
 	# NPCs equip starting inventory
 	if ownr != RPG.player:
 		for o in ownr.container.get_objects():
+			# this is the name in the database, which is readable
+			o.read_name = o.get_name()
+			print("Readable name in container: " + str(o.read_name))
 			if o.item.equippable:
 				o.item.use(ownr)
 
