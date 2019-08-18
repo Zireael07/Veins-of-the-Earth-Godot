@@ -2,107 +2,32 @@
 
 [ext_resource path="res://InventorySlot.gd" type="Script" id=1]
 
-[node name="InventorySlot" type="Button" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="InventorySlot" type="Button"]
 margin_right = 12.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 32, 32 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-flat = false
-align = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 centered = false
-_sections_unfolded = [ "Offset" ]
 
-[node name="MenuContainer" type="VBoxContainer" parent="." index="1"]
-
+[node name="MenuContainer" type="VBoxContainer" parent="."]
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 40.0
 margin_right = 59.0
 margin_bottom = 84.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Rect", "Visibility" ]
 
-[node name="UseButton" type="Button" parent="MenuContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="UseButton" type="Button" parent="MenuContainer"]
 margin_right = 79.0
 margin_bottom = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Use/Wield"
-flat = false
-align = 1
 
-[node name="DropButton" type="Button" parent="MenuContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="DropButton" type="Button" parent="MenuContainer"]
 margin_top = 24.0
 margin_right = 79.0
 margin_bottom = 44.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Drop"
-flat = false
-align = 1
-
 [connection signal="pressed" from="." to="." method="_on_InventorySlot_pressed"]
-
 [connection signal="pressed" from="MenuContainer/UseButton" to="." method="_on_UseButton_pressed"]
-
 [connection signal="pressed" from="MenuContainer/DropButton" to="." method="_on_DropButton_pressed"]
-
-

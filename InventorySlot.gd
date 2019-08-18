@@ -23,7 +23,7 @@ func update_slot():
 		set_disabled(false)
 	else:
 		get_node('Sprite').set_texture(null)
-		set_disabled(true)
+		#set_disabled(true)
 
 
 func _ready():
@@ -35,6 +35,8 @@ func _ready():
 	connect("mouse_entered", get_parent(), "_on_slot_mouse_enter", [self])
 	connect("mouse_exited", get_parent(), "_on_slot_mouse_exit")
 
+	# ensure they're always enabled
+	set_disabled(false)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -50,7 +52,7 @@ func _on_InventorySlot_pressed():
 		else:
 			# hide use button if wielded
 			if contents.size() > 0 and contents[0].item.equipped:
-				print("Hiding use button because equipped: " + str(contents[0].item.get_parent().get_name()))
+				#print("Hiding use button because equipped: " + str(contents[0].item.get_parent().get_name()))
 				get_node("MenuContainer/UseButton").hide()
 			# show the menu
 			get_node("MenuContainer").show()
