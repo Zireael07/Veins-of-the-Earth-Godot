@@ -342,7 +342,7 @@ func get_floor_cells():
 	
 	return list
 	
-var monster_table = [ ["kobold", 70], ["drow", 20], ["human", 10] ]
+var monster_table = [ ["kobold", 50], ["orc", 30], ["drow", 10], ["human", 10] ]
 var item_table = [ ["longsword", 50], ["potion", 20], ["chainmail", 30] ]
 
 
@@ -390,6 +390,7 @@ func place_monsters(room):
 	var res = random_choice_table(chance_roll_table)
 	print("Res: " + str(res))
 	
+	#TODO: Lookup table to prevent forgetting an entry
 	var mon
 	if res == "kobold":
 		mon = RPG.make_entity("kobold/kobold")
@@ -397,6 +398,8 @@ func place_monsters(room):
 		mon = RPG.make_entity("drow/drow")
 	elif res == "human":
 		mon = RPG.make_entity("human/human")
+	elif res == "orc":
+		mon = RPG.make_entity("orc/orc")
 	
 	print("Place monster: " + str(mon) + " @ " + str(pos))
 	

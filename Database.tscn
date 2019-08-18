@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Database.gd" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entity.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/drow_fighter.png" type="Texture" id=4]
-[ext_resource path="res://thing.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/chain_armor.png" type="Texture" id=6]
-[ext_resource path="res://assets/human.png" type="Texture" id=7]
-[ext_resource path="res://assets/flask.png" type="Texture" id=8]
-[ext_resource path="res://assets/food.png" type="Texture" id=9]
-[ext_resource path="res://assets/longsword.png" type="Texture" id=10]
+[ext_resource path="res://assets/goblin.png" type="Texture" id=4]
+[ext_resource path="res://assets/drow_fighter.png" type="Texture" id=5]
+[ext_resource path="res://thing.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/chain_armor.png" type="Texture" id=7]
+[ext_resource path="res://assets/human.png" type="Texture" id=8]
+[ext_resource path="res://assets/flask.png" type="Texture" id=9]
+[ext_resource path="res://assets/food.png" type="Texture" id=10]
+[ext_resource path="res://assets/longsword.png" type="Texture" id=11]
+[ext_resource path="res://assets/armor_leather.png" type="Texture" id=12]
 
 [node name="Database" type="Node"]
 script = ExtResource( 1 )
@@ -23,25 +25,35 @@ position = Vector2( 0, 0 )
 faction_id = 0
 
 [node name="kobold" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="kobold" parent="kobold" instance=ExtResource( 3 )]
 
+[node name="orc" type="Node" parent="."]
+
+[node name="orc" parent="orc" instance=ExtResource( 3 )]
+position = Vector2( 110, 60 )
+
+[node name="Sprite" parent="orc/orc" index="1"]
+texture = ExtResource( 4 )
+
 [node name="drow" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="drow" parent="drow" instance=ExtResource( 3 )]
 position = Vector2( 38, 60 )
 
 [node name="Sprite" parent="drow/drow" index="1"]
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Actor" parent="drow/drow" index="2"]
 max_hp = 10
 
-[node name="chain armor" parent="drow/drow/container" index="0" instance=ExtResource( 5 )]
+[node name="chain armor" parent="drow/drow/container" index="0" instance=ExtResource( 6 )]
 position = Vector2( 110, 120 )
 
 [node name="Sprite" parent="drow/drow/container/chain armor" index="0"]
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Item" parent="drow/drow/container/chain armor" index="1"]
 use_function = ""
@@ -57,7 +69,7 @@ armor = 5
 position = Vector2( 74, 60 )
 
 [node name="Sprite" parent="human/human" index="1"]
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Actor" parent="human/human" index="2"]
 max_hp = 10
@@ -66,16 +78,16 @@ conversations = [ "Welcome adventurer! Do you want my help?", "That's great!", "
 
 [node name="potion" type="Node" parent="."]
 
-[node name="potion" parent="potion" instance=ExtResource( 5 )]
+[node name="potion" parent="potion" instance=ExtResource( 6 )]
 position = Vector2( 0, 120 )
 
 [node name="flask" type="Node" parent="."]
 
-[node name="flask" parent="flask" instance=ExtResource( 5 )]
+[node name="flask" parent="flask" instance=ExtResource( 6 )]
 position = Vector2( 80, 120 )
 
 [node name="Sprite" parent="flask/flask" index="0"]
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Item" parent="flask/flask" index="1"]
 use_function = "drink"
@@ -85,11 +97,11 @@ damage = PoolIntArray(  )
 
 [node name="rations" type="Node" parent="."]
 
-[node name="rations" parent="rations" instance=ExtResource( 5 )]
+[node name="rations" parent="rations" instance=ExtResource( 6 )]
 position = Vector2( 80, 120 )
 
 [node name="Sprite" parent="rations/rations" index="0"]
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="Item" parent="rations/rations" index="1"]
 use_function = "eat"
@@ -99,11 +111,11 @@ damage = PoolIntArray(  )
 
 [node name="longsword" type="Node" parent="."]
 
-[node name="longsword" parent="longsword" instance=ExtResource( 5 )]
+[node name="longsword" parent="longsword" instance=ExtResource( 6 )]
 position = Vector2( 40, 120 )
 
 [node name="Sprite" parent="longsword/longsword" index="0"]
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [node name="Item" parent="longsword/longsword" index="1"]
 use_function = ""
@@ -114,11 +126,11 @@ damage = PoolIntArray( 1, 8 )
 
 [node name="chain armor" type="Node" parent="."]
 
-[node name="chain armor" parent="chain armor" instance=ExtResource( 5 )]
+[node name="chain armor" parent="chain armor" instance=ExtResource( 6 )]
 position = Vector2( 110, 120 )
 
 [node name="Sprite" parent="chain armor/chain armor" index="0"]
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Item" parent="chain armor/chain armor" index="1"]
 use_function = ""
@@ -128,7 +140,25 @@ equip_slot = "BODY"
 damage = PoolIntArray( 1, 8 )
 armor = 5
 
+[node name="leather armor" type="Node" parent="."]
+
+[node name="leather armor" parent="leather armor" instance=ExtResource( 6 )]
+position = Vector2( 135, 120 )
+
+[node name="Sprite" parent="leather armor/leather armor" index="0"]
+texture = ExtResource( 12 )
+
+[node name="Item" parent="leather armor/leather armor" index="1"]
+use_function = ""
+indestructible = false
+equippable = true
+equip_slot = "BODY"
+damage = PoolIntArray( 1, 8 )
+armor = 2
+
 [editable path="player/player"]
+
+[editable path="orc/orc"]
 
 [editable path="drow/drow"]
 
@@ -143,3 +173,5 @@ armor = 5
 [editable path="longsword/longsword"]
 
 [editable path="chain armor/chain armor"]
+
+[editable path="leather armor/leather armor"]
