@@ -24,26 +24,38 @@ func use(entity):
 #		print("Equippable")
 		if not equipped:
 			# check for equipped
-			if entity.container.get_equipped_in_slot(equip_slot) == null:
-				RPG.broadcast(entity.read_name + " equipped " + ownr.read_name, RPG.COLOR_WHITE)
-				equipped = true
-			
-				if entity == RPG.player:
-					# GUI fix
-					RPG.inventory.move_to_equipped(inventory_slot, equip_slot, ownr)
+			var worn = entity.container.get_equipped_in_slot(equip_slot) 
+			if worn != null:
+				print("Already wearing item in slot " + str(equip_slot) + " " + str(worn.read_name) + "!")
+				# take off the item in slot
+				RPG.broadcast(entity.read_name + " took off " + worn.read_name, RPG.COLOR_WHITE)
+				worn.item.equipped = false
 				
-				if equip_slot == "MAIN_HAND" and damage.size() > 0:
-					#print("Using the sword's damage")
-					# use the weapon's damage in place of the player's
-					entity.fighter.damage = damage
-					return
-				else:
-					# prevent falling through
-					return
+				if entity == RPG.player:
+					# GUI update
+					RPG.inventory.move_to_inventory(worn.item.equip_slot, worn)
+					
+				# prevent falling through
+				#return
+				
+			#else:
+			RPG.broadcast(entity.read_name + " equipped " + ownr.read_name, RPG.COLOR_WHITE)
+			equipped = true
+			
+			if entity == RPG.player:
+				# GUI update
+				RPG.inventory.move_to_equipped(inventory_slot, equip_slot, ownr)
+				
+			if equip_slot == "MAIN_HAND" and damage.size() > 0:
+				#print("Using the sword's damage")
+				# use the weapon's damage in place of the player's
+				entity.fighter.damage = damage
+				return
 			else:
-				print("Already wearing item in slot " + str(equip_slot) + "!")
 				# prevent falling through
 				return
+				
+				
 	if use_function.empty():
 		RPG.broadcast("The " +ownr.read_name+ " cannot be used", RPG.COLOR_DARK_GREY)
 		return

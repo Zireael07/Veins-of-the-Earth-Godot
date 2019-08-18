@@ -5,7 +5,7 @@ onready var objects = get_node('../InventoryObjects')
 onready var eq = get_node("../VBoxContainer/EquipmentContainer")
 onready var name_label = get_node('../VBoxContainer/ItemName')
 
-
+# Functions for graphical (player) inventory
 # Get an array of all inventory Objects
 func get_objects():
 	return self.objects.get_children()
@@ -86,6 +86,15 @@ func move_to_equipped(slot, equip_slot, item):
 		slot.remove_contents(item)
 	#	else:
 	#		print("Slot taken")
+
+# inverse of the above
+func move_to_inventory(equip_slot, item):
+	if equip_slot == "BODY":
+		eq.get_child(0).remove_contents(item)
+		get_free_slot().add_contents(item)
+	elif equip_slot == "MAIN_HAND":
+		eq.get_child(1).remove_contents(item)
+		get_free_slot().add_contents(item)
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
