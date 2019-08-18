@@ -388,7 +388,7 @@ func place_monsters(room):
 	print(chance_roll_table)
 	
 	var res = random_choice_table(chance_roll_table)
-	print("Res: " + str(res))
+	#print("Res: " + str(res))
 	
 	#TODO: Lookup table to prevent forgetting an entry
 	var mon
@@ -401,7 +401,7 @@ func place_monsters(room):
 	elif res == "orc":
 		mon = RPG.make_entity("orc/orc")
 	
-	print("Place monster: " + str(mon) + " @ " + str(pos))
+	#print("Place monster: " + str(mon) + " @ " + str(pos))
 	
 	RPG.map.spawn(mon, pos, true)
 	
@@ -417,7 +417,7 @@ func place_items(room):
 	print(chance_roll_table)
 	
 	var res = random_choice_table(chance_roll_table)
-	print("Rs: " + str(res))
+	#print("Rs: " + str(res))
 	
 	var it
 	if res == "potion":
@@ -427,6 +427,6 @@ func place_items(room):
 	elif res == "longsword":
 		it = RPG.make_entity("longsword/longsword")
 	
-	print("Place item: " + str(it) + " @ " + str(pos))
+	#print("Place item: " + str(it) + " @ " + str(pos))
 	
 	RPG.map.spawn(it, pos)

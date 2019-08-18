@@ -38,7 +38,7 @@ func quit_dialogue():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
-			print("Clicked")
+			#print("Clicked")
 			# if we're visible but buttons are hidden
 			if is_visible() and not $"VBoxContainer/Button1".is_visible() and not $"VBoxContainer/Button2".is_visible():
 				quit_dialogue()
