@@ -10,7 +10,7 @@ func draw_map( map ):
 
 # inverse of what the old FogMap node did
 func fill():
-	print("Clearing the whole map")
+	#print("Clearing the whole map")
 	for x in range(data.map.size()):
 		for y in range(data.map[x].size()):
 			set_cell(x, y, -1) # clear
@@ -57,6 +57,11 @@ func spawn_player(pos, start_game=false):
 		var ration = RPG.make_entity("rations/rations")
 		spawn(ration, pos)
 		ration.item.pickup(player)
+		var armor = RPG.make_entity("leather armor/leather armor")
+		spawn(armor, pos)
+		armor.item.pickup(player)
+		# equip starting armor
+		armor.item.use(player)
 		
 	# welcome message
 	RPG.broadcast("Welcome to Veins of the Earth!", RPG.COLOR_BROWN)
