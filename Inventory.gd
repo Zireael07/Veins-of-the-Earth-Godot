@@ -1,9 +1,9 @@
 extends HBoxContainer
 
 # class member variables go here, for example:
-onready var objects = get_node('../InventoryObjects')
-onready var eq = get_node("../VBoxContainer/EquipmentContainer")
-onready var name_label = get_node('../VBoxContainer/ItemName')
+onready var objects = get_node('../../InventoryObjects')
+onready var eq = get_node("../../Control/EquipmentContainer")
+onready var name_label = get_node('../../Control2/VBoxContainer/ItemName')
 
 # Functions for graphical (player) inventory
 # Get an array of all inventory Objects

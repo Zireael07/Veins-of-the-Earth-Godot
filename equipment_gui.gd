@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 # class member variables go here, for example:
-onready var name_label = get_node('../ItemName')
+onready var name_label = get_node('../../Control2/VBoxContainer/ItemName')
 
 func _ready():
 	# Called when the node is added to the scene for the first time.

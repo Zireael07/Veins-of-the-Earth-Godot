@@ -5,308 +5,173 @@
 [ext_resource path="res://InventorySlot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Inventory.gd" type="Script" id=4]
 
-[node name="InventoryPanel" type="Control" index="0" groups=[
+[node name="InventoryPanel" type="Control" groups=[
 "inventory_gui",
 ]]
-
 pause_mode = 2
 visible = false
 anchor_left = 0.5
-anchor_top = 0.0
 anchor_right = 0.5
-anchor_bottom = 0.0
 margin_left = -200.0
 margin_right = 200.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 400, 400 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Pause", "Rect" ]
 
-[node name="Panel" type="Panel" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Panel" type="Panel" parent="."]
 margin_right = 400.0
 margin_bottom = 400.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Eq" type="Label" parent="Control"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 393.0
-margin_bottom = 393.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-
-[node name="Eq" type="Label" parent="VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 386.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+margin_bottom = 21.0
 text = "Equipment"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="EquipmentContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 18.0
-margin_right = 386.0
-margin_bottom = 50.0
+[node name="EquipmentContainer" type="HBoxContainer" parent="Control"]
+margin_left = 7.0
+margin_top = 25.0
+margin_right = 393.0
+margin_bottom = 57.0
 rect_min_size = Vector2( 0, 32 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="InventorySlot" parent="VBoxContainer/EquipmentContainer" index="0" instance=ExtResource( 3 )]
-
+[node name="InventorySlot" parent="Control/EquipmentContainer" instance=ExtResource( 3 )]
 margin_right = 32.0
 margin_bottom = 32.0
 
-[node name="InventorySlot2" parent="VBoxContainer/EquipmentContainer" index="1" instance=ExtResource( 3 )]
-
+[node name="InventorySlot2" parent="Control/EquipmentContainer" instance=ExtResource( 3 )]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer" index="2"]
+[node name="Control2" type="Control" parent="."]
+margin_top = 100.0
+margin_right = 40.0
+margin_bottom = 140.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 54.0
-margin_right = 386.0
-margin_bottom = 58.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="Control2"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 21.0
+margin_bottom = 20.0
 
-[node name="Title" type="Label" parent="VBoxContainer" index="3"]
+[node name="HSeparator" type="HSeparator" parent="Control2/VBoxContainer"]
+margin_right = 61.0
+margin_bottom = 4.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 62.0
-margin_right = 386.0
-margin_bottom = 76.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+[node name="Title" type="Label" parent="Control2/VBoxContainer"]
+margin_top = 8.0
+margin_right = 61.0
+margin_bottom = 22.0
 text = "Inventory"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="ItemName" type="Label" parent="VBoxContainer" index="4"]
+[node name="ItemName" type="Label" parent="Control2/VBoxContainer"]
+margin_top = 26.0
+margin_right = 61.0
+margin_bottom = 40.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 80.0
-margin_right = 386.0
-margin_bottom = 94.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Inventory" type="HBoxContainer" parent="." index="2"]
-
+[node name="Inventory" type="HBoxContainer" parent="Control2"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 7.0
-margin_top = 157.0
+margin_top = 87.0
 margin_right = 393.0
-margin_bottom = 197.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
+margin_bottom = 127.0
 script = ExtResource( 4 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="InventorySlot" parent="Inventory" index="0" instance=ExtResource( 3 )]
-
+[node name="InventorySlot" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_right = 32.0
 margin_bottom = 40.0
 
-[node name="InventorySlot2" parent="Inventory" index="1" instance=ExtResource( 3 )]
-
+[node name="InventorySlot2" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 40.0
 
-[node name="InventorySlot3" parent="Inventory" index="2" instance=ExtResource( 3 )]
-
+[node name="InventorySlot3" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 40.0
 
-[node name="InventorySlot4" parent="Inventory" index="3" instance=ExtResource( 3 )]
-
+[node name="InventorySlot4" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 40.0
 
-[node name="InventorySlot5" parent="Inventory" index="4" instance=ExtResource( 3 )]
-
+[node name="InventorySlot5" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 40.0
 
-[node name="InventorySlot6" parent="Inventory" index="5" instance=ExtResource( 3 )]
-
+[node name="InventorySlot6" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 40.0
 
-[node name="InventorySlot7" parent="Inventory" index="6" instance=ExtResource( 3 )]
-
+[node name="InventorySlot7" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 40.0
 
-[node name="InventorySlot8" parent="Inventory" index="7" instance=ExtResource( 3 )]
-
+[node name="InventorySlot8" parent="Control2/Inventory" instance=ExtResource( 3 )]
 margin_left = 252.0
 margin_right = 284.0
 margin_bottom = 40.0
 
-[node name="Inventory2" type="HBoxContainer" parent="." index="3"]
-
+[node name="Inventory2" type="HBoxContainer" parent="Control2"]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 7.0
-margin_top = 107.0
+margin_top = 37.0
 margin_right = 393.0
-margin_bottom = 147.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
+margin_bottom = 77.0
 script = ExtResource( 4 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="InventorySlot9" parent="Inventory2" index="0" instance=ExtResource( 3 )]
-
+[node name="InventorySlot9" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_right = 32.0
 margin_bottom = 40.0
 
-[node name="InventorySlot10" parent="Inventory2" index="1" instance=ExtResource( 3 )]
-
+[node name="InventorySlot10" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 40.0
 
-[node name="InventorySlot11" parent="Inventory2" index="2" instance=ExtResource( 3 )]
-
+[node name="InventorySlot11" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 40.0
 
-[node name="InventorySlot12" parent="Inventory2" index="3" instance=ExtResource( 3 )]
-
+[node name="InventorySlot12" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 40.0
 
-[node name="InventorySlot13" parent="Inventory2" index="4" instance=ExtResource( 3 )]
-
+[node name="InventorySlot13" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 40.0
 
-[node name="InventorySlot14" parent="Inventory2" index="5" instance=ExtResource( 3 )]
-
+[node name="InventorySlot14" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 40.0
 
-[node name="InventorySlot15" parent="Inventory2" index="6" instance=ExtResource( 3 )]
-
+[node name="InventorySlot15" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 40.0
 
-[node name="InventorySlot16" parent="Inventory2" index="7" instance=ExtResource( 3 )]
-
+[node name="InventorySlot16" parent="Control2/Inventory2" instance=ExtResource( 3 )]
 margin_left = 252.0
 margin_right = 284.0
 margin_bottom = 40.0
 
-[node name="InventoryObjects" type="Node2D" parent="." index="4"]
-
+[node name="InventoryObjects" type="Node2D" parent="."]
 visible = false
 position = Vector2( 7, 7 )
-_sections_unfolded = [ "Visibility" ]
-
-
