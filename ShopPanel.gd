@@ -2,6 +2,7 @@ extends Control
 
 # Declare member variables here. Examples:
 onready var item_box = get_node("PlayerContainer")
+onready var shop_box = get_node("HBoxContainer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,3 +47,16 @@ func fill_from_inventory():
 		item_box.add_child(ob)
 		# assign item to button
 		ob.ownr = obj
+		# connect button toggle
+		ob.connect("toggled", self, "_on_ItemButton_toggled", [ob])
+		
+func _on_ItemButton_toggled(pressed, ob):
+	print("Item pressed")
+	if ob.get_parent().get_name() == "PlayerContainer":
+		# reparent
+		ob.get_parent().remove_child(ob)
+		shop_box.add_child(ob)
+	else:		
+		# reparent
+		ob.get_parent().remove_child(ob)
+		item_box.add_child(ob)
