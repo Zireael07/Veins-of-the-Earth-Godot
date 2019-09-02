@@ -2,6 +2,7 @@ extends Control
 
 # class member variables go here, for example:
 var action
+var ent
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -11,15 +12,12 @@ func _ready():
 	pass
 
 func initial_dialogue(entity):
+	ent = entity
 	print(entity.get_parent().get_name())
 	print(str(entity.conversations))
 	if entity.conversations.size() < 1:
 		print("Nothing to talk about")
 		return
-	else:
-		# test shop
-		var sw = RPG.make_entity("longsword/longsword")
-		entity.get_parent().add_child(sw)
 	
 	# initial text
 	$"VBoxContainer/Text".set_text(entity.conversations[0])
@@ -52,7 +50,17 @@ func _input(event):
 				# do the action
 				if action != null:
 					if action == "shop":
-						get_parent().get_node("ShopPanel").start()
+						var shop = []
+						# test shop
+						var sw = RPG.make_entity("longsword/longsword")
+						# this is the name in the database, which is readable
+						sw.read_name = sw.get_name()
+						print("Readable name: " + str(sw.read_name))
+						
+						ent.get_parent().add_child(sw)
+						shop.append(sw)
+						# show shop screen
+						get_parent().get_node("ShopPanel").start(shop)
 						get_parent().get_node("ShopPanel").show()
 
 

@@ -8,9 +8,10 @@ onready var shop_box = get_node("HBoxContainer")
 func _ready():
 	pass
 
-func start():	
+func start(shop):	
 	clear_items()
 	fill_from_inventory()
+	fill_shop(shop)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -34,7 +35,9 @@ func _input(event):
 func clear_items():
 	for i in range(item_box.get_child_count()):
 		item_box.get_child(i).queue_free()
-		print("Clear item" + str(i))
+		#print("Clear item" + str(i))
+	for i in range(shop_box.get_child_count()):
+		shop_box.get_child(i).queue_free()
 				
 func fill_from_inventory():
 	# Get inventory objects
@@ -49,14 +52,28 @@ func fill_from_inventory():
 		ob.ownr = obj
 		# connect button toggle
 		ob.connect("toggled", self, "_on_ItemButton_toggled", [ob])
-		
+
+func fill_shop(shop):
+	for obj in shop:
+		# instanciate & add
+		var ob = preload('res://ItemListButton.tscn').instance()
+		shop_box.add_child(ob)
+		# assign item to button
+		ob.ownr = obj
+		# connect button toggle
+		ob.connect("toggled", self, "_on_ItemButton_toggled", [ob])
+
 func _on_ItemButton_toggled(pressed, ob):
 	print("Item pressed")
 	if ob.get_parent().get_name() == "PlayerContainer":
 		# reparent
 		ob.get_parent().remove_child(ob)
 		shop_box.add_child(ob)
+		# remove from player inventory
+		RPG.player.container.remove_from_inventory(ob.ownr)
 	else:		
 		# reparent
 		ob.get_parent().remove_child(ob)
 		item_box.add_child(ob)
+		# add to player inventory
+		RPG.player.container.add_to_inventory(ob.ownr)
