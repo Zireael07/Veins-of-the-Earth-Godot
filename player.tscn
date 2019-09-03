@@ -6,76 +6,30 @@
 [ext_resource path="res://Actor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://container.gd" type="Script" id=5]
 
-[node name="Node2D" type="Node2D" index="0"]
-
+[node name="Node2D" type="Node2D"]
 position = Vector2( 0, 60 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-block_move = false
 
-[node name="marker" type="Sprite" parent="." index="0"]
-
+[node name="marker" type="Sprite" parent="."]
 modulate = Color( 0, 1, 1, 1 )
 position = Vector2( 0, -2 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
-
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-
-anchor_mode = 1
+[node name="Camera2D" type="Camera2D" parent="."]
 rotating = true
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-_sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Actor" parent="." index="3" instance=ExtResource( 4 )]
-
+[node name="Actor" parent="." instance=ExtResource( 4 )]
 max_hp = 20
 
-[node name="Label" type="Label" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="."]
 margin_left = -17.0
 margin_top = -28.0
 margin_right = 23.0
 margin_bottom = -14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="container" type="Node" parent="." index="5"]
-
+[node name="container" type="Node" parent="."]
 script = ExtResource( 5 )
-
-

@@ -4,6 +4,7 @@ extends Control
 onready var valscont = $"Panel/ValsContainer"
 onready var namelab = $"Panel/LabelName"
 onready var melee = $"Panel/SkillsContainer/HBoxContainer/LabelVal"
+onready var money = $"Panel/MoneyContainer"
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -23,6 +24,11 @@ func update_data():
 	namelab.set_text(str(RPG.player.get_name()))
 	
 	melee.set_text(str(RPG.player.get_node("Actor").melee))	
+	
+	var txt = ""
+	for m in RPG.player.money:
+        txt = txt + str(m[0]) + ": " + str(m[1]) + "\n"
+	money.set_text(txt)
 
 
 #func _process(delta):

@@ -2,7 +2,7 @@ extends "entity.gd"
 
 var nutrition = 500
 var thirst = 300
-
+var money = []
 
 signal player_moved(me)
 signal player_acted
@@ -24,6 +24,11 @@ func _ready():
 	
 	set_z_index(2)
 
+	# money
+	money = [ ["bronze", 0],
+              ["silver", 100],
+              ["gold", 0],
+              ["platinum", 0]]
 
 func set_map_position(pos):
 	.set_map_position(pos) 
