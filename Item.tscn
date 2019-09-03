@@ -2,13 +2,5 @@
 
 [ext_resource path="res://Item.gd" type="Script" id=1]
 
-[node name="Item" type="Node" index="0"]
-
+[node name="Item" type="Node"]
 script = ExtResource( 1 )
-use_function = ""
-indestructible = null
-equippable = null
-equip_slot = ""
-damage = null
-
-

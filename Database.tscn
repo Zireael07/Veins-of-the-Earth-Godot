@@ -57,7 +57,6 @@ texture = ExtResource( 7 )
 
 [node name="Item" parent="drow/drow/container/chain armor" index="1"]
 use_function = ""
-indestructible = false
 equippable = true
 equip_slot = "BODY"
 damage = PoolIntArray( 1, 8 )
@@ -91,8 +90,6 @@ texture = ExtResource( 9 )
 
 [node name="Item" parent="flask/flask" index="1"]
 use_function = "drink"
-indestructible = false
-equippable = false
 damage = PoolIntArray(  )
 
 [node name="rations" type="Node" parent="."]
@@ -105,8 +102,6 @@ texture = ExtResource( 10 )
 
 [node name="Item" parent="rations/rations" index="1"]
 use_function = "eat"
-indestructible = false
-equippable = false
 damage = PoolIntArray(  )
 
 [node name="longsword" type="Node" parent="."]
@@ -119,7 +114,6 @@ texture = ExtResource( 11 )
 
 [node name="Item" parent="longsword/longsword" index="1"]
 use_function = ""
-indestructible = false
 equippable = true
 equip_slot = "MAIN_HAND"
 damage = PoolIntArray( 1, 8 )
@@ -134,11 +128,11 @@ texture = ExtResource( 7 )
 
 [node name="Item" parent="chain armor/chain armor" index="1"]
 use_function = ""
-indestructible = false
 equippable = true
 equip_slot = "BODY"
 damage = PoolIntArray( 1, 8 )
 armor = 5
+price = 4000
 
 [node name="leather armor" type="Node" parent="."]
 
@@ -150,11 +144,11 @@ texture = ExtResource( 12 )
 
 [node name="Item" parent="leather armor/leather armor" index="1"]
 use_function = ""
-indestructible = false
 equippable = true
 equip_slot = "BODY"
 damage = PoolIntArray( 1, 8 )
 armor = 2
+price = 1500
 
 [editable path="player/player"]
 

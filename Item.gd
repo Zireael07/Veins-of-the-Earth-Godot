@@ -16,6 +16,12 @@ export(int) var armor = 0
 
 var inventory_slot
 
+# TODO: calculate?
+# 1 sp = 10 cp
+# 1 gp = 20 sp = 200 cp
+# 1 pp = 10 gp = 200 sp = 2000 cp
+
+export(int) var price = 1 # in copper because there are items worth less than 1 sp
 
 func use(entity):
 	print("Using an item")
@@ -105,6 +111,8 @@ func _ready():
 	ownr.item = self
 	
 	#pass
+	
+
 
 #-------------------------
 # item use functions

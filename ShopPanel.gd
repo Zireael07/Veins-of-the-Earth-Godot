@@ -50,6 +50,8 @@ func fill_from_inventory():
 		item_box.add_child(ob)
 		# assign item to button
 		ob.ownr = obj
+		# set price
+		ob.set_price(obj.item.price)
 		# connect button toggle
 		ob.connect("toggled", self, "_on_ItemButton_toggled", [ob])
 
@@ -60,6 +62,8 @@ func fill_shop(shop):
 		shop_box.add_child(ob)
 		# assign item to button
 		ob.ownr = obj
+		# set price
+		ob.set_price(obj.item.price)
 		# connect button toggle
 		ob.connect("toggled", self, "_on_ItemButton_toggled", [ob])
 
