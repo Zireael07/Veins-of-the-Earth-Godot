@@ -75,9 +75,14 @@ func _on_ItemButton_toggled(pressed, ob):
 		shop_box.add_child(ob)
 		# remove from player inventory
 		RPG.player.container.remove_from_inventory(ob.ownr)
+		# add money
+		RPG.player.add_money([["silver", ob.ownr.item.price/10]])
 	else:		
 		# reparent
 		ob.get_parent().remove_child(ob)
 		item_box.add_child(ob)
 		# add to player inventory
 		RPG.player.container.add_to_inventory(ob.ownr)
+		# remove money
+		RPG.player.remove_money([["silver", ob.ownr.item.price/10]])
+		

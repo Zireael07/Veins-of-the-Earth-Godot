@@ -26,9 +26,9 @@ func _ready():
 
 	# money
 	money = [ ["bronze", 0],
-              ["silver", 100],
-              ["gold", 0],
-              ["platinum", 0]]
+			  ["silver", 100],
+			  ["gold", 0],
+			  ["platinum", 0]]
 
 func set_map_position(pos):
 	.set_map_position(pos) 
@@ -161,3 +161,22 @@ func _input(event):
 		else:
 			RPG.game.character_sheet.update_data()
 			RPG.game.character_sheet.show()
+			
+# money
+func add_money(values):
+	print(str(values))
+	for v in values:
+		for m in money:
+			if v[0] == m[0]:
+				m[1] += v[1]
+				print("Incrementing " + str(m[0]) + " by " + str(v[1]))
+				break
+
+func remove_money(values):
+	print(str(values))
+	for v in values:
+		for m in money:
+			if v[0] == m[0]:
+				m[1] -= v[1]
+				print("Decrementing " + str(m[0]) + " by " + str(v[1]))
+				break
