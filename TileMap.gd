@@ -24,8 +24,9 @@ func _ready():
 	RPG.map = self
 	
 func new_game():
+	data = dun_gen.Generate_perlin()
 	#data = dun_gen.Generate_random()
-	data = dun_gen.Generate_BSP()
+	#data = dun_gen.Generate_BSP()
 	#data = dun_gen.Generate_Town_BSP()
 	draw_map( data.map )
 	

@@ -9,7 +9,6 @@ var contain
 var bak = []
 var start_rect
 
-
 func Generate_Town_BSP(map_size=Vector2(20,20), wall_id=1, floor_id=0):
 	# Randomize
 	randomize()
@@ -213,6 +212,47 @@ func rect(contain):
 	for r in bak:
 		contain.append(r)	
 
+func Generate_perlin(map_size=Vector2(20,20), wall_id=1, floor_id=0):
+	# Randomize
+	randomize()
+	
+	# init
+	map = []
+	var start_pos = Vector2()
+
+	# Populate map array
+	for x in range( map_size.x ):
+		var column = []
+		for y in range( map_size.y ):
+			column.append( wall_id )
+		map.append( column )
+		
+	# make actual map
+	for x in range (map_size.x):
+		for y in range (map_size.y):
+			# black magic here!
+			var i = x/map_size.x
+			var j = y/map_size.y
+			
+			# noise
+			var n = perlin.noise_2d(i,j)
+			
+			# map
+			if n < 0.45:
+				map[x][y] = 0
+				# dummy
+				start_pos = Vector2(x,y)
+			else:
+				map[x][y] = 1	
+	
+	# return data
+	return {
+		"map":      map,
+		"rooms":    [],
+		"start_pos":    start_pos,
+		}
+
+
 
 # Generate the map
 # room_size = minimum and maximum w/h a room should have
@@ -333,6 +373,9 @@ func vline( y1, y2, x ):
 		line.append( Vector2(x,y) )
 	return line
 
+
+
+# utility
 func get_floor_cells():
 	var list = []
 	for x in range( map.size() ):
@@ -341,8 +384,10 @@ func get_floor_cells():
 				list.append(Vector2(x,y))
 	
 	return list
-	
-var monster_table = [ ["kobold", 50], ["orc", 30], ["drow", 10], ["human", 10] ]
+
+
+# spawning items/monsters	
+var monster_table = [ ["kobold", 10], ["orc", 30], ["drow", 10], ["human", 50] ]
 var item_table = [ ["longsword", 50], ["potion", 20], ["chainmail", 30] ]
 
 

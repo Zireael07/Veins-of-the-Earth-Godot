@@ -25,6 +25,7 @@ RPG="*res://RPG.gd"
 dun_gen="*res://dun_gen.gd"
 FOV_gen="*res://FOV_gen.gd"
 Astar_map="*res://Astar_map.gd"
+perlin="*res://perlin.gd"
 
 [input]
 
