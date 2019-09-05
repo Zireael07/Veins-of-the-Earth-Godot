@@ -13,25 +13,6 @@ func start(shop):
 	fill_from_inventory()
 	fill_shop(shop)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func _input(event):
-	if (event is InputEventKey):
-		if event.scancode == KEY_ESCAPE and event.pressed:
-			print("Esc pressed")
-			
-			if not is_visible():
-				print("Pausing")
-				# prevents accidentally doing other stuff
-				get_tree().set_pause(true)
-				show()
-			else:
-				print("Unpausing")
-				get_tree().set_pause(false)
-				hide()
-
 func clear_items():
 	for i in range(item_box.get_child_count()):
 		item_box.get_child(i).queue_free()

@@ -161,9 +161,8 @@ func _on_QuitButton_pressed():
 		print("Skipping save, player dead")
 	get_tree().quit()
 	
-	
-	#pass # replace with function body
 
+# this is where we handle ALL the Escape keypresses 
 func _input(event):
 	if (event is InputEventKey):
 		if event.scancode == KEY_ESCAPE and event.pressed:
@@ -174,6 +173,9 @@ func _input(event):
 				get_node("CharacterCreation").show()
 				return
 			
+			if get_node("frame/right/map/ShopPanel").is_visible():
+				get_node("frame/right/map/ShopPanel").hide()
+				return
 			
 			if get_node("frame/right/map/Panel").is_visible():
 				get_node("frame/right/map/Panel").hide()

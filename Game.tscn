@@ -344,7 +344,6 @@ text = "OK"
 
 [node name="CharacterSheet" type="Control" parent="."]
 pause_mode = 2
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -471,6 +470,7 @@ margin_bottom = 104.0
 text = "8"
 
 [node name="SkillsContainer" type="VBoxContainer" parent="CharacterSheet/Panel"]
+editor/display_folded = true
 margin_top = 150.0
 margin_right = 100.0
 margin_bottom = 250.0
@@ -489,6 +489,16 @@ margin_left = 44.0
 margin_right = 60.0
 margin_bottom = 14.0
 text = "55"
+
+[node name="MoneyContainer" type="RichTextLabel" parent="CharacterSheet/Panel"]
+margin_left = 150.0
+margin_top = 150.0
+margin_right = 250.0
+margin_bottom = 225.0
+text = "Bronze: 0
+Silver:: 0
+Gold: 0
+Platinum: 0"
 
 [node name="DropPopup" type="Popup" parent="."]
 pause_mode = 2
