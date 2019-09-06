@@ -133,6 +133,9 @@ func step_to(cell):
 		var blocker = grid.is_cell_blocked(res[1])
 		if not blocker:
 			set_position(res[0]+Vector2(0,-8))
+			# update our visibility
+			if res[1] in RPG.map.cells:
+				set_visible(true)
 		# detect when we bump something
 		else:
 			if typeof(blocker) == TYPE_OBJECT:

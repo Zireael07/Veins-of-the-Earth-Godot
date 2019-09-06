@@ -1,6 +1,7 @@
 extends TileMap
 
 var data = null
+var cells = []
 
 # Draw map cells from map 2DArray
 func draw_map( map ):
@@ -149,7 +150,7 @@ func _on_player_pos_changed(player):
 	var r = RPG.TORCH_RADIUS
 	
 	# Get FOV cells
-	var cells = FOV_gen.calculate_fov(data.map, 1, player.get_map_position(), r)
+	cells = FOV_gen.calculate_fov(data.map, 1, player.get_map_position(), r)
 	
 	#print("Cells to reveal: " + str(cells))
 	# Reveal cells
