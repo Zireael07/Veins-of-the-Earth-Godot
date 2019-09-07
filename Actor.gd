@@ -26,6 +26,7 @@ var base_armor = 0 #setget _get_armor # damage reduction
 # skills
 var melee = 55
 
+var body_parts = []
 
 export(int) var faction_id = 1
 enum faction { PLAYER = 0, ENEMY = 1, NEUTRAL = 2}
@@ -147,6 +148,9 @@ func set_real_max_hp(what):
 	#print(get_parent().get_name() + " " + str(max_hp))
 	emit_signal('hp_changed', self.hp, self.max_hp)
 
+
+var body = { "humanoid": ["head", "torso", "arm", "arm", "leg", "leg"] }
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -165,7 +169,23 @@ func _ready():
 	# set applicable marker color
 	ownr.get_node("marker").set_modulate(get_marker_color())
 	
-	#pass
+	set_body_parts(body["humanoid"])
+
+
+func set_body_parts(parts):
+	print("Setting body parts...")
+	
+	var BP_TO_HP = {
+			"head": 0.33,
+			"torso": 0.4,
+			"arm": 0.25,
+			"leg": 0.25,
+		}
+	
+	for p in parts:
+		if p in BP_TO_HP:
+			#print("Looking up hp.." + str(int(BP_TO_HP[p]*max_hp)))
+			body_parts.append([p, int(BP_TO_HP[p]*max_hp)])
 
 func broadcast_damage_taken(from, amount):
 	var n = from.name
