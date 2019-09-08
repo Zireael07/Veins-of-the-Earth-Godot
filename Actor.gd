@@ -122,11 +122,34 @@ func fight(who):
 			RPG.game.dialogue_panel.show()
 			# prevents accidentally doing other stuff
 			get_tree().set_pause(true)
+
+func random_body_part():
+	var loc = RPG.roll(1,20)
+	if loc < 3:
+		return body_parts[4] # left "leg"
+	elif loc < 6:
+		return body_parts[5] # right leg
+	elif loc < 13:
+		return body_parts[1] # torso
+	elif loc < 16:
+		return body_parts[2] # left arm
+	elif loc < 19:
+		return body_parts[3] # right arm
+	else:
+		return body_parts[0] # head
 		
 func take_damage(from, amount):
-	#print(get_parent().get_name() + " takes " + str(amount) + " damage!")
-	broadcast_damage_taken(from,amount)
-	self.hp -= amount
+	# determine body part hit
+	var part = random_body_part()
+	# log
+	broadcast_damage_taken(from,amount,part[0])
+	
+	#self.hp -= amount
+	part[1] -= amount
+	#emit_signal("hp_changed", part[1], part[2], part[0])
+	
+	if (part[0] == "torso" or part[0] == "head") and part[1] <= 0:
+		die()
 
 func die():
 	get_parent().kill()
@@ -184,16 +207,18 @@ func set_body_parts(parts):
 	
 	for p in parts:
 		if p in BP_TO_HP:
-			#print("Looking up hp.." + str(int(BP_TO_HP[p]*max_hp)))
-			body_parts.append([p, int(BP_TO_HP[p]*max_hp)])
+			var hp = int(BP_TO_HP[p]*max_hp)
+			#print("Looking up hp.." + str(hp))
+			body_parts.append([p, hp, hp])
 
-func broadcast_damage_taken(from, amount):
+# log message
+func broadcast_damage_taken(from, amount, part):
 	var n = from.name
 	var m = str(amount)
 	var color = RPG.COLOR_DARK_GREY
 	if ownr == RPG.player:
 		color = RPG.COLOR_RED
-	RPG.broadcast(n+ " hits " +ownr.read_name+ " for " +str(amount)+ " HP",color)
+	RPG.broadcast(n+ " hits " +ownr.read_name+ " in the " + str(part) + " for " +str(amount)+ " HP",color)
 
 var faction_reaction = { faction.PLAYER: 100, faction.ENEMY: -100, faction.NEUTRAL: 0 }
 func get_marker_color():
