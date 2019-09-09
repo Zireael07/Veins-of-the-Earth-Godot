@@ -146,7 +146,8 @@ func take_damage(from, amount):
 	
 	#self.hp -= amount
 	part[1] -= amount
-	#emit_signal("hp_changed", part[1], part[2], part[0])
+	if RPG.player == self.ownr:
+		emit_signal("hp_changed", part[1], part[2], part[0])
 	
 	if (part[0] == "torso" or part[0] == "head") and part[1] <= 0:
 		die()
@@ -156,23 +157,23 @@ func die():
 
 func _set_hp(value):
 	hp = value
-	emit_signal('hp_changed', hp, self.max_hp)
+	#emit_signal('hp_changed', hp, self.max_hp)
 	if hp <= 0:
 		die()
 
 func _set_max_hp(what):
 	max_hp = what
-	emit_signal('hp_changed', self.hp, self.max_hp)
+	#emit_signal('hp_changed', self.hp, self.max_hp)
 
 # this is where we apply stat bonus (after we have it)
 func set_real_max_hp(what):
 #	print(get_parent().get_name() + " bonus hp: " + str(int(floor(constitution - 10)/2)))
 	max_hp = what + int(floor(constitution - 10)/2)
 	#print(get_parent().get_name() + " " + str(max_hp))
-	emit_signal('hp_changed', self.hp, self.max_hp)
+	#emit_signal('hp_changed', self.hp, self.max_hp)
 
 
-var body = { "humanoid": ["head", "torso", "arm", "arm", "leg", "leg"] }
+var body = { "humanoid": ["head", "torso", "arm", "arm2", "leg", "leg2"] }
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -201,8 +202,8 @@ func set_body_parts(parts):
 	var BP_TO_HP = {
 			"head": 0.33,
 			"torso": 0.4,
-			"arm": 0.25,
-			"leg": 0.25,
+			"arm": 0.25, "arm2": 0.25,
+			"leg": 0.25, "leg2": 0.25,
 		}
 	
 	for p in parts:
@@ -210,6 +211,7 @@ func set_body_parts(parts):
 			var hp = int(BP_TO_HP[p]*max_hp)
 			#print("Looking up hp.." + str(hp))
 			body_parts.append([p, hp, hp])
+
 
 # log message
 func broadcast_damage_taken(from, amount, part):
@@ -254,6 +256,7 @@ func save():
 	data.wisdom = self.wisdom
 	data.charisma = self.charisma
 	data.faction_id = self.faction_id
+	data.body_parts = self.body_parts
 	return data
 
 func restore(data):
