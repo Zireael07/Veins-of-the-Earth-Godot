@@ -154,12 +154,20 @@ func restore_game():
 
 func _on_QuitButton_pressed():
 	print("Quit pressed")
-	get_node("frame/right/map/Panel").hide()
+	get_node("frame/right/map/MenuPanel").hide()
 	if not RPG.player.dead:
 		save_game()
 	else:
 		print("Skipping save, player dead")
 	get_tree().quit()
+	
+
+func _on_DebugButton_pressed():
+	get_node("frame/right/map/MenuPanel").hide()
+	get_node("frame/right/map/DebugMenuPanel").show()
+	
+	
+	pass # Replace with function body.
 	
 
 # this is where we handle ALL the Escape keypresses 
@@ -177,10 +185,17 @@ func _input(event):
 				get_node("frame/right/map/ShopPanel").hide()
 				return
 			
-			if get_node("frame/right/map/Panel").is_visible():
-				get_node("frame/right/map/Panel").hide()
+			if get_node("frame/right/map/DebugMenuPanel").is_visible():
+				get_node("frame/right/map/DebugMenuPanel").hide()
+				return
+			
+			
+			# needs to be handled last in this block
+			if get_node("frame/right/map/MenuPanel").is_visible():
+				get_node("frame/right/map/MenuPanel").hide()
 			else:
-				get_node("frame/right/map/Panel").show()
+				get_node("frame/right/map/MenuPanel").show()
+				
 		
 	if Input.is_action_pressed("toggle_labels"):
 		# toggle
@@ -192,3 +207,4 @@ func _input(event):
 				e.get_node("Label").show()
 			else:
 				e.get_node("Label").hide()
+

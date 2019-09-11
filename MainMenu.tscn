@@ -54,7 +54,6 @@ margin_top = 114.0
 margin_right = 300.0
 margin_bottom = 134.0
 text = "Quit"
-
 [connection signal="pressed" from="Panel/VBoxContainer/New_game" to="." method="_on_New_game_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

@@ -21,6 +21,11 @@ func reveal(cells):
 		if get_cellv(cell) == -1:
 			set_cell(cell[0],cell[1], data.map[cell[0]][cell[1]])
 
+func debug_reveal():
+	for x in range(data.map.size()):
+		for y in range(data.map[x].size()):
+			set_cell(x,y, data.map[x][y])
+
 func _ready():
 	RPG.map = self
 	

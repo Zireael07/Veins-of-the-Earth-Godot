@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://PlayerInfo.tscn" type="PackedScene" id=2]
@@ -7,11 +7,12 @@
 [ext_resource path="res://DialoguePanel.gd" type="Script" id=5]
 [ext_resource path="res://ShopPanel.gd" type="Script" id=6]
 [ext_resource path="res://ItemListButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://CharacterCreation.gd" type="Script" id=8]
-[ext_resource path="res://CharacterSheet.gd" type="Script" id=9]
-[ext_resource path="res://DropPopupPanel.gd" type="Script" id=10]
-[ext_resource path="res://DeathPopup.gd" type="Script" id=11]
-[ext_resource path="res://WelcomePopup.gd" type="Script" id=12]
+[ext_resource path="res://DebugMenuPanel.gd" type="Script" id=8]
+[ext_resource path="res://CharacterCreation.gd" type="Script" id=9]
+[ext_resource path="res://CharacterSheet.gd" type="Script" id=10]
+[ext_resource path="res://DropPopupPanel.gd" type="Script" id=11]
+[ext_resource path="res://DeathPopup.gd" type="Script" id=12]
+[ext_resource path="res://WelcomePopup.gd" type="Script" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.167969, 0.157471, 0.157471, 1 )
@@ -158,8 +159,7 @@ margin_top = 26.0
 margin_right = 380.0
 margin_bottom = 66.0
 
-[node name="Panel" type="Panel" parent="frame/right/map"]
-editor/display_folded = true
+[node name="MenuPanel" type="Panel" parent="frame/right/map"]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -170,7 +170,16 @@ margin_top = -100.0
 margin_right = 100.0
 margin_bottom = 100.0
 
-[node name="QuitButton" type="Button" parent="frame/right/map/Panel"]
+[node name="DebugButton" type="Button" parent="frame/right/map/MenuPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -46.5
+margin_top = 60.0
+margin_right = 46.5
+margin_bottom = 80.0
+text = "Debug Menu"
+
+[node name="QuitButton" type="Button" parent="frame/right/map/MenuPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -180,6 +189,27 @@ margin_top = -10.0
 margin_right = 20.0
 margin_bottom = 10.0
 text = "Quit"
+
+[node name="DebugMenuPanel" type="Panel" parent="frame/right/map"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+script = ExtResource( 8 )
+
+[node name="RevealButton" type="Button" parent="frame/right/map/DebugMenuPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -52.5
+margin_top = 5.0
+margin_right = 52.5
+margin_bottom = 20.0
+text = "Reveal all map"
 
 [node name="Panel" type="Panel" parent="frame/right"]
 editor/display_folded = true
@@ -203,7 +233,7 @@ editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="Panel" type="Panel" parent="CharacterCreation"]
 anchor_left = 0.5
@@ -347,7 +377,7 @@ pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="Panel" type="Panel" parent="CharacterSheet"]
 anchor_left = 0.5
@@ -504,7 +534,7 @@ Platinum: 0"
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Panel" type="Panel" parent="DropPopup"]
 anchor_right = 1.0
@@ -568,7 +598,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 popup_exclusive = true
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="Panel" type="Panel" parent="DeathPopup"]
 anchor_left = 0.5
@@ -605,7 +635,7 @@ editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 popup_exclusive = true
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="Panel" type="Panel" parent="WelcomePopup"]
 anchor_left = 0.5
@@ -630,7 +660,7 @@ Press ESC or click to close."
 editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="Panel" type="Panel" parent="HelpPopup"]
 anchor_right = 1.0
@@ -654,7 +684,9 @@ G to pick up items, D to drop items, I to open inventory
 [connection signal="cell_hover" from="frame/right/map/ViewportContainer/Viewport/Node2D" to="frame/left/PlayerInfo" method="_on_Node2D_cell_hover"]
 [connection signal="pressed" from="frame/right/map/DialoguePanel/VBoxContainer/Button1" to="frame/right/map/DialoguePanel" method="_on_Button1_pressed"]
 [connection signal="pressed" from="frame/right/map/DialoguePanel/VBoxContainer/Button2" to="frame/right/map/DialoguePanel" method="_on_Button2_pressed"]
-[connection signal="pressed" from="frame/right/map/Panel/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="frame/right/map/MenuPanel/DebugButton" to="." method="_on_DebugButton_pressed"]
+[connection signal="pressed" from="frame/right/map/MenuPanel/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="frame/right/map/DebugMenuPanel/RevealButton" to="frame/right/map/DebugMenuPanel" method="_on_RevealButton_pressed"]
 [connection signal="text_entered" from="CharacterCreation/Panel/TextEdit" to="CharacterCreation" method="_on_TextEdit_text_entered"]
 [connection signal="pressed" from="CharacterCreation/Panel/RerollButton" to="CharacterCreation" method="_on_RerollButton_pressed"]
 [connection signal="pressed" from="CharacterCreation/Panel/OKButton" to="CharacterCreation" method="_on_OKButton_pressed"]
