@@ -34,19 +34,44 @@ enum faction { PLAYER = 0, ENEMY = 1, NEUTRAL = 2}
 export(Array, String) var conversations
 
 
-func get_armor():
-	var armor = base_armor
-	var object_bonuses = []
-
-	for o in ownr.container.get_equipped_objects():
-		if o.item.armor > 0:
-			object_bonuses.append(o.item.armor)
-			
-	for v in object_bonuses:
-		armor += v
+# Body parts system core
+class BodyPart:
+	var _name
+	var max_hp = 0
+	var hp = 0
+	var base_armor = 0
+	var ownr
+	
+	var BP_TO_INVEN_SLOT = {
+	"torso": "BODY",
+	"leg": "LEGS",
+	"arm": "OFF_HAND"
+}
+	
+	
+	func _init(n, val, base_armor=0):
+		_name = n
+		max_hp = val
+		hp = val
+		base_armor = base_armor
+		#ownr = ownr
 		
-#	print("Armor: " + str(armor))
-	return armor
+
+	func get_armor():
+		var armor = base_armor
+		var object_bonuses = []
+	
+		for o in ownr.ownr.container.get_equipped_objects():
+			if _name in BP_TO_INVEN_SLOT:
+				if o.item.equip_slot == BP_TO_INVEN_SLOT[_name]:
+					if o.item.armor > 0:
+						object_bonuses.append(o.item.armor)
+				
+		for v in object_bonuses:
+			armor += v
+			
+	#	print("Armor: " + str(armor))
+		return armor
 
 
 func fill_hp():
@@ -109,8 +134,9 @@ func fight(who):
 			var dmg = RPG.roll(damage[0], damage[1])
 			var mod = int(floor((strength - 10)/2))
 			RPG.broadcast(ownr.read_name + " hits " + who.read_name + "!", RPG.COLOR_LIGHT_BLUE)
-			who.fighter.take_damage(ownr, max(0,dmg + mod - who.fighter.get_armor())) #self.power)
-			who.add_splash(0, max(0,dmg + mod - who.fighter.get_armor()))
+			var ret = who.fighter.take_damage(ownr, max(0,dmg + mod)) #- who.fighter.get_armor()))
+			who.add_splash(0, ret)
+			#who.add_splash(0, max(0,dmg + mod - who.fighter.get_armor()))
 		else:
 			who.add_splash(1)
 			RPG.broadcast(ownr.read_name + " misses " + who.read_name + "!")
@@ -137,20 +163,27 @@ func random_body_part():
 		return body_parts[3] # right arm
 	else:
 		return body_parts[0] # head
-		
+
+# returns actual damage dealt		
 func take_damage(from, amount):
 	# determine body part hit
 	var part = random_body_part()
-	# log
-	broadcast_damage_taken(from,amount,part[0])
-	
+
+	amount = max(0,amount - part.get_armor())
+	print("Armor: " + str(part.get_armor()))
 	#self.hp -= amount
-	part[1] -= amount
+	part.hp -= amount
 	if RPG.player == self.ownr:
-		emit_signal("hp_changed", part[1], part[2], part[0])
+		emit_signal("hp_changed", part.hp, part.max_hp, part._name)
 	
-	if (part[0] == "torso" or part[0] == "head") and part[1] <= 0:
+	# log
+	broadcast_damage_taken(from,amount,part._name)
+	
+	if (part._name == "torso" or part._name == "head") and part.hp <= 0:
 		die()
+		
+		
+	return amount
 
 func die():
 	get_parent().kill()
@@ -210,8 +243,10 @@ func set_body_parts(parts):
 		if p in BP_TO_HP:
 			var hp = int(BP_TO_HP[p]*max_hp)
 			#print("Looking up hp.." + str(hp))
-			body_parts.append([p, hp, hp])
-
+			var body_part = BodyPart.new(p, hp, base_armor)
+			body_part.ownr = self
+			body_parts.append(body_part)
+			#body_parts.append([p, hp, hp])
 
 # log message
 func broadcast_damage_taken(from, amount, part):

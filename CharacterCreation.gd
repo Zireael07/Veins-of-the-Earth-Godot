@@ -36,7 +36,7 @@ func _on_OKButton_pressed():
 	# update HUD for player
 	#print("Updating HUD")
 	for p in RPG.player.get_node("Actor").body_parts:
-		RPG.player.get_node("Actor").emit_signal("hp_changed", p[1], p[2], p[0])
+		RPG.player.get_node("Actor").emit_signal("hp_changed", p.hp, p.max_hp, p._name)
 
 func _on_TextEdit_text_entered(new_text):
 #	print(new_text)
