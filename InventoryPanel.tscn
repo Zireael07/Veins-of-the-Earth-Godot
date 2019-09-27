@@ -50,6 +50,11 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 
+[node name="InventorySlot3" parent="Control/EquipmentContainer" instance=ExtResource( 3 )]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+
 [node name="Control2" type="Control" parent="."]
 margin_top = 100.0
 margin_right = 40.0

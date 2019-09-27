@@ -86,6 +86,9 @@ func move_to_equipped(slot, equip_slot, item):
 		slot.remove_contents(item)
 	#	else:
 	#		print("Slot taken")
+	elif equip_slot == "LEGS":
+		eq.get_child(2).add_contents(item)
+		slot.remove_contents(item)
 
 # inverse of the above
 func move_to_inventory(equip_slot, item):
@@ -94,6 +97,9 @@ func move_to_inventory(equip_slot, item):
 		get_free_slot().add_contents(item)
 	elif equip_slot == "MAIN_HAND":
 		eq.get_child(1).remove_contents(item)
+		get_free_slot().add_contents(item)
+	elif equip_slot == "LEGS":
+		eq.get_child(2).remove_contents(item)
 		get_free_slot().add_contents(item)
 
 func _ready():
