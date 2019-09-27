@@ -69,6 +69,9 @@ func spawn_player(pos, start_game=false):
 		armor.item.pickup(player)
 		# equip starting armor
 		armor.item.use(player)
+		var gr = RPG.make_entity("leather armor/leather armor")
+		spawn(gr, pos, "armor" )
+		gr.item.pickup(player)
 		
 	# welcome message
 	RPG.broadcast("Welcome to Veins of the Earth!", RPG.COLOR_BROWN)
@@ -173,7 +176,15 @@ func _on_player_pos_changed(player):
 
 
 # Spawn what path from Database, set position to where
-func spawn( what, where, start_game=false ):
+func spawn( what, where, flag="", start_game=false ):
+	# handle spawning differing stuff based on templates
+	if flag == "armor":
+		var nm = what.get_name()
+		what.set_name(nm + " greaves")
+		#nw_ent.readable_name == nw_ent.readable_name + " greaves"
+		what.get_node("Item").equip_slot = "LEGS"
+		what.get_node("Sprite").set_texture(RPG._db.greaves_gfx)
+		
 	print("Spawning: " + str(what.get_name()) + " @: " + str(where))
 	# this is the name in the database, which is readable
 	what.read_name = what.get_name()
@@ -188,7 +199,7 @@ func spawn( what, where, start_game=false ):
 		# starting inventory
 		var sw = RPG.make_entity("longsword/longsword")
 		spawn(sw, where)
-		sw.item.pickup(what)	
+		sw.item.pickup(what)
 	
 func save():
 	print("Saving map data...")
