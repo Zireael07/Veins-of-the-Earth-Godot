@@ -117,9 +117,31 @@ func _ready():
 #-------------------------
 # item use functions
 func heal(entity):
-	RPG.broadcast(entity.read_name + " is healed!")
+	# determine injured body part hit
+	var injuries = entity.fighter.injured_body_parts()
+
+	# nothing to do
+	if injuries.size() < 1:
+		return
+	
+	var part
+	if injuries.size() > 2:
+		var choice = RPG.roll(0, injuries.size()-1)
+		part = entity.fighter.body_parts[injuries[choice]]
+	# only one, no rolling	
+	else:
+		part = entity.fighter.body_parts[injuries[0]]
+		
 	var heal = RPG.roll(1,6)
-	entity.fighter.hp += heal
+	# avoid overhealing
+	var new = min(part.hp + heal, part.max_hp)
+	part.hp = new
+	#entity.fighter.hp += heal	
+	RPG.broadcast(entity.read_name + " healed" + " its " + part._name + " for " + str(heal) + " !")
+	# update HUD
+	entity.fighter.emit_signal("hp_changed", part.hp, part.max_hp, part._name)
+
+	
 	return "OK"
 
 func eat(entity):

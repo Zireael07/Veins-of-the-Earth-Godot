@@ -164,6 +164,15 @@ func random_body_part():
 	else:
 		return body_parts[0] # head
 
+
+func injured_body_parts():
+	var injured = []
+	for p in body_parts:
+		if p.hp < p.max_hp:
+			# only store indices
+			injured.append(body_parts.find(p))
+	return injured
+	
 # returns actual damage dealt		
 func take_damage(from, amount):
 	# determine body part hit
