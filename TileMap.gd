@@ -42,6 +42,9 @@ func new_game():
 	# Astar representation
 	Astar_map.build_map(Vector2(data.map.size(), data.map[0].size()), dun_gen.get_floor_cells()) 
 	
+	# calendar init
+	RPG.calendar = RPG.Calendar.new()
+	
 	call_deferred("spawn_player", data.start_pos, true)
 
 func spawn_player(pos, start_game=false):

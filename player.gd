@@ -71,6 +71,9 @@ func act():
 	# update HUD
 	RPG.game.playerinfo.get_node("VBoxContainer2/NutritionBar").set_value(nutrition)
 	RPG.game.playerinfo.get_node("VBoxContainer2/ThirstBar").set_value(thirst)
+	
+	# display time
+	RPG.broadcast(RPG.calendar.get_time_date(RPG.calendar.turn))
 
 func _input(event):
 	direction = Vector2()
