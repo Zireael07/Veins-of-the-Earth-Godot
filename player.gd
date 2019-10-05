@@ -4,6 +4,11 @@ var nutrition = 500
 var thirst = 300
 var money = []
 
+# rest
+var resting = false
+var rest_cnt = 0
+var rest_turns = 0
+
 signal player_moved(me)
 signal player_acted
 
@@ -60,6 +65,10 @@ func step_to(cell):
 
 	
 func act():
+	if resting:
+		resting_step()
+		return
+	
 	print("Player act")
 	nutrition -= 1
 	thirst -= 1
@@ -73,7 +82,8 @@ func act():
 	RPG.game.playerinfo.get_node("VBoxContainer2/ThirstBar").set_value(thirst)
 	
 	# display time
-	RPG.broadcast(RPG.calendar.get_time_date(RPG.calendar.turn))
+	if not resting:
+		RPG.broadcast(RPG.calendar.get_time_date(RPG.calendar.turn))
 
 func _input(event):
 	direction = Vector2()
@@ -155,6 +165,9 @@ func _input(event):
 		
 		emit_signal('player_acted')
 		
+	if Input.is_action_just_pressed("rest"):
+		rest_start(30)
+		
 	if Input.is_action_just_pressed("help"):
 		RPG.game.get_node("HelpPopup").popup()
 		
@@ -183,3 +196,43 @@ func remove_money(values):
 				m[1] -= v[1]
 				print("Decrementing " + str(m[0]) + " by " + str(v[1]))
 				break
+				
+func rest_start(turns):
+	rest_cnt = 0
+	resting = true
+	rest_turns = turns
+	RPG.broadcast("Resting starts...", RPG.COLOR_LIGHT_BLUE)
+
+	if resting and rest_cnt >= turns:
+		rest_stop()
+	else:
+		rest_cnt += 1
+		# toggle game state to enemy turn
+		emit_signal('player_acted')
+
+func resting_step():
+	if not resting:
+		return
+	#print(str(rest_cnt))
+	if resting and rest_cnt >= rest_turns:
+		rest_stop()
+	else:
+		# actual resting stuff (actually only done once for simplicity)
+		if rest_cnt == 6:
+			# I think this formula dates back to Incursion
+			var healing = ((1+3)*fighter.constitution)/5
+
+			fighter.heal(healing)
+
+		rest_cnt += 1
+		# toggle game state to enemy turn
+		emit_signal('player_acted')
+
+
+func rest_stop():
+	resting = false
+	# passage of time
+	RPG.calendar.turn += RPG.calendar.HOUR*8
+	RPG.broadcast("Rested for " + str(rest_cnt) + " turns", RPG.COLOR_LIGHT_BLUE)
+	RPG.broadcast(RPG.calendar.get_time_date(RPG.calendar.turn), RPG.COLOR_LIGHT_BLUE)
+	emit_signal('player_acted')

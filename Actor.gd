@@ -197,6 +197,31 @@ func take_damage(from, amount):
 func die():
 	get_parent().kill()
 
+func heal(amount):
+	# determine injured body part hit
+	var injuries = injured_body_parts()
+
+	# nothing to do
+	if injuries.size() < 1:
+		return
+	
+	var part
+	if injuries.size() > 2:
+		var choice = RPG.roll(0, injuries.size()-1)
+		part = body_parts[injuries[choice]]
+	# only one, no rolling	
+	else:
+		part = body_parts[injuries[0]]
+		
+	# avoid overhealing
+	var new = min(part.hp + amount, part.max_hp)
+	part.hp = new
+	#entity.fighter.hp += heal	
+	RPG.broadcast(owner.read_name + " healed" + " its " + part._name + " for " + str(amount) + " !")
+	# update HUD
+	emit_signal("hp_changed", part.hp, part.max_hp, part._name)
+
+
 func _set_hp(value):
 	hp = value
 	#emit_signal('hp_changed', hp, self.max_hp)
